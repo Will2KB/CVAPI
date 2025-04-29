@@ -22,8 +22,8 @@ public class PersonService {
 		return personRepository.findById(id).get();
 	}
 
-	public Person getPersonByName(String name) {
-		return personRepository.findFirstCityByName(name);
+	public Person getPersonByName(String name, String firstName) {
+		return personRepository.findFirstPersonByNameAndFirstName(name, firstName);
 	}
 
 	public Person savePerson(Person person) {

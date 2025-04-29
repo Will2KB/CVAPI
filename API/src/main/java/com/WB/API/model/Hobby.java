@@ -36,6 +36,11 @@ public class Hobby {
 		this.descriptions = new ArrayList<>();
 	}
 
+	public Hobby(int id) {
+		this();
+		this.id = id;
+	}
+
 	public String getName() {
 		return name;
 	}

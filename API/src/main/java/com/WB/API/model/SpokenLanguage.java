@@ -1,6 +1,5 @@
 package com.WB.API.model;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -16,17 +15,27 @@ public class SpokenLanguage {
 	@EmbeddedId
 	private SpokenLanguageId id;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "person_id")
 	private Person person;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "language_id")
 	private Language language;
 
 	@NotBlank(message = "Un niveau est nécessaire")
 	@Column(name = "level")
 	private String level;
+
+	public SpokenLanguage() {
+
+	}
+
+	public SpokenLanguage(int personId, int languageId) {
+		this();
+		this.id = new SpokenLanguageId(personId, languageId);
+		this.language = new Language(languageId);
+	}
 
 	public Person getPerson() {
 		return person;

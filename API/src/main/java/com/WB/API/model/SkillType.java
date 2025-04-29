@@ -33,6 +33,11 @@ public class SkillType {
 		this.skills = new ArrayList<>();
 	}
 
+	public SkillType(int typeId) {
+		this();
+		this.id = id;
+	}
+
 	public String getName() {
 		return name;
 	}

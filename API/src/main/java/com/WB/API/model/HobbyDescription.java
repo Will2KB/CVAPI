@@ -21,6 +21,16 @@ public class HobbyDescription {
 	@Column(name = "description")
 	private String description;
 
+	public HobbyDescription() {
+
+	}
+
+	public HobbyDescription(int id, String description) {
+		this();
+		this.id = id;
+		this.description = description;
+	}
+
 	public String getDescription() {
 		return description;
 	}

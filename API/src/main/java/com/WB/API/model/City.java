@@ -36,14 +36,19 @@ public class City {
 
 	}
 
-	public City(int id, String name, Integer zipCode) {
+	public City(int id) {
 		this();
 		this.id = id;
+	}
+
+	public City(int id, String name, Integer zipCode) {
+		this(id);
 		this.name = name;
 		this.zip_code = zipCode;
 	}
 
 	public City(String name, Integer zipCode) {
+		this();
 		this.name = name;
 		this.zip_code = zipCode;
 	}

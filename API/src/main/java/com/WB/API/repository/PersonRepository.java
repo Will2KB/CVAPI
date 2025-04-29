@@ -12,5 +12,7 @@ public interface PersonRepository extends CrudRepository<Person, Integer> {
 
 	public List<Person> findAll();
 
-	public Person findFirstCityByName(String name);
+	public Person findFirstPersonByNameAndFirstName(String name, String firstName);
+
+	public Person findFirstPersonByMail(String mail);
 }

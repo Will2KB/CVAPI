@@ -38,6 +38,14 @@ public class Address {
 	@JoinColumn(name = "city_id")
 	private City city;
 
+	public Address() {
+
+	}
+
+	public Address(int id) {
+		this.id = id;
+	}
+
 	public int getId() {
 		return id;
 	}

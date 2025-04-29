@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -37,13 +39,21 @@ class PersonRepositoryTest {
 		personRepository.save(person2);
 		persons.add(person2);
 
-		Person person3 = new Person("Paramount", "Thibault", "MadrigalCoco@gmail.com", "0606548768");
+		Person person3 = new Person("Papa", "Thibault", "PapaThibault@gmail.com", "0606548768");
 		personRepository.save(person3);
 		persons.add(person3);
 
 		Person person4 = new Person("Herrault", "Rodolphe", "roro@gmail.com", "0609598768");
 		personRepository.save(person4);
 		persons.add(person4);
+
+		Person person5 = new Person("Paramount", "Thibault", "ParamountThibault@gmail.com", "0606546498");
+		personRepository.save(person5);
+		persons.add(person5);
+
+		Person person6 = new Person("Herrault", "Alicia", "alicia@gmail.com", "0695478768");
+		personRepository.save(person6);
+		persons.add(person6);
 	}
 
 	@Test
@@ -85,6 +95,35 @@ class PersonRepositoryTest {
 		Assertions.assertEquals(searchPerson.getMail(), findPerson.getMail());
 	}
 
+	@ParameterizedTest
+	@DisplayName("Chargement d'une personne à partir de son nom")
+	@ValueSource(ints = { 0, 1, 2, 3, 4, 5 })
+	void findPersonByName_ReturnCorrectPerson(int searchId) {
+		Person searchPerson = persons.get(searchId);
+		Person findPerson = personRepository.findFirstPersonByNameAndFirstName(searchPerson.getName(),
+				searchPerson.getFirstName());
+
+		Assertions.assertNotNull(findPerson);
+		Assertions.assertEquals(searchPerson.getId(), findPerson.getId());
+		Assertions.assertEquals(searchPerson.getName(), findPerson.getName());
+		Assertions.assertEquals(searchPerson.getFirstName(), findPerson.getFirstName());
+		Assertions.assertEquals(searchPerson.getMail(), findPerson.getMail());
+	}
+
+	@ParameterizedTest
+	@DisplayName("Chargement d'une personne à partir de son email")
+	@ValueSource(ints = { 0, 1, 2, 3, 4, 5 })
+	void findPersonByEmail_ReturnCorrectPerson(int searchId) {
+		Person searchPerson = persons.get(searchId);
+		Person findPerson = personRepository.findFirstPersonByMail(searchPerson.getMail());
+
+		Assertions.assertNotNull(findPerson);
+		Assertions.assertEquals(searchPerson.getId(), findPerson.getId());
+		Assertions.assertEquals(searchPerson.getName(), findPerson.getName());
+		Assertions.assertEquals(searchPerson.getFirstName(), findPerson.getFirstName());
+		Assertions.assertEquals(searchPerson.getMail(), findPerson.getMail());
+	}
+
 	@Test
 	@DisplayName("Chargement de toutes les personnes")
 	void findAllPersons_ReturnCorrectList() {
@@ -92,7 +131,7 @@ class PersonRepositoryTest {
 
 		for (Person expectedPerson : persons) {
 			Person actualPerson = findPersons.stream().filter(c -> c.getName().equals(expectedPerson.getName()))
-					.findFirst().orElse(null);
+					.filter(c -> c.getFirstName().equals(expectedPerson.getFirstName())).findFirst().orElse(null);
 
 			Assertions.assertNotNull(actualPerson);
 			Assertions.assertEquals(expectedPerson.getId(), actualPerson.getId());

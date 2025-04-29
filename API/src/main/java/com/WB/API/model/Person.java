@@ -97,6 +97,11 @@ public class Person {
 		this.spokenLanguages = new ArrayList<>();
 	}
 
+	public Person(int id) {
+		this();
+		this.id = id;
+	}
+
 	public Person(String name, String firstName, String eMail, String phone) {
 		this();
 		this.name = name;

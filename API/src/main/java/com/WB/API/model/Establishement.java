@@ -35,6 +35,15 @@ public class Establishement {
 	@JoinColumn(name = "address_id")
 	private Address address;
 
+	public Establishement() {
+
+	}
+
+	public Establishement(int id) {
+		this();
+		this.id = id;
+	}
+
 	public String getName() {
 		return name;
 	}

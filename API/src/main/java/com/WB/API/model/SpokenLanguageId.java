@@ -14,6 +14,16 @@ public class SpokenLanguageId {
 	@Column(name = "language_id", insertable = false, updatable = false)
 	private int languageId;
 
+	public SpokenLanguageId() {
+
+	}
+
+	public SpokenLanguageId(int personId, int langageId) {
+		this();
+		this.languageId = langageId;
+		this.personId = personId;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

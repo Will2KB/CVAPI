@@ -33,6 +33,10 @@ public class Language {
 		this.languagesSpoken = new ArrayList<>();
 	}
 
+	public Language(int id) {
+		this.id = id;
+	}
+
 	public Language(int id, String name) {
 		this();
 		this.id = id;
