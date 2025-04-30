@@ -1,12 +1,26 @@
 package com.WB.API.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class CityDTO {
 
 	private int id;
+	@NotBlank(message = "Un nom de ville est nécessaire")
 	private String name;
-	private Integer zip_code;
+	private Integer zipCode;
 	private int countryId;
 	private String countryName;
+
+	public CityDTO() {
+
+	}
+
+	public CityDTO(int id, String name, Integer zipCode) {
+		this();
+		this.id = id;
+		this.name = name;
+		this.zipCode = zipCode;
+	}
 
 	public int getId() {
 		return id;
@@ -24,12 +38,12 @@ public class CityDTO {
 		this.name = name;
 	}
 
-	public Integer getZip_code() {
-		return zip_code;
+	public Integer getZipCode() {
+		return zipCode;
 	}
 
-	public void setZip_code(Integer zip_code) {
-		this.zip_code = zip_code;
+	public void setZipCode(Integer zipCode) {
+		this.zipCode = zipCode;
 	}
 
 	public int getCountryId() {

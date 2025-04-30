@@ -9,6 +9,9 @@ import com.WB.API.model.Nationality;
 public class NationalityMapper {
 
 	public static NationalityDTO toDTO(Nationality nationality) {
+		if (nationality == null)
+			return null;
+
 		NationalityDTO nationalityDTO = new NationalityDTO();
 
 		nationalityDTO.setId(nationality.getId());
@@ -18,6 +21,9 @@ public class NationalityMapper {
 	}
 
 	public static List<NationalityDTO> toDTOList(List<Nationality> nationalities) {
+		if (nationalities == null)
+			return null;
+
 		List<NationalityDTO> nationalitiesDTO = new ArrayList<>();
 
 		for (Nationality nationality : nationalities) {
@@ -28,11 +34,17 @@ public class NationalityMapper {
 	}
 
 	public static Nationality toEntity(NationalityDTO nationalityDTO) {
+		if (nationalityDTO == null)
+			return null;
+
 		Nationality nationality = new Nationality(nationalityDTO.getId(), nationalityDTO.getName());
 		return nationality;
 	}
 
 	public static List<Nationality> toEntityList(List<NationalityDTO> nationalitiesDTO) {
+		if (nationalitiesDTO == null)
+			return null;
+
 		List<Nationality> nationalities = new ArrayList<>();
 
 		for (NationalityDTO nationalityDTO : nationalitiesDTO) {

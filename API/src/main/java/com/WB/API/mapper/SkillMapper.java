@@ -8,13 +8,10 @@ import com.WB.API.model.Skill;
 
 public class SkillMapper {
 
-	private int id;
-	private String name;
-	private int typeId;
-	private String typeName;
-	private boolean enable;
-
 	public static SkillDTO toDTO(Skill skill) {
+		if (skill == null)
+			return null;
+
 		SkillDTO skillDTO = new SkillDTO();
 
 		skillDTO.setId(skill.getId());
@@ -27,6 +24,9 @@ public class SkillMapper {
 	}
 
 	public static List<SkillDTO> toDTOList(List<Skill> skills) {
+		if (skills == null)
+			return null;
+
 		List<SkillDTO> skillsDTO = new ArrayList<>();
 
 		for (Skill skill : skills) {
@@ -37,12 +37,18 @@ public class SkillMapper {
 	}
 
 	public static Skill toEntity(SkillDTO skillDTO) {
+		if (skillDTO == null)
+			return null;
+
 		Skill skill = new Skill(skillDTO.getId(), skillDTO.getTypeId());
 
 		return skill;
 	}
 
 	public static List<Skill> toEntityList(List<SkillDTO> skillsDTO) {
+		if (skillsDTO == null)
+			return null;
+
 		List<Skill> skills = new ArrayList<>();
 
 		for (SkillDTO skillDTO : skillsDTO) {

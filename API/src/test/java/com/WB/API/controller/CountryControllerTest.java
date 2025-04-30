@@ -19,7 +19,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.WB.API.model.Country;
+import com.WB.API.dto.CountryDTO;
 import com.WB.API.service.CountryService;
 
 @ActiveProfiles("test")
@@ -33,14 +33,14 @@ class CountryControllerTest {
 	@MockBean
 	private CountryService countryService;
 
-	private List<Country> mockedListCountries;
+	private List<CountryDTO> mockedListCountries;
 
 	@BeforeEach
 	public void loadData() {
-		mockedListCountries = new ArrayList<Country>();
-		mockedListCountries.add(new Country(12, "France"));
-		mockedListCountries.add(new Country(13, "Suisse"));
-		mockedListCountries.add(new Country(14, "Espagne"));
+		mockedListCountries = new ArrayList<>();
+		mockedListCountries.add(new CountryDTO(12, "France"));
+		mockedListCountries.add(new CountryDTO(13, "Suisse"));
+		mockedListCountries.add(new CountryDTO(14, "Espagne"));
 	}
 
 	@Test
@@ -63,7 +63,7 @@ class CountryControllerTest {
 	@Test
 	@DisplayName("Requête API pour charger un pays à partir de son ID")
 	void testGetCountryById_ReturnCorrectCountry() throws Exception {
-		Country searchCountry = mockedListCountries.get(2);
+		CountryDTO searchCountry = mockedListCountries.get(2);
 		Mockito.when(countryService.getContryById(searchCountry.getId())).thenReturn(searchCountry);
 
 		mockMvc.perform(get("/countries/id/" + searchCountry.getId())).andExpect(status().isOk())

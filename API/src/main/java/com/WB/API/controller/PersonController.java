@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.WB.API.model.Person;
+import com.WB.API.dto.PersonDTO;
+import com.WB.API.dto.PersonSummaryDTO;
 import com.WB.API.service.PersonService;
 
 import jakarta.validation.Valid;
@@ -21,17 +22,17 @@ public class PersonController {
 	private PersonService personService;
 
 	@GetMapping("/persons")
-	public List<Person> getPersons() {
+	public List<PersonSummaryDTO> getPersons() {
 		return personService.getPersons();
 	}
 
 	@GetMapping("/persons/id/{id}")
-	public Person getPerson(@PathVariable int id) {
+	public PersonDTO getPerson(@PathVariable int id) {
 		return personService.getPersonById(id);
 	}
 
 	@PostMapping("/persons")
-	public Person savePerson(@Valid @RequestBody Person person) {
+	public PersonSummaryDTO savePerson(@Valid @RequestBody PersonDTO person) {
 		return personService.savePerson(person);
 	}
 }

@@ -23,7 +23,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.WB.API.model.Experience;
+import com.WB.API.dto.ExperienceDTO;
+import com.WB.API.dto.ExperienceSummaryDTO;
 import com.WB.API.service.ExperienceService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -41,27 +42,37 @@ class ExperienceControllerTest {
 	@MockBean
 	private ExperienceService experienceService;
 
-	private List<Experience> mockedListExperiences;
+	private List<ExperienceDTO> mockedListExperiences;
 
 	@BeforeEach
 	public void loadData() {
-		mockedListExperiences = new ArrayList<Experience>();
+		mockedListExperiences = new ArrayList<>();
 		mockedListExperiences
-				.add(new Experience(12, "Exp. 1", LocalDate.of(2012, 12, 15), LocalDate.of(2016, 2, 5), false));
+				.add(new ExperienceDTO(12, "Exp. 1", LocalDate.of(2012, 12, 15), LocalDate.of(2016, 2, 5), false));
 		mockedListExperiences
-				.add(new Experience(13, "Exp. 2", LocalDate.of(2012, 12, 15), LocalDate.of(2016, 2, 5), false));
+				.add(new ExperienceDTO(13, "Exp. 2", LocalDate.of(2012, 12, 15), LocalDate.of(2016, 2, 5), false));
 		mockedListExperiences
-				.add(new Experience(14, "Exp. 3", LocalDate.of(2012, 12, 15), LocalDate.of(2016, 2, 5), false));
+				.add(new ExperienceDTO(14, "Exp. 3", LocalDate.of(2012, 12, 15), LocalDate.of(2016, 2, 5), false));
 		mockedListExperiences
-				.add(new Experience(15, "Form. 1", LocalDate.of(2001, 9, 1), LocalDate.of(2005, 9, 1), true));
+				.add(new ExperienceDTO(15, "Form. 1", LocalDate.of(2001, 9, 1), LocalDate.of(2005, 9, 1), true));
 		mockedListExperiences
-				.add(new Experience(16, "Form. 2", LocalDate.of(2006, 9, 1), LocalDate.of(2010, 9, 5), true));
+				.add(new ExperienceDTO(16, "Form. 2", LocalDate.of(2006, 9, 1), LocalDate.of(2010, 9, 5), true));
+	}
+
+	private List<ExperienceSummaryDTO> getMockedListSummary() {
+		List<ExperienceSummaryDTO> summaries = new ArrayList<>();
+
+		for (ExperienceDTO experienceDTO : mockedListExperiences) {
+			summaries.add(experienceDTO.getSummary());
+		}
+
+		return summaries;
 	}
 
 	@Test
 	@DisplayName("Requête API pour charger toutes les Experiencenes")
 	void testGetExperiences_ReturnAllExperiences() throws Exception {
-		Mockito.when(experienceService.getExperiences()).thenReturn(mockedListExperiences);
+		Mockito.when(experienceService.getExperiences()).thenReturn(this.getMockedListSummary());
 
 		mockMvc.perform(get("/experiences")).andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -69,40 +80,40 @@ class ExperienceControllerTest {
 
 				.andExpect(jsonPath("$[0].id").value(mockedListExperiences.get(0).getId()))
 				.andExpect(jsonPath("$[0].name").value(mockedListExperiences.get(0).getName()))
-				.andExpect(
-						jsonPath("$[0].dateBegining").value(mockedListExperiences.get(0).getDateBegining().toString()))
+				.andExpect(jsonPath("$[0].dateBeginning")
+						.value(mockedListExperiences.get(0).getDateBeginning().toString()))
 				.andExpect(jsonPath("$[0].dateEnding").value(mockedListExperiences.get(0).getDateEnding().toString()))
 				.andExpect(jsonPath("$[0].formation").value(mockedListExperiences.get(0).isFormation()))
 				.andExpect(jsonPath("$[1].id").value(mockedListExperiences.get(1).getId()))
 				.andExpect(jsonPath("$[1].name").value(mockedListExperiences.get(1).getName()))
 				.andExpect(jsonPath("$[1].id").value(mockedListExperiences.get(1).getId()))
 				.andExpect(jsonPath("$[1].name").value(mockedListExperiences.get(1).getName()))
-				.andExpect(
-						jsonPath("$[1].dateBegining").value(mockedListExperiences.get(1).getDateBegining().toString()))
+				.andExpect(jsonPath("$[1].dateBeginning")
+						.value(mockedListExperiences.get(1).getDateBeginning().toString()))
 				.andExpect(jsonPath("$[1].dateEnding").value(mockedListExperiences.get(1).getDateEnding().toString()))
 				.andExpect(jsonPath("$[1].formation").value(mockedListExperiences.get(1).isFormation()))
 				.andExpect(jsonPath("$[2].id").value(mockedListExperiences.get(2).getId()))
 				.andExpect(jsonPath("$[2].name").value(mockedListExperiences.get(2).getName()))
 				.andExpect(jsonPath("$[2].id").value(mockedListExperiences.get(2).getId()))
 				.andExpect(jsonPath("$[2].name").value(mockedListExperiences.get(2).getName()))
-				.andExpect(
-						jsonPath("$[2].dateBegining").value(mockedListExperiences.get(2).getDateBegining().toString()))
+				.andExpect(jsonPath("$[2].dateBeginning")
+						.value(mockedListExperiences.get(2).getDateBeginning().toString()))
 				.andExpect(jsonPath("$[2].dateEnding").value(mockedListExperiences.get(2).getDateEnding().toString()))
 				.andExpect(jsonPath("$[2].formation").value(mockedListExperiences.get(2).isFormation()))
 				.andExpect(jsonPath("$[3].id").value(mockedListExperiences.get(3).getId()))
 				.andExpect(jsonPath("$[3].name").value(mockedListExperiences.get(3).getName()))
 				.andExpect(jsonPath("$[3].id").value(mockedListExperiences.get(3).getId()))
 				.andExpect(jsonPath("$[3].name").value(mockedListExperiences.get(3).getName()))
-				.andExpect(
-						jsonPath("$[3].dateBegining").value(mockedListExperiences.get(3).getDateBegining().toString()))
+				.andExpect(jsonPath("$[3].dateBeginning")
+						.value(mockedListExperiences.get(3).getDateBeginning().toString()))
 				.andExpect(jsonPath("$[3].dateEnding").value(mockedListExperiences.get(3).getDateEnding().toString()))
 				.andExpect(jsonPath("$[3].formation").value(mockedListExperiences.get(3).isFormation()))
 				.andExpect(jsonPath("$[4].id").value(mockedListExperiences.get(4).getId()))
 				.andExpect(jsonPath("$[4].name").value(mockedListExperiences.get(4).getName()))
 				.andExpect(jsonPath("$[4].id").value(mockedListExperiences.get(4).getId()))
 				.andExpect(jsonPath("$[4].name").value(mockedListExperiences.get(4).getName()))
-				.andExpect(
-						jsonPath("$[4].dateBegining").value(mockedListExperiences.get(4).getDateBegining().toString()))
+				.andExpect(jsonPath("$[4].dateBeginning")
+						.value(mockedListExperiences.get(4).getDateBeginning().toString()))
 				.andExpect(jsonPath("$[4].dateEnding").value(mockedListExperiences.get(4).getDateEnding().toString()))
 				.andExpect(jsonPath("$[4].formation").value(mockedListExperiences.get(4).isFormation()));
 
@@ -119,14 +130,14 @@ class ExperienceControllerTest {
 	@Test
 	@DisplayName("Requête API pour charger une Experiencene à partir de son ID")
 	void testGetExperienceById_ReturnCorrectExperience() throws Exception {
-		Experience searchExperience = mockedListExperiences.get(2);
+		ExperienceDTO searchExperience = mockedListExperiences.get(2);
 		Mockito.when(experienceService.getExperienceById(searchExperience.getId())).thenReturn(searchExperience);
 
 		mockMvc.perform(get("/experiences/id/" + searchExperience.getId())).andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.id").value(searchExperience.getId()))
 				.andExpect(jsonPath("$.name").value(searchExperience.getName()))
-				.andExpect(jsonPath("$.dateBegining").value(searchExperience.getDateBegining().toString()))
+				.andExpect(jsonPath("$.dateBeginning").value(searchExperience.getDateBeginning().toString()))
 				.andExpect(jsonPath("$.dateEnding").value(searchExperience.getDateEnding().toString()))
 				.andExpect(jsonPath("$.formation").value(searchExperience.isFormation()));
 
@@ -144,15 +155,15 @@ class ExperienceControllerTest {
 	@DisplayName("Sauvegarde d'une expérience bien définie")
 	public void testSaveExperience_resturnSavedExperience() throws Exception {
 
-		Experience newExperience = new Experience(12, "Exp. 1", LocalDate.of(2012, 12, 15), LocalDate.of(2016, 2, 5),
-				false);
-		when(experienceService.saveExperience(Mockito.any(Experience.class))).thenReturn(newExperience);
+		ExperienceDTO newExperience = new ExperienceDTO(12, "Exp. 1", LocalDate.of(2012, 12, 15),
+				LocalDate.of(2016, 2, 5), false);
+		when(experienceService.saveExperience(Mockito.any(ExperienceDTO.class))).thenReturn(newExperience.getSummary());
 
 		mockMvc.perform(post("/experiences").contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(newExperience))).andExpect(status().isOk())
 				.andExpect(jsonPath("$.id").value(newExperience.getId()))
 				.andExpect(jsonPath("$.name").value(newExperience.getName()))
-				.andExpect(jsonPath("$.dateBegining").value(newExperience.getDateBegining().toString()))
+				.andExpect(jsonPath("$.dateBeginning").value(newExperience.getDateBeginning().toString()))
 				.andExpect(jsonPath("$.dateEnding").value(newExperience.getDateEnding().toString()))
 				.andExpect(jsonPath("$.formation").value(newExperience.isFormation()));
 	}
@@ -160,9 +171,10 @@ class ExperienceControllerTest {
 	@Test
 	@DisplayName("Sauvegarde d'une expérience avec un nom vide")
 	public void testSaveExperienceWithEmptyName_StatusFail() throws Exception {
-		Experience invalidExperience = new Experience(12, " ", LocalDate.of(2012, 12, 15), LocalDate.of(2016, 2, 5),
-				false);
-		when(experienceService.saveExperience(Mockito.any(Experience.class))).thenReturn(invalidExperience);
+		ExperienceDTO invalidExperience = new ExperienceDTO(12, " ", LocalDate.of(2012, 12, 15),
+				LocalDate.of(2016, 2, 5), false);
+		when(experienceService.saveExperience(Mockito.any(ExperienceDTO.class)))
+				.thenReturn(invalidExperience.getSummary());
 
 		mockMvc.perform(post("/experiences").contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(invalidExperience))).andExpect(status().isBadRequest());
@@ -171,8 +183,9 @@ class ExperienceControllerTest {
 	@Test
 	@DisplayName("Sauvegarde d'une expérience avec une date de début null")
 	public void testSaveExperienceWithDateBeginningNull_StatusFail() throws Exception {
-		Experience invalidExperience = new Experience(12, "Exp. 2", null, LocalDate.of(2016, 2, 5), false);
-		when(experienceService.saveExperience(Mockito.any(Experience.class))).thenReturn(invalidExperience);
+		ExperienceDTO invalidExperience = new ExperienceDTO(12, "Exp. 2", null, LocalDate.of(2016, 2, 5), false);
+		when(experienceService.saveExperience(Mockito.any(ExperienceDTO.class)))
+				.thenReturn(invalidExperience.getSummary());
 
 		mockMvc.perform(post("/experiences").contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(invalidExperience))).andExpect(status().isBadRequest());

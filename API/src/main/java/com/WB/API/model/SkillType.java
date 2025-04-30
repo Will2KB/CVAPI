@@ -11,7 +11,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "skill_type")
@@ -22,7 +21,6 @@ public class SkillType {
 	@Column(name = "id")
 	private int id;
 
-	@NotBlank(message = "Un nom de type de compétence est nécessaire")
 	@Column(name = "name")
 	private String name;
 

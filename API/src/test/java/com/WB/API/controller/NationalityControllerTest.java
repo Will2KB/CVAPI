@@ -19,7 +19,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.WB.API.model.Nationality;
+import com.WB.API.dto.NationalityDTO;
 import com.WB.API.service.NationalityService;
 
 @ActiveProfiles("test")
@@ -33,14 +33,14 @@ class NationalityControllerTest {
 	@MockBean
 	private NationalityService nationalityService;
 
-	private List<Nationality> mockedListNationalities;
+	private List<NationalityDTO> mockedListNationalities;
 
 	@BeforeEach
 	public void loadData() {
-		mockedListNationalities = new ArrayList<Nationality>();
-		mockedListNationalities.add(new Nationality(12, "Français"));
-		mockedListNationalities.add(new Nationality(13, "Suisse"));
-		mockedListNationalities.add(new Nationality(14, "Espagnol"));
+		mockedListNationalities = new ArrayList<>();
+		mockedListNationalities.add(new NationalityDTO(12, "Français"));
+		mockedListNationalities.add(new NationalityDTO(13, "Suisse"));
+		mockedListNationalities.add(new NationalityDTO(14, "Espagnol"));
 	}
 
 	@Test
@@ -63,7 +63,7 @@ class NationalityControllerTest {
 	@Test
 	@DisplayName("Requête API pour charger une nationalité à partir de son ID")
 	void testGetNationalityById_ReturnCorrectNationality() throws Exception {
-		Nationality searchNationality = mockedListNationalities.get(2);
+		NationalityDTO searchNationality = mockedListNationalities.get(2);
 		Mockito.when(nationalityService.getNationalityById(searchNationality.getId())).thenReturn(searchNationality);
 
 		mockMvc.perform(get("/nationalities/id/" + searchNationality.getId())).andExpect(status().isOk())

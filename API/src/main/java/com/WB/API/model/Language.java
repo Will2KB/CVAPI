@@ -11,7 +11,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "language")
@@ -22,7 +21,6 @@ public class Language {
 	@Column(name = "id")
 	private int id;
 
-	@NotBlank(message = "un nom de langue est nécessaire")
 	@Column(name = "name")
 	private String name;
 
@@ -34,6 +32,7 @@ public class Language {
 	}
 
 	public Language(int id) {
+		this();
 		this.id = id;
 	}
 

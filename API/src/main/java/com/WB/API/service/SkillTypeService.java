@@ -5,7 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.WB.API.model.SkillType;
+import com.WB.API.dto.SkillTypeDTO;
+import com.WB.API.mapper.SkillTypeMapper;
 import com.WB.API.repository.SkillTypeRepository;
 
 @Service
@@ -14,11 +15,11 @@ public class SkillTypeService {
 	@Autowired
 	private SkillTypeRepository skillTypeRepository;
 
-	public SkillType getSkillTypeByID(Integer ID) {
-		return skillTypeRepository.findById(ID).get();
+	public SkillTypeDTO getSkillTypeByID(Integer ID) {
+		return SkillTypeMapper.toDTO(skillTypeRepository.findById(ID).get());
 	}
 
-	public List<SkillType> getSkillTypes() {
-		return skillTypeRepository.findAll();
+	public List<SkillTypeDTO> getSkillTypes() {
+		return SkillTypeMapper.toDTOList(skillTypeRepository.findAll());
 	}
 }

@@ -14,6 +14,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.context.ActiveProfiles;
 
+import com.WB.API.dto.LanguageDTO;
+import com.WB.API.mapper.LanguageMapper;
 import com.WB.API.model.Language;
 import com.WB.API.repository.LanguageRepository;
 
@@ -28,26 +30,36 @@ class LangageServiceTest {
 	@InjectMocks
 	private LanguageService languageService;
 
-	private List<Language> mockedListLanguages;
+	private List<LanguageDTO> mockedListLanguages;
 
 	@BeforeEach
 	private void LoadData() {
-		mockedListLanguages = new ArrayList<Language>();
-		mockedListLanguages.add(new Language(12, "Français"));
-		mockedListLanguages.add(new Language(13, "Anglais"));
-		mockedListLanguages.add(new Language(14, "Espagnol"));
+		mockedListLanguages = new ArrayList<>();
+		mockedListLanguages.add(new LanguageDTO(12, "Français"));
+		mockedListLanguages.add(new LanguageDTO(13, "Anglais"));
+		mockedListLanguages.add(new LanguageDTO(14, "Espagnol"));
 
+	}
+
+	private List<Language> getMockedListEntity() {
+		List<Language> languages = new ArrayList<>();
+
+		for (LanguageDTO languageDTO : mockedListLanguages) {
+			languages.add(LanguageMapper.toEntity(languageDTO));
+		}
+
+		return languages;
 	}
 
 	@Test
 	@DisplayName("Chargement de toutes les langues")
 	void findAll_ShouldReturnListOfAllLanguages() {
-		Mockito.when(LanguageRepository.findAll()).thenReturn(mockedListLanguages);
+		Mockito.when(LanguageRepository.findAll()).thenReturn(this.getMockedListEntity());
 
-		List<Language> loadedLanguages = languageService.getLanguages();
+		List<LanguageDTO> loadedLanguages = languageService.getLanguages();
 
-		for (Language expectedLanguage : mockedListLanguages) {
-			Language actualLanguage = loadedLanguages.stream()
+		for (LanguageDTO expectedLanguage : mockedListLanguages) {
+			LanguageDTO actualLanguage = loadedLanguages.stream()
 					.filter(c -> c.getName().equals(expectedLanguage.getName())).findFirst().orElse(null);
 
 			Assertions.assertNotNull(actualLanguage);

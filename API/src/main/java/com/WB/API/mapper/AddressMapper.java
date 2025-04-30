@@ -5,13 +5,10 @@ import com.WB.API.model.Address;
 
 public class AddressMapper {
 
-	private int id;
-	private Integer streetNumber;
-	private String street;
-	private String complement;
-	private CityMapper city;
-
 	public static AddressDTO toDTO(Address address) {
+		if (address == null)
+			return null;
+
 		AddressDTO addressDTO = new AddressDTO();
 
 		addressDTO.setId(address.getId());
@@ -24,6 +21,9 @@ public class AddressMapper {
 	}
 
 	public static Address toEntity(AddressDTO addressDTO) {
+		if (addressDTO == null)
+			return null;
+
 		Address address = new Address(addressDTO.getId());
 
 		address.setNb_street(addressDTO.getStreetNumber());

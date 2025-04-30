@@ -6,9 +6,6 @@ import java.util.List;
 
 import org.hibernate.annotations.DynamicUpdate;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonInclude;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,10 +19,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.transaction.Transactional;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
-@JsonInclude(JsonInclude.Include.NON_NULL) // Ignore les champs null dans le JSON
 @Entity
 @Table(name = "experience")
 @Transactional
@@ -37,22 +31,18 @@ public class Experience {
 	@Column(name = "id")
 	private int id;
 
-	@NotBlank(message = "Le nom de l'expérience ne peut pas être vide")
 	@Column(name = "name")
 	private String name;
 
-	@NotNull(message = "La date de début d'expérience doit être renseigné")
-	@JsonFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "date_begining")
 	private LocalDate dateBegining;
 
-	@JsonFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "date_ending")
 	private LocalDate dateEnding;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "establishment_id")
-	private Establishement establishement;
+	private Establishment establishement;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "city_id")
@@ -93,7 +83,7 @@ public class Experience {
 		this.name = name;
 	}
 
-	public LocalDate getDateBegining() {
+	public LocalDate getDateBeginning() {
 		return dateBegining;
 	}
 
@@ -109,11 +99,11 @@ public class Experience {
 		this.dateEnding = dateEnding;
 	}
 
-	public Establishement getEstablishement() {
+	public Establishment getEstablishement() {
 		return establishement;
 	}
 
-	public void setEstablishement(Establishement establishement) {
+	public void setEstablishement(Establishment establishement) {
 		this.establishement = establishement;
 	}
 

@@ -15,6 +15,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.context.ActiveProfiles;
 
+import com.WB.API.dto.NationalityDTO;
+import com.WB.API.mapper.NationalityMapper;
 import com.WB.API.model.Nationality;
 import com.WB.API.repository.NationalityRepository;
 
@@ -29,24 +31,35 @@ class NationalityServiceTest {
 	@InjectMocks
 	private NationalityService nationalityService;
 
-	private List<Nationality> mockedListNationalities;
+	private List<NationalityDTO> mockedListNationalities;
 
 	@BeforeEach
 	private void LoadData() {
-		mockedListNationalities = new ArrayList<Nationality>();
-		mockedListNationalities.add(new Nationality(12, "Français"));
-		mockedListNationalities.add(new Nationality(13, "Suisse"));
-		mockedListNationalities.add(new Nationality(14, "Espagnol"));
+		mockedListNationalities = new ArrayList<NationalityDTO>();
+		mockedListNationalities.add(new NationalityDTO(12, "Français"));
+		mockedListNationalities.add(new NationalityDTO(13, "Suisse"));
+		mockedListNationalities.add(new NationalityDTO(14, "Espagnol"));
 
+	}
+
+	private List<Nationality> getMockedListPersonEntity() {
+		List<Nationality> nationalities = new ArrayList<>();
+
+		for (NationalityDTO nationalityDTO : mockedListNationalities) {
+			nationalities.add(NationalityMapper.toEntity(nationalityDTO));
+		}
+
+		return nationalities;
 	}
 
 	@Test
 	@DisplayName("Recherche d'une nationalité à partir de l'ID")
 	void findById_ShouldReturnCorrectNationality() {
-		Nationality mockedNationality = mockedListNationalities.get(2);
+		NationalityDTO mockedNationalityDTO = mockedListNationalities.get(2);
+		Nationality mockedNationality = new Nationality(mockedNationalityDTO.getId(), mockedNationalityDTO.getName());
 		Mockito.when(nationalityRepository.findById(mockedNationality.getId()))
 				.thenReturn(Optional.of(mockedNationality));
-		Nationality result = nationalityService.getNationalityById(mockedNationality.getId());
+		NationalityDTO result = nationalityService.getNationalityById(mockedNationality.getId());
 
 		Assertions.assertNotNull(result);
 		Assertions.assertEquals(mockedNationality.getName(), result.getName());
@@ -55,12 +68,12 @@ class NationalityServiceTest {
 	@Test
 	@DisplayName("Chargement de toutes les nationalités")
 	void getNationalities_ShouldReturnListOfAllNationalitys() {
-		Mockito.when(nationalityRepository.findAll()).thenReturn(mockedListNationalities);
+		Mockito.when(nationalityRepository.findAll()).thenReturn(this.getMockedListPersonEntity());
 
-		List<Nationality> loadedNationalities = nationalityService.getNationalities();
+		List<NationalityDTO> loadedNationalities = nationalityService.getNationalities();
 
-		for (Nationality expectedNationality : mockedListNationalities) {
-			Nationality actualNationality = loadedNationalities.stream()
+		for (NationalityDTO expectedNationality : mockedListNationalities) {
+			NationalityDTO actualNationality = loadedNationalities.stream()
 					.filter(c -> c.getName().equals(expectedNationality.getName())).findFirst().orElse(null);
 
 			Assertions.assertNotNull(actualNationality);

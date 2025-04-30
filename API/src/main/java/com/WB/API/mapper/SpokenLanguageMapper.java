@@ -8,12 +8,10 @@ import com.WB.API.model.SpokenLanguage;
 
 public class SpokenLanguageMapper {
 
-	private int personId;
-	private int languageId;
-	private String name;
-	private String level;
-
 	public static SpokenLanguageDTO toDTO(SpokenLanguage language) {
+		if (language == null)
+			return null;
+
 		SpokenLanguageDTO languageDTO = new SpokenLanguageDTO();
 
 		languageDTO.setLanguageId(language.getLanguage().getId());
@@ -25,6 +23,9 @@ public class SpokenLanguageMapper {
 	}
 
 	public static List<SpokenLanguageDTO> toDTOList(List<SpokenLanguage> languages) {
+		if (languages == null)
+			return null;
+
 		List<SpokenLanguageDTO> languagesDTO = new ArrayList<>();
 
 		for (SpokenLanguage spokenLanguage : languages) {
@@ -35,6 +36,9 @@ public class SpokenLanguageMapper {
 	}
 
 	public static SpokenLanguage toEntity(SpokenLanguageDTO languageDTO) {
+		if (languageDTO == null)
+			return null;
+
 		SpokenLanguage language = new SpokenLanguage(languageDTO.getPersonId(), languageDTO.getLanguageId());
 		language.setLevel(languageDTO.getLevel());
 
@@ -42,6 +46,9 @@ public class SpokenLanguageMapper {
 	}
 
 	public static List<SpokenLanguage> toEntityList(List<SpokenLanguageDTO> languagesDTO) {
+		if (languagesDTO == null)
+			return null;
+
 		List<SpokenLanguage> languages = new ArrayList<>();
 
 		for (SpokenLanguageDTO spokenLanguageDTO : languagesDTO) {

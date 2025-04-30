@@ -19,7 +19,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.WB.API.model.City;
+import com.WB.API.dto.CityDTO;
 import com.WB.API.service.CityService;
 
 @ActiveProfiles("test")
@@ -33,15 +33,15 @@ class CityControllerTest {
 	@MockBean
 	private CityService cityService;
 
-	private List<City> mockedListCities;
+	private List<CityDTO> mockedListCities;
 
 	@BeforeEach
 	public void loadData() {
-		mockedListCities = new ArrayList<City>();
-		mockedListCities.add(new City(12, "Bonneville", 74130));
-		mockedListCities.add(new City(13, "Genève", 1201));
-		mockedListCities.add(new City(14, "Plan-les-Ouates", 1212));
-		mockedListCities.add(new City(15, "Paris", 75000));
+		mockedListCities = new ArrayList<>();
+		mockedListCities.add(new CityDTO(12, "Bonneville", 74130));
+		mockedListCities.add(new CityDTO(13, "Genève", 1201));
+		mockedListCities.add(new CityDTO(14, "Plan-les-Ouates", 1212));
+		mockedListCities.add(new CityDTO(15, "Paris", 75000));
 	}
 
 	@Test
@@ -66,7 +66,7 @@ class CityControllerTest {
 	@Test
 	@DisplayName("Requête API pour charger une ville à partir de son ID")
 	void testGetCityById_ReturnCorrectCity() throws Exception {
-		City searchCity = mockedListCities.get(2);
+		CityDTO searchCity = mockedListCities.get(2);
 		Mockito.when(cityService.getCityByID(searchCity.getId())).thenReturn(searchCity);
 
 		mockMvc.perform(get("/cities/id/" + searchCity.getId())).andExpect(status().isOk())
@@ -79,7 +79,7 @@ class CityControllerTest {
 	@Test
 	@DisplayName("Requête API pour charger une ville à partir de son nom")
 	void testGetCityByName_ReturnCorrectCity() throws Exception {
-		City searchCity = mockedListCities.get(2);
+		CityDTO searchCity = mockedListCities.get(2);
 		Mockito.when(cityService.getCityByName(searchCity.getName())).thenReturn(searchCity);
 
 		mockMvc.perform(get("/cities/name/" + searchCity.getName())).andExpect(status().isOk())

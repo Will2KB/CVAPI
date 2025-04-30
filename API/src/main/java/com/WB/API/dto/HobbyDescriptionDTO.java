@@ -1,8 +1,12 @@
 package com.WB.API.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class HobbyDescriptionDTO {
 
 	private int id;
+
+	@NotBlank(message = "Une description de hobby est nécessaire")
 	private String description;
 
 	public int getId() {

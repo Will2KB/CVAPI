@@ -10,7 +10,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "city")
@@ -21,7 +20,6 @@ public class City {
 	@Column(name = "id")
 	private int id;
 
-	@NotBlank(message = "Un nom de ville est nécessaire")
 	@Column(name = "name")
 	private String name;
 

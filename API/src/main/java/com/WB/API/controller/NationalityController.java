@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.WB.API.model.Nationality;
+import com.WB.API.dto.NationalityDTO;
 import com.WB.API.service.NationalityService;
 
 @RestController
@@ -17,12 +17,12 @@ public class NationalityController {
 	private NationalityService nationalityService;
 
 	@GetMapping("/nationalities")
-	public List<Nationality> getNationalitys() {
+	public List<NationalityDTO> getNationalitys() {
 		return nationalityService.getNationalities();
 	}
 
 	@GetMapping("/nationalities/id/{id}")
-	public Nationality getNationality(@PathVariable int id) {
+	public NationalityDTO getNationality(@PathVariable int id) {
 		return nationalityService.getNationalityById(id);
 	}
 }

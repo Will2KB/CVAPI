@@ -6,7 +6,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "hobby_description")
@@ -17,7 +16,6 @@ public class HobbyDescription {
 	@Column(name = "id")
 	private int id;
 
-	@NotBlank(message = "Une description de hobby est nécessaire")
 	@Column(name = "description")
 	private String description;
 

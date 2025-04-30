@@ -1,9 +1,14 @@
 package com.WB.API.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class SkillDTO {
 
 	private int id;
+
+	@NotBlank(message = "Un nom de compétence est nécessaire")
 	private String name;
+
 	private int typeId;
 	private String typeName;
 	private boolean enable;

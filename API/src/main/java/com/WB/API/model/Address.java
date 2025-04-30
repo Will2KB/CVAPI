@@ -1,7 +1,5 @@
 package com.WB.API.model;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,9 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 @Table(name = "address")
 public class Address {
@@ -27,7 +23,6 @@ public class Address {
 	@Column(name = "nb_street")
 	private Integer nb_street;
 
-	@NotBlank(message = "Il faut au minimum une rue pour définir une adresse")
 	@Column(name = "street")
 	private String street;
 

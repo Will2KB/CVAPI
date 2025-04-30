@@ -23,7 +23,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.WB.API.model.Person;
+import com.WB.API.dto.PersonDTO;
+import com.WB.API.dto.PersonSummaryDTO;
 import com.WB.API.service.PersonService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -41,21 +42,31 @@ class PersonControllerTest {
 	@MockBean
 	private PersonService personService;
 
-	private List<Person> mockedListPersons;
+	private List<PersonDTO> mockedListPersons;
 
 	@BeforeEach
 	public void loadData() {
-		mockedListPersons = new ArrayList<Person>();
-		mockedListPersons.add(new Person(12, "Dupont", "Toto", "toto@gmail.com", "0609548768"));
-		mockedListPersons.add(new Person(13, "Madrigal", "Coco", "Madrigal@gmail.com", "0609688768"));
-		mockedListPersons.add(new Person(14, "Herrault", "Rodolphe", "roro@gmail.com", "0609549868"));
-		mockedListPersons.add(new Person(15, "Paramount", "Thibault", "Paramount@gmail.com", "0607548768"));
+		mockedListPersons = new ArrayList<PersonDTO>();
+		mockedListPersons.add(new PersonDTO(12, "Dupont", "Toto", "toto@gmail.com", "0609548768"));
+		mockedListPersons.add(new PersonDTO(13, "Madrigal", "Coco", "Madrigal@gmail.com", "0609688768"));
+		mockedListPersons.add(new PersonDTO(14, "Herrault", "Rodolphe", "roro@gmail.com", "0609549868"));
+		mockedListPersons.add(new PersonDTO(15, "Paramount", "Thibault", "Paramount@gmail.com", "0607548768"));
+	}
+
+	private List<PersonSummaryDTO> getMockedListSummary() {
+		List<PersonSummaryDTO> summaries = new ArrayList<>();
+
+		for (PersonDTO personDTO : mockedListPersons) {
+			summaries.add(personDTO.getSummary());
+		}
+
+		return summaries;
 	}
 
 	@Test
 	@DisplayName("Requête API pour charger toutes les personnes")
 	void testGetPersons_ReturnAllPersons() throws Exception {
-		Mockito.when(personService.getPersons()).thenReturn(mockedListPersons);
+		Mockito.when(personService.getPersons()).thenReturn(this.getMockedListSummary());
 
 		mockMvc.perform(get("/persons")).andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -74,7 +85,7 @@ class PersonControllerTest {
 	@Test
 	@DisplayName("Requête API pour charger une personne à partir de son ID")
 	void testGetPersonById_ReturnCorrectPerson() throws Exception {
-		Person searchPerson = mockedListPersons.get(2);
+		PersonDTO searchPerson = mockedListPersons.get(2);
 		Mockito.when(personService.getPersonById(searchPerson.getId())).thenReturn(searchPerson);
 
 		mockMvc.perform(get("/persons/id/" + searchPerson.getId())).andExpect(status().isOk())
@@ -88,8 +99,8 @@ class PersonControllerTest {
 	@DisplayName("Sauvegarde d'une personne bien définie")
 	public void testSavePerson_resturnSavedPerson() throws Exception {
 
-		Person newPerson = new Person(12, "Dupont", "Toto", "toto@gmail.com", "0609548768");
-		when(personService.savePerson(Mockito.any(Person.class))).thenReturn(newPerson);
+		PersonDTO newPerson = new PersonDTO(12, "Dupont", "Toto", "toto@gmail.com", "0609548768");
+		when(personService.savePerson(Mockito.any(PersonDTO.class))).thenReturn(newPerson.getSummary());
 
 		mockMvc.perform(post("/persons").contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(newPerson))).andExpect(status().isOk())
@@ -103,8 +114,8 @@ class PersonControllerTest {
 	@Test
 	@DisplayName("Sauvegarde d'une personne avec un nom vide")
 	public void testSavePersonWithEmptyName_StatusFail() throws Exception {
-		Person invalidPerson = new Person(12, "", "Toto", "toto@gmail.com", "0698748768");
-		when(personService.savePerson(Mockito.any(Person.class))).thenReturn(invalidPerson);
+		PersonDTO invalidPerson = new PersonDTO(12, "", "Toto", "toto@gmail.com", "0698748768");
+		when(personService.savePerson(Mockito.any(PersonDTO.class))).thenReturn(invalidPerson.getSummary());
 
 		mockMvc.perform(post("/persons").contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(invalidPerson))).andExpect(status().isBadRequest());
@@ -113,8 +124,8 @@ class PersonControllerTest {
 	@Test
 	@DisplayName("Sauvegarde d'une personne avec un prénom vide")
 	public void testSavePersonWithEmptyFirstname_StatusFail() throws Exception {
-		Person invalidPerson = new Person(12, "Dupont", "", "toto@gmail.com", "0609549768");
-		when(personService.savePerson(Mockito.any(Person.class))).thenReturn(invalidPerson);
+		PersonDTO invalidPerson = new PersonDTO(12, "Dupont", "", "toto@gmail.com", "0609549768");
+		when(personService.savePerson(Mockito.any(PersonDTO.class))).thenReturn(invalidPerson.getSummary());
 
 		mockMvc.perform(post("/persons").contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(invalidPerson))).andExpect(status().isBadRequest());
@@ -124,8 +135,8 @@ class PersonControllerTest {
 	@DisplayName("Sauvegarde d'une personne avec un mail incorrect")
 	@ValueSource(strings = { "", "totogmail.com", "toto@gmail", "toto@", "@gmail.com", "toto.tutu@gmail" })
 	public void testSaveExperienceWithIncorrectMail_StatusFail(String mail) throws Exception {
-		Person invalidPerson = new Person(12, "Dupont", "Toto", mail, "0609548768");
-		when(personService.savePerson(Mockito.any(Person.class))).thenReturn(invalidPerson);
+		PersonDTO invalidPerson = new PersonDTO(12, "Dupont", "Toto", mail, "0609548768");
+		when(personService.savePerson(Mockito.any(PersonDTO.class))).thenReturn(invalidPerson.getSummary());
 
 		mockMvc.perform(post("/persons").contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(invalidPerson))).andExpect(status().isBadRequest());
@@ -137,8 +148,8 @@ class PersonControllerTest {
 			"01234567890123456789", "33612345678", "+33/612345678", "+33 6A 12 34 56 78", "++33612345678",
 			"+001123456789", "+33612345678!", "+33612345678@" })
 	public void testSaveExperienceWithIncorrectPhone_StatusFail(String phone) throws Exception {
-		Person invalidPerson = new Person(12, "Dupont", "Toto", "toto@gmail.com", phone);
-		when(personService.savePerson(Mockito.any(Person.class))).thenReturn(invalidPerson);
+		PersonDTO invalidPerson = new PersonDTO(12, "Dupont", "Toto", "toto@gmail.com", phone);
+		when(personService.savePerson(Mockito.any(PersonDTO.class))).thenReturn(invalidPerson.getSummary());
 
 		mockMvc.perform(post("/persons").contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(invalidPerson))).andExpect(status().isBadRequest());

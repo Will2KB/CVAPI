@@ -2,12 +2,27 @@ package com.WB.API.dto;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+@JsonInclude(JsonInclude.Include.NON_NULL) // Ignore les champs null dans le JSON
 public class ExperienceSummaryDTO {
 
 	private int id;
+
+	@NotBlank(message = "Le nom de l'expérience ne peut pas être vide")
 	private String name;
+
+	@NotNull(message = "La date de début d'expérience doit être renseigné")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dateBeginning;
+
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dateEnding;
+
 	private int establishmentId;
 	private int cityId;
 	private String cityName;

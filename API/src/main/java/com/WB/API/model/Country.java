@@ -6,7 +6,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "country")
@@ -17,7 +16,6 @@ public class Country {
 	@Column(name = "id")
 	private int id;
 
-	@NotBlank(message = "Un nom de pays est nécessaire")
 	@Column(name = "name")
 	private String name;
 

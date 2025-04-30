@@ -73,7 +73,7 @@ class ExperienceRepositoryTest {
 		Experience findExperience = optExperience.get();
 		Assertions.assertEquals(newExperience.getName(), findExperience.getName());
 		Assertions.assertEquals(newExperience.getDescription(), findExperience.getDescription());
-		Assertions.assertEquals(newExperience.getDateBegining(), findExperience.getDateBegining());
+		Assertions.assertEquals(newExperience.getDateBeginning(), findExperience.getDateBeginning());
 		Assertions.assertEquals(newExperience.getDateEnding(), findExperience.getDateEnding());
 		Assertions.assertEquals(newExperience.getMission(), findExperience.getMission());
 		Assertions.assertEquals(newExperience.isFormation(), findExperience.isFormation());
@@ -93,7 +93,7 @@ class ExperienceRepositoryTest {
 		Assertions.assertEquals(searchExperience.getId(), experience.getId());
 		Assertions.assertEquals(searchExperience.getName(), experience.getName());
 		Assertions.assertEquals(searchExperience.getDescription(), experience.getDescription());
-		Assertions.assertEquals(searchExperience.getDateBegining(), experience.getDateBegining());
+		Assertions.assertEquals(searchExperience.getDateBeginning(), experience.getDateBeginning());
 		Assertions.assertEquals(searchExperience.getDateEnding(), experience.getDateEnding());
 		Assertions.assertEquals(searchExperience.getMission(), experience.getMission());
 		Assertions.assertEquals(searchExperience.isFormation(), experience.isFormation());
@@ -112,7 +112,7 @@ class ExperienceRepositoryTest {
 			Assertions.assertEquals(expectedExperience.getId(), actualExperience.getId());
 			Assertions.assertEquals(expectedExperience.getName(), actualExperience.getName());
 			Assertions.assertEquals(expectedExperience.getDescription(), actualExperience.getDescription());
-			Assertions.assertEquals(expectedExperience.getDateBegining(), actualExperience.getDateBegining());
+			Assertions.assertEquals(expectedExperience.getDateBeginning(), actualExperience.getDateBeginning());
 			Assertions.assertEquals(expectedExperience.getDateEnding(), actualExperience.getDateEnding());
 			Assertions.assertEquals(expectedExperience.getMission(), actualExperience.getMission());
 			Assertions.assertEquals(expectedExperience.isFormation(), actualExperience.isFormation());

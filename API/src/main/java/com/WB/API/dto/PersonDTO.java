@@ -4,10 +4,18 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import jakarta.validation.Valid;
+
+@JsonInclude(JsonInclude.Include.NON_NULL) // Ignore les champs null dans le JSON
 public class PersonDTO {
 
+	@Valid
 	private PersonSummaryDTO summary;
 
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate birthDate;
 	private int age;
 	private String subtitle;
@@ -20,30 +28,33 @@ public class PersonDTO {
 	private List<ExperienceSummaryDTO> experiences;
 
 	public PersonDTO() {
-		this.summary = new PersonSummaryDTO();
+		this.loadSummary();
 		this.address = new AddressDTO();
 		this.nationalities = new ArrayList<>();
 		this.spokenLanguages = new ArrayList<>();
 		this.experiences = new ArrayList<>();
 	}
 
-	public List<HobbyDTO> getHobbies() {
-		return hobbies;
+	public PersonDTO(String name, String firstName, String eMail, String phone) {
+		this();
+		this.summary.setName(name);
+		this.summary.setFirstName(firstName);
+		this.summary.setMail(eMail);
+		this.summary.setPhone(phone);
 	}
 
-	public void setHobbies(List<HobbyDTO> hobbies) {
-		this.hobbies = hobbies;
+	public PersonDTO(int id, String name, String firstName, String eMail, String phone) {
+		this(name, firstName, eMail, phone);
+		this.summary.setId(id);
 	}
 
-	public List<NationalityDTO> getNationalities() {
-		return nationalities;
-	}
-
-	public void setNationalities(List<NationalityDTO> nationalities) {
-		this.nationalities = nationalities;
+	private void loadSummary() {
+		if (this.summary == null)
+			this.summary = new PersonSummaryDTO();
 	}
 
 	public PersonSummaryDTO getSummary() {
+		this.loadSummary();
 		return summary;
 	}
 
@@ -67,44 +78,28 @@ public class PersonDTO {
 		this.address = address;
 	}
 
-	public List<SpokenLanguageDTO> getSpokenLanguages() {
-		return spokenLanguages;
-	}
-
-	public void setSpokenLanguages(List<SpokenLanguageDTO> spokenLanguages) {
-		this.spokenLanguages = spokenLanguages;
-	}
-
-	public List<ExperienceSummaryDTO> getExperiences() {
-		return experiences;
-	}
-
-	public void setExperiences(List<ExperienceSummaryDTO> experiences) {
-		this.experiences = experiences;
-	}
-
 	public int getId() {
-		return summary.getId();
+		return this.getSummary().getId();
 	}
 
 	public void setId(int id) {
-		this.summary.setId(id);
+		this.getSummary().setId(id);
 	}
 
 	public String getName() {
-		return this.summary.getName();
+		return this.getSummary().getName();
 	}
 
 	public void setName(String name) {
-		this.summary.setName(name);
+		this.getSummary().setName(name);
 	}
 
 	public String getFirstName() {
-		return this.summary.getFirstName();
+		return this.getSummary().getFirstName();
 	}
 
 	public void setFirstName(String firstName) {
-		this.summary.setFirstName(firstName);
+		this.getSummary().setFirstName(firstName);
 	}
 
 	public int getAge() {
@@ -116,27 +111,27 @@ public class PersonDTO {
 	}
 
 	public String getMail() {
-		return this.summary.getMail();
+		return this.getSummary().getMail();
 	}
 
 	public void setMail(String mail) {
-		this.summary.setMail(mail);
+		this.getSummary().setMail(mail);
 	}
 
 	public String getPhone() {
-		return this.summary.getPhone();
+		return this.getSummary().getPhone();
 	}
 
 	public void setPhone(String phone) {
-		this.summary.setPhone(phone);
+		this.getSummary().setPhone(phone);
 	}
 
 	public String getTitle() {
-		return this.summary.getTitle();
+		return this.getSummary().getTitle();
 	}
 
 	public void setTitle(String title) {
-		this.summary.setTitle(title);
+		this.getSummary().setTitle(title);
 	}
 
 	public String getSubtitle() {
@@ -155,4 +150,35 @@ public class PersonDTO {
 		this.personalValues = personalValues;
 	}
 
+	public List<HobbyDTO> getHobbies() {
+		return hobbies;
+	}
+
+	public void setHobbies(List<HobbyDTO> hobbies) {
+		this.hobbies = hobbies;
+	}
+
+	public List<NationalityDTO> getNationalities() {
+		return nationalities;
+	}
+
+	public void setNationalities(List<NationalityDTO> nationalities) {
+		this.nationalities = nationalities;
+	}
+
+	public List<SpokenLanguageDTO> getSpokenLanguages() {
+		return spokenLanguages;
+	}
+
+	public void setSpokenLanguages(List<SpokenLanguageDTO> spokenLanguages) {
+		this.spokenLanguages = spokenLanguages;
+	}
+
+	public List<ExperienceSummaryDTO> getExperiences() {
+		return experiences;
+	}
+
+	public void setExperiences(List<ExperienceSummaryDTO> experiences) {
+		this.experiences = experiences;
+	}
 }

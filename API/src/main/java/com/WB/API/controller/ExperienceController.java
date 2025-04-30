@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.WB.API.model.Experience;
+import com.WB.API.dto.ExperienceDTO;
+import com.WB.API.dto.ExperienceSummaryDTO;
 import com.WB.API.service.ExperienceService;
 
 import jakarta.validation.Valid;
@@ -22,13 +23,13 @@ public class ExperienceController {
 	private ExperienceService experienceService;
 
 	@GetMapping("/experiences")
-	public List<Experience> getExperiences() {
+	public List<ExperienceSummaryDTO> getExperiences() {
 		return experienceService.getExperiences();
 	}
 
 	@GetMapping("/experiences/id/{id}")
-	public ResponseEntity<Experience> getExperience(@PathVariable int id) {
-		Experience experience = experienceService.getExperienceById(id);
+	public ResponseEntity<ExperienceDTO> getExperience(@PathVariable int id) {
+		ExperienceDTO experience = experienceService.getExperienceById(id);
 		if (experience == null) {
 			return ResponseEntity.notFound().build();
 		}
@@ -36,7 +37,7 @@ public class ExperienceController {
 	}
 
 	@PostMapping("/experiences")
-	public Experience saveExperience(@Valid @RequestBody Experience experience) {
+	public ExperienceSummaryDTO saveExperience(@Valid @RequestBody ExperienceDTO experience) {
 		return experienceService.saveExperience(experience);
 	}
 }

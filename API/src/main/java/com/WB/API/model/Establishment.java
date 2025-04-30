@@ -2,8 +2,6 @@ package com.WB.API.model;
 
 import org.hibernate.annotations.DynamicUpdate;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,20 +12,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 @Table(name = "establishement")
 @DynamicUpdate
-public class Establishement {
+public class Establishment {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 
-	@NotBlank(message = "Un nom d'établissement est nécessaire")
 	@Column(name = "name")
 	private String name;
 
@@ -35,11 +30,11 @@ public class Establishement {
 	@JoinColumn(name = "address_id")
 	private Address address;
 
-	public Establishement() {
+	public Establishment() {
 
 	}
 
-	public Establishement(int id) {
+	public Establishment(int id) {
 		this();
 		this.id = id;
 	}

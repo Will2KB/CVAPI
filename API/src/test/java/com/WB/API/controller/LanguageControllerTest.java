@@ -19,7 +19,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.WB.API.model.Language;
+import com.WB.API.dto.LanguageDTO;
 import com.WB.API.service.LanguageService;
 
 @ActiveProfiles("test")
@@ -33,14 +33,14 @@ class LanguageControllerTest {
 	@MockBean
 	private LanguageService languageService;
 
-	private List<Language> mockedListLanguages;
+	private List<LanguageDTO> mockedListLanguages;
 
 	@BeforeEach
 	public void loadData() {
-		mockedListLanguages = new ArrayList<Language>();
-		mockedListLanguages.add(new Language(12, "Français"));
-		mockedListLanguages.add(new Language(13, "Anglais"));
-		mockedListLanguages.add(new Language(14, "Espagnol"));
+		mockedListLanguages = new ArrayList<>();
+		mockedListLanguages.add(new LanguageDTO(12, "Français"));
+		mockedListLanguages.add(new LanguageDTO(13, "Anglais"));
+		mockedListLanguages.add(new LanguageDTO(14, "Espagnol"));
 	}
 
 	@Test

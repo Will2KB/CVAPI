@@ -13,7 +13,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "hobby")
@@ -24,7 +23,6 @@ public class Hobby {
 	@Column(name = "id")
 	private int id;
 
-	@NotBlank(message = "Un nom de hobby est nécessaire")
 	@Column(name = "name")
 	private String name;
 

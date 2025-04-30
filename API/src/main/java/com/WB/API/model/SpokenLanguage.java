@@ -6,7 +6,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "person_speaks_language")
@@ -23,7 +22,6 @@ public class SpokenLanguage {
 	@JoinColumn(name = "language_id")
 	private Language language;
 
-	@NotBlank(message = "Un niveau est nécessaire")
 	@Column(name = "level")
 	private String level;
 

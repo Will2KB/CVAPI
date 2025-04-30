@@ -3,10 +3,17 @@ package com.WB.API.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+
 public class HobbyDTO {
 
 	private int id;
+
+	@NotBlank(message = "Un nom de hobby est nécessaire")
 	private String name;
+
+	@Valid
 	private List<HobbyDescriptionDTO> descriptions;
 
 	public HobbyDTO() {

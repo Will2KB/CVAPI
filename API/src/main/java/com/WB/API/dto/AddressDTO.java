@@ -1,9 +1,15 @@
 package com.WB.API.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import jakarta.validation.constraints.NotBlank;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class AddressDTO {
 
 	private int id;
 	private Integer streetNumber;
+	@NotBlank(message = "Il faut au minimum une rue pour définir une adresse")
 	private String street;
 	private String complement;
 	private CityDTO city;

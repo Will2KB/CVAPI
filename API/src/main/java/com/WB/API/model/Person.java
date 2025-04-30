@@ -1,14 +1,10 @@
 package com.WB.API.model;
 
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.annotations.DynamicUpdate;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonInclude;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -24,11 +20,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.transaction.Transactional;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 
-@JsonInclude(JsonInclude.Include.NON_NULL) // Ignore les champs null dans le JSON
 @Entity
 @Table(name = "person")
 @Transactional
@@ -40,25 +32,18 @@ public class Person {
 	@Column(name = "id")
 	private int id;
 
-	@NotBlank(message = "Le nom ne peut pas être vide")
 	@Column(name = "name")
 	private String name;
 
-	@NotBlank(message = "Le prénom ne peut pas être vide")
 	@Column(name = "first_name")
 	private String firstName;
 
-	@JsonFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "birthday")
-	private LocalDate birthday;
+	private LocalDate birthdate;
 
-	@Email(message = "L'adresse mail n'est pas valide")
-	@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "L'adresse mail doit contenir un point dans le nom de domaine")
-	@NotBlank(message = "L'adresse mail ne peut pas être vide")
 	@Column(name = "mail")
 	private String mail;
 
-	@Pattern(regexp = "^(\\+([1-9]{1,3})\\d{4,14}|0\\d{9})$", message = "Numéro de téléphone invalide : doit être un numéro international (+...) ou français (0...)")
 	@Column(name = "phone")
 	private String phone;
 
@@ -131,19 +116,12 @@ public class Person {
 		this.firstName = firstName;
 	}
 
-	public LocalDate getBirthday() {
-		return birthday;
+	public LocalDate getBirthdate() {
+		return birthdate;
 	}
 
-	public int getAge() {
-		if (birthday == null)
-			return 0;
-
-		return Period.between(birthday, LocalDate.now()).getYears();
-	}
-
-	public void setBirthday(LocalDate birthday) {
-		this.birthday = birthday;
+	public void setBirthdate(LocalDate birthday) {
+		this.birthdate = birthday;
 	}
 
 	public String getMail() {

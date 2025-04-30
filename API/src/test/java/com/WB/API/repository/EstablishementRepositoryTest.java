@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import com.WB.API.model.Establishement;
+import com.WB.API.model.Establishment;
 
 @ActiveProfiles("test")
 @DataJpaTest
@@ -22,18 +22,18 @@ class EstablishementRepositoryTest {
 	@Autowired
 	EstablishementRepository establishementRepository;
 
-	private List<Establishement> establishements;
+	private List<Establishment> establishements;
 
 	@BeforeEach
 	private void loadData() {
 		establishements = new ArrayList<>();
 
-		Establishement establishement1 = new Establishement();
+		Establishment establishement1 = new Establishment();
 		establishement1.setName("Université");
 		establishementRepository.save(establishement1);
 		establishements.add(establishement1);
 
-		Establishement establishement2 = new Establishement();
+		Establishment establishement2 = new Establishment();
 		establishement2.setName("Company");
 		establishementRepository.save(establishement2);
 		establishements.add(establishement2);
@@ -43,12 +43,12 @@ class EstablishementRepositoryTest {
 	@Test
 	@DisplayName("Chargement d'un établissement à partir de son ID")
 	void findEstablishementById_ReturnCorrectEstablishement() {
-		Establishement searchEstablishement = establishements.get(1);
-		Optional<Establishement> optEstablishement = establishementRepository.findById(searchEstablishement.getId());
+		Establishment searchEstablishement = establishements.get(1);
+		Optional<Establishment> optEstablishement = establishementRepository.findById(searchEstablishement.getId());
 
 		Assertions.assertTrue(optEstablishement.isPresent(),
 				"L'établissement n'a pas été trouvée pour l'ID " + searchEstablishement.getId());
-		Establishement establishement = optEstablishement.get();
+		Establishment establishement = optEstablishement.get();
 
 		Assertions.assertNotNull(establishement);
 		Assertions.assertEquals(searchEstablishement.getId(), establishement.getId());

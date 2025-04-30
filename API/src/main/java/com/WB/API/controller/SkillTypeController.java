@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.WB.API.model.SkillType;
+import com.WB.API.dto.SkillTypeDTO;
 import com.WB.API.service.SkillTypeService;
 
 @RestController
@@ -17,12 +17,12 @@ public class SkillTypeController {
 	private SkillTypeService skillTypeService;
 
 	@GetMapping("/skillTypes")
-	public List<SkillType> getSkillTypes() {
+	public List<SkillTypeDTO> getSkillTypes() {
 		return skillTypeService.getSkillTypes();
 	}
 
 	@GetMapping("/skillTypes/id/{id}")
-	public SkillType getSkillType(@PathVariable int id) {
+	public SkillTypeDTO getSkillType(@PathVariable int id) {
 		return skillTypeService.getSkillTypeByID(id);
 	}
 }
