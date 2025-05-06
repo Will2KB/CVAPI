@@ -9,6 +9,16 @@ public class HobbyDescriptionDTO {
 	@NotBlank(message = "Une description de hobby est nécessaire")
 	private String description;
 
+	public HobbyDescriptionDTO() {
+
+	}
+
+	public HobbyDescriptionDTO(int id, String description) {
+		this();
+		this.id = id;
+		this.description = description;
+	}
+
 	public int getId() {
 		return id;
 	}

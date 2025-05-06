@@ -12,7 +12,7 @@ public class AddressMapper {
 		AddressDTO addressDTO = new AddressDTO();
 
 		addressDTO.setId(address.getId());
-		addressDTO.setStreetNumber(address.getNb_street());
+		addressDTO.setStreetNumber(address.getStreetNumber());
 		addressDTO.setStreet(address.getStreet());
 		addressDTO.setComplement(address.getComplement());
 		addressDTO.setCity(CityMapper.toDTO(address.getCity()));
@@ -26,7 +26,7 @@ public class AddressMapper {
 
 		Address address = new Address(addressDTO.getId());
 
-		address.setNb_street(addressDTO.getStreetNumber());
+		address.setStreetNumber(addressDTO.getStreetNumber());
 		address.setStreet(addressDTO.getStreet());
 		address.setComplement(addressDTO.getComplement());
 		address.setCity(CityMapper.toEntity(addressDTO.getCity()));

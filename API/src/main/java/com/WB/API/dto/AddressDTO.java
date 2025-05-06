@@ -14,6 +14,18 @@ public class AddressDTO {
 	private String complement;
 	private CityDTO city;
 
+	public AddressDTO() {
+
+	}
+
+	public AddressDTO(int id, Integer streetNumber, String street, String complement) {
+		this();
+		this.id = id;
+		this.streetNumber = streetNumber;
+		this.street = street;
+		this.complement = complement;
+	}
+
 	public int getId() {
 		return id;
 	}

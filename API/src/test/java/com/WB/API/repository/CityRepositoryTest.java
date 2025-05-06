@@ -57,7 +57,7 @@ class CityRepositoryTest {
 
 			Assertions.assertNotNull(actualCity);
 			Assertions.assertEquals(expectedCity.getId(), actualCity.getId());
-			Assertions.assertEquals(expectedCity.getZip_code(), actualCity.getZip_code());
+			Assertions.assertEquals(expectedCity.getZipCode(), actualCity.getZipCode());
 		}
 	}
 
@@ -74,7 +74,7 @@ class CityRepositoryTest {
 	@DisplayName("Chargement d'une ville à partir de son nom alors qu'il existe 2 villes en base avec le même nom")
 	void findCityByName_ReturnFirstValue() {
 		City searchCity = cities.get(2);
-		City newCity = new City(searchCity.getName(), searchCity.getZip_code());
+		City newCity = new City(searchCity.getName(), searchCity.getZipCode());
 		cityRepository.save(newCity);
 
 		City findCity = cityRepository.findFirstCityByName(searchCity.getName());
@@ -94,7 +94,7 @@ class CityRepositoryTest {
 		Assertions.assertNotNull(city);
 		Assertions.assertEquals(searchCity.getId(), city.getId());
 		Assertions.assertEquals(searchCity.getName(), city.getName());
-		Assertions.assertEquals(searchCity.getZip_code(), city.getZip_code());
+		Assertions.assertEquals(searchCity.getZipCode(), city.getZipCode());
 	}
 
 }

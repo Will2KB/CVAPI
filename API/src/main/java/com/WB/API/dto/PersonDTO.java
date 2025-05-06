@@ -43,9 +43,18 @@ public class PersonDTO {
 		this.summary.setPhone(phone);
 	}
 
-	public PersonDTO(int id, String name, String firstName, String eMail, String phone) {
+	public PersonDTO(int id, String name, String firstName, String eMail, String phone, String title) {
 		this(name, firstName, eMail, phone);
+		this.summary.setTitle(title);
 		this.summary.setId(id);
+	}
+
+	public PersonDTO(int id, String name, String firstName, String eMail, String phone, String title, String subTitle,
+			LocalDate birthDate, String personValues) {
+		this(id, name, firstName, eMail, phone, title);
+		this.subtitle = subTitle;
+		this.birthDate = birthDate;
+		this.personalValues = personValues;
 	}
 
 	private void loadSummary() {

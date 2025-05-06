@@ -33,7 +33,7 @@ public class SkillType {
 
 	public SkillType(int typeId) {
 		this();
-		this.id = id;
+		this.id = typeId;
 	}
 
 	public String getName() {

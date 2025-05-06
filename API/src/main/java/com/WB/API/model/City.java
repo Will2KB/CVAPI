@@ -24,7 +24,7 @@ public class City {
 	private String name;
 
 	@Column(name = "zip")
-	private Integer zip_code;
+	private Integer zipCode;
 
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	@JoinColumn(name = "country_id")
@@ -42,13 +42,13 @@ public class City {
 	public City(int id, String name, Integer zipCode) {
 		this(id);
 		this.name = name;
-		this.zip_code = zipCode;
+		this.zipCode = zipCode;
 	}
 
 	public City(String name, Integer zipCode) {
 		this();
 		this.name = name;
-		this.zip_code = zipCode;
+		this.zipCode = zipCode;
 	}
 
 	public String getName() {
@@ -59,12 +59,12 @@ public class City {
 		this.name = name;
 	}
 
-	public Integer getZip_code() {
-		return zip_code;
+	public Integer getZipCode() {
+		return zipCode;
 	}
 
 	public void setZip_code(Integer zip_code) {
-		this.zip_code = zip_code;
+		this.zipCode = zip_code;
 	}
 
 	public Country getCountry() {

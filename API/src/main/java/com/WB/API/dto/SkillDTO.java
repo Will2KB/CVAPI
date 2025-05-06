@@ -13,6 +13,16 @@ public class SkillDTO {
 	private String typeName;
 	private boolean enable;
 
+	public SkillDTO() {
+	}
+
+	public SkillDTO(int id, String name, boolean isEnable) {
+		this();
+		this.id = id;
+		this.name = name;
+		this.enable = isEnable;
+	}
+
 	public int getId() {
 		return id;
 	}

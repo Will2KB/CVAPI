@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import com.WB.API.assertions.CountryAssertions;
 import com.WB.API.model.Country;
 
 @DataJpaTest
@@ -50,14 +51,7 @@ class CountryRepositoryTest {
 	void findAllCountries_ReturnCorrectList() {
 		List<Country> findCountry = countryRepository.findAll();
 
-		for (Country expectedCountry : countries) {
-			Country actualCountry = findCountry.stream().filter(c -> c.getName().equals(expectedCountry.getName()))
-					.findFirst().orElse(null);
-
-			Assertions.assertNotNull(actualCountry);
-			Assertions.assertEquals(expectedCountry.getId(), actualCountry.getId());
-			Assertions.assertEquals(expectedCountry.getName(), actualCountry.getName());
-		}
+		CountryAssertions.assertListEntities(findCountry, countries);
 	}
 
 	@Test
@@ -69,9 +63,8 @@ class CountryRepositoryTest {
 		Assertions.assertTrue(optCountry.isPresent(), "Le pays n'a pas été trouvée pour l'ID " + searchCountry.getId());
 		Country country = optCountry.get();
 
-		Assertions.assertNotNull(country);
-		Assertions.assertEquals(searchCountry.getId(), country.getId());
-		Assertions.assertEquals(searchCountry.getName(), country.getName());
+		CountryAssertions.assertNotNullEntity(country);
+		CountryAssertions.assertEqualsProperties(searchCountry, country);
 	}
 
 }

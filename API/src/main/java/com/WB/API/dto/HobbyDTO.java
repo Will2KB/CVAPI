@@ -20,6 +20,12 @@ public class HobbyDTO {
 		this.descriptions = new ArrayList<>();
 	}
 
+	public HobbyDTO(int id, String name) {
+		this();
+		this.id = id;
+		this.name = name;
+	}
+
 	public int getId() {
 		return id;
 	}

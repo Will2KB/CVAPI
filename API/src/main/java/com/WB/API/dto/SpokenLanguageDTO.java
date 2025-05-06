@@ -10,6 +10,17 @@ public class SpokenLanguageDTO {
 	@NotBlank(message = "Un niveau est nécessaire")
 	private String level;
 
+	public SpokenLanguageDTO() {
+
+	}
+
+	public SpokenLanguageDTO(int personId, int languageId, String level) {
+		this();
+		this.personId = personId;
+		this.languageId = languageId;
+		this.level = level;
+	}
+
 	public int getPersonId() {
 		return personId;
 	}

@@ -48,7 +48,7 @@ public class PersonService {
 		return PersonMapper.toSummaryDTO(personRepository.save(toSave));
 	}
 
-	private int getAge(Person person) {
+	public int getAge(Person person) {
 		if (person.getBirthdate() == null)
 			return 0;
 

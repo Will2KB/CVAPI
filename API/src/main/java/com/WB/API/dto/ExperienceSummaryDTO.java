@@ -30,6 +30,20 @@ public class ExperienceSummaryDTO {
 	private String mission;
 	private boolean isFormation;
 
+	public ExperienceSummaryDTO() {
+
+	}
+
+	public ExperienceSummaryDTO(int id, String name, LocalDate dateBeginning, LocalDate dateEnding,
+			boolean isFormation) {
+		this();
+		this.id = id;
+		this.name = name;
+		this.dateBeginning = dateBeginning;
+		this.dateEnding = dateEnding;
+		this.isFormation = isFormation;
+	}
+
 	public int getId() {
 		return id;
 	}

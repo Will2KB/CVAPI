@@ -39,6 +39,12 @@ public class Establishment {
 		this.id = id;
 	}
 
+	public Establishment(int id, String name, int addressId) {
+		this(id);
+		this.name = name;
+		this.address = new Address(addressId);
+	}
+
 	public String getName() {
 		return name;
 	}

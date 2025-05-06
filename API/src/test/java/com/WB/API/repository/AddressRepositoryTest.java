@@ -30,27 +30,27 @@ class AddressRepositoryTest {
 		addresses = new ArrayList<>();
 
 		Address address1 = new Address();
-		address1.setNb_street(12);
+		address1.setStreetNumber(12);
 		address1.setStreet("Rue du Général");
 		address1.setComplement("Bis");
 		addressRepository.save(address1);
 		addresses.add(address1);
 
 		Address address2 = new Address();
-		address2.setNb_street(253);
+		address2.setStreetNumber(253);
 		address2.setStreet("Rue du Maréchal");
 		address2.setComplement("Ter");
 		addressRepository.save(address2);
 		addresses.add(address2);
 
 		Address address3 = new Address();
-		address3.setNb_street(75);
+		address3.setStreetNumber(75);
 		address3.setStreet("Rue Peter");
 		addressRepository.save(address3);
 		addresses.add(address3);
 
 		Address address4 = new Address();
-		address4.setNb_street(167);
+		address4.setStreetNumber(167);
 		address4.setStreet("Rue Duchemin");
 		address4.setComplement("Entrée A");
 		addressRepository.save(address4);
@@ -69,7 +69,7 @@ class AddressRepositoryTest {
 
 		Assertions.assertNotNull(address);
 		Assertions.assertEquals(searchAddress.getId(), address.getId());
-		Assertions.assertEquals(searchAddress.getNb_street(), address.getNb_street());
+		Assertions.assertEquals(searchAddress.getStreetNumber(), address.getStreetNumber());
 		Assertions.assertEquals(searchAddress.getStreet(), address.getStreet());
 		Assertions.assertEquals(searchAddress.getComplement(), address.getComplement());
 	}

@@ -21,7 +21,7 @@ public class Address {
 	private int id;
 
 	@Column(name = "nb_street")
-	private Integer nb_street;
+	private Integer streetNumber;
 
 	@Column(name = "street")
 	private String street;
@@ -34,23 +34,29 @@ public class Address {
 	private City city;
 
 	public Address() {
-
 	}
 
 	public Address(int id) {
 		this.id = id;
 	}
 
+	public Address(int id, Integer streetNumber, String street, String complement) {
+		this(id);
+		this.streetNumber = streetNumber;
+		this.street = street;
+		this.complement = complement;
+	}
+
 	public int getId() {
 		return id;
 	}
 
-	public Integer getNb_street() {
-		return nb_street;
+	public Integer getStreetNumber() {
+		return streetNumber;
 	}
 
-	public void setNb_street(Integer nb_street) {
-		this.nb_street = nb_street;
+	public void setStreetNumber(Integer nb_street) {
+		this.streetNumber = nb_street;
 	}
 
 	public String getStreet() {

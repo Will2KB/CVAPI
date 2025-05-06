@@ -17,8 +17,10 @@ public class SkillMapper {
 		skillDTO.setId(skill.getId());
 		skillDTO.setName(skill.getName());
 		skillDTO.setEnable(skill.isEnable());
-		skillDTO.setTypeId(skill.getType().getId());
-		skillDTO.setTypeName(skill.getType().getName());
+		if (skill.getType() != null) {
+			skillDTO.setTypeId(skill.getType().getId());
+			skillDTO.setTypeName(skill.getType().getName());
+		}
 
 		return skillDTO;
 	}
@@ -41,6 +43,8 @@ public class SkillMapper {
 			return null;
 
 		Skill skill = new Skill(skillDTO.getId(), skillDTO.getTypeId());
+		skill.setName(skillDTO.getName());
+		skill.setEnable(skillDTO.isEnable());
 
 		return skill;
 	}

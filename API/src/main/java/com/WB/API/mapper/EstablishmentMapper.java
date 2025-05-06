@@ -15,8 +15,14 @@ public class EstablishmentMapper {
 		establishmentDTO.setId(establishment.getId());
 		establishmentDTO.setName(establishment.getName());
 		establishmentDTO.setAddressId(establishment.getAddress().getId());
-		establishmentDTO.setCityName(establishment.getAddress().getCity().getName());
-		establishmentDTO.setCountryName(establishment.getAddress().getCity().getCountry().getName());
+		if (establishment.getAddress() != null) {
+			if (establishment.getAddress().getCity() != null) {
+				establishmentDTO.setCityName(establishment.getAddress().getCity().getName());
+				if (establishment.getAddress().getCity().getCountry() != null) {
+					establishmentDTO.setCountryName(establishment.getAddress().getCity().getCountry().getName());
+				}
+			}
+		}
 
 		return establishmentDTO;
 	}

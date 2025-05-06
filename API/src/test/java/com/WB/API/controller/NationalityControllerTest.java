@@ -5,10 +5,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -19,7 +15,10 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.WB.API.assertions.NationalityAssertions;
+import com.WB.API.assertions.TestDatas;
 import com.WB.API.dto.NationalityDTO;
+import com.WB.API.model.Nationality;
 import com.WB.API.service.NationalityService;
 
 @ActiveProfiles("test")
@@ -33,37 +32,28 @@ class NationalityControllerTest {
 	@MockBean
 	private NationalityService nationalityService;
 
-	private List<NationalityDTO> mockedListNationalities;
-
-	@BeforeEach
-	public void loadData() {
-		mockedListNationalities = new ArrayList<>();
-		mockedListNationalities.add(new NationalityDTO(12, "Français"));
-		mockedListNationalities.add(new NationalityDTO(13, "Suisse"));
-		mockedListNationalities.add(new NationalityDTO(14, "Espagnol"));
-	}
-
 	@Test
 	@DisplayName("Requête API pour charger toutes les nationalités")
 	void testGetNationalities_ReturnAllNationalities() throws Exception {
-		Mockito.when(nationalityService.getNationalities()).thenReturn(mockedListNationalities);
+		TestDatas<Nationality, NationalityDTO> datas = NationalityAssertions.getSkillTestDatas(3);
+		Mockito.when(nationalityService.getNationalities()).thenReturn(datas.dtos);
 
 		mockMvc.perform(get("/nationalities")).andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-				.andExpect(jsonPath("$.length()").value(mockedListNationalities.size()))
-				.andExpect(jsonPath("$[0].id").value(mockedListNationalities.get(0).getId()))
-				.andExpect(jsonPath("$[0].name").value(mockedListNationalities.get(0).getName()))
-				.andExpect(jsonPath("$[1].id").value(mockedListNationalities.get(1).getId()))
-				.andExpect(jsonPath("$[1].name").value(mockedListNationalities.get(1).getName()))
-				.andExpect(jsonPath("$[2].id").value(mockedListNationalities.get(2).getId()))
-				.andExpect(jsonPath("$[2].name").value(mockedListNationalities.get(2).getName()));
+				.andExpect(jsonPath("$.length()").value(datas.dtos.size()))
+				.andExpect(jsonPath("$[0].id").value(datas.dtos.get(0).getId()))
+				.andExpect(jsonPath("$[0].name").value(datas.dtos.get(0).getName()))
+				.andExpect(jsonPath("$[1].id").value(datas.dtos.get(1).getId()))
+				.andExpect(jsonPath("$[1].name").value(datas.dtos.get(1).getName()))
+				.andExpect(jsonPath("$[2].id").value(datas.dtos.get(2).getId()))
+				.andExpect(jsonPath("$[2].name").value(datas.dtos.get(2).getName()));
 
 	}
 
 	@Test
 	@DisplayName("Requête API pour charger une nationalité à partir de son ID")
 	void testGetNationalityById_ReturnCorrectNationality() throws Exception {
-		NationalityDTO searchNationality = mockedListNationalities.get(2);
+		NationalityDTO searchNationality = NationalityAssertions.getNationalityDTO();
 		Mockito.when(nationalityService.getNationalityById(searchNationality.getId())).thenReturn(searchNationality);
 
 		mockMvc.perform(get("/nationalities/id/" + searchNationality.getId())).andExpect(status().isOk())

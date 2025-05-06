@@ -16,7 +16,7 @@ public class CityMapper {
 		CityDTO dto = new CityDTO();
 		dto.setId(city.getId());
 		dto.setName(city.getName());
-		dto.setZipCode(city.getZip_code());
+		dto.setZipCode(city.getZipCode());
 		if (city.getCountry() != null) {
 			dto.setCountryId(city.getCountry().getId());
 			dto.setCountryName(city.getCountry().getName());

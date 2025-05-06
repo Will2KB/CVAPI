@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import com.WB.API.assertions.SkillAssertions;
 import com.WB.API.model.Skill;
 
 @ActiveProfiles("test")
@@ -56,12 +57,10 @@ class SkillRepositoryTest {
 
 		Assertions.assertTrue(optSkill.isPresent(),
 				"La compétence n'a pas été trouvée pour l'ID " + searchSkill.getId());
-		Skill Skill = optSkill.get();
+		Skill skill = optSkill.get();
 
-		Assertions.assertNotNull(Skill);
-		Assertions.assertEquals(searchSkill.getId(), Skill.getId());
-		Assertions.assertEquals(searchSkill.getName(), Skill.getName());
-		Assertions.assertEquals(searchSkill.isEnable(), Skill.isEnable());
+		SkillAssertions.assertNotNullEntity(skill);
+		SkillAssertions.assertEqualsProperties(searchSkill, skill);
 
 	}
 }
