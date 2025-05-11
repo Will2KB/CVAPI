@@ -20,9 +20,9 @@ public class EstablishmentDTO {
 
 	public EstablishmentDTO(int id, String name, int addressId) {
 		this();
-		this.id = id;
-		this.name = name;
-		this.addressId = addressId;
+		this.setId(id);
+		this.setName(name);
+		this.setAddressId(addressId);
 	}
 
 	public int getId() {

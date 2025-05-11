@@ -35,14 +35,14 @@ public class Skill {
 	public Skill(int id, int typeId) {
 		this();
 		this.id = id;
-		this.type = new SkillType(typeId);
+		this.setType(new SkillType(typeId));
 	}
 
 	public Skill(int id, String name, boolean isEnable) {
 		this();
 		this.id = id;
-		this.name = name;
-		this.enable = isEnable;
+		this.setName(name);
+		this.setEnable(isEnable);
 	}
 
 	public String getName() {

@@ -36,7 +36,8 @@ class ExperienceServiceTest {
 
 		ExperienceDTO mockedExperience = ExperienceAssertions.getExperienceDTO();
 		Experience input = new Experience(mockedExperience.getId(), mockedExperience.getName(),
-				mockedExperience.getDateBeginning(), mockedExperience.getDateEnding(), mockedExperience.isFormation());
+				mockedExperience.getDateBeginning(), mockedExperience.getDateEnding(), mockedExperience.isFormation(),
+				mockedExperience.getMission());
 
 		Mockito.when(experienceRepository.save(Mockito.any(Experience.class))).thenReturn(input);
 
@@ -52,13 +53,13 @@ class ExperienceServiceTest {
 		ExperienceDTO mockedExperienceDTO = ExperienceAssertions.getExperienceDTO();
 		Experience mockedExperience = new Experience(mockedExperienceDTO.getId(), mockedExperienceDTO.getName(),
 				mockedExperienceDTO.getDateBeginning(), mockedExperienceDTO.getDateEnding(),
-				mockedExperienceDTO.isFormation());
+				mockedExperienceDTO.isFormation(), mockedExperienceDTO.getMission());
 		Mockito.when(experienceRepository.findById(mockedExperienceDTO.getId()))
 				.thenReturn(Optional.of(mockedExperience));
 		ExperienceDTO result = experienceService.getExperienceById(mockedExperienceDTO.getId());
 
 		ExperienceAssertions.assertNotNullDTO(result);
-		ExperienceAssertions.assertEqualsProperties(mockedExperienceDTO, result);
+		ExperienceAssertions.assertEqualsProperties(mockedExperienceDTO, result, true);
 	}
 
 	@Test

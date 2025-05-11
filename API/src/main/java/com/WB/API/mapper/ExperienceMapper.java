@@ -86,10 +86,21 @@ public class ExperienceMapper {
 
 		Experience experience = new Experience(experienceDTO.getSummary().getId(), experienceDTO.getSummary().getName(),
 				experienceDTO.getSummary().getDateBeginning(), experienceDTO.getSummary().getDateEnding(),
-				experienceDTO.getSummary().isFormation());
+				experienceDTO.getSummary().isFormation(), experienceDTO.getMission());
 		experience.setMission(experienceDTO.getSummary().getMission());
-		experience.setEstablishement(new Establishment(experienceDTO.getEstablishment().getId()));
-		experience.setCity(new City(experienceDTO.getCity().getId()));
+
+		if (experienceDTO.getEstablishment() != null) {
+			experience.setEstablishement(new Establishment(experienceDTO.getEstablishment().getId()));
+		} else {
+			experience.setEstablishement(null);
+		}
+
+		if (experience.getCity() != null) {
+			experience.setCity(new City(experienceDTO.getCity().getId()));
+		} else {
+			experience.setCity(null);
+		}
+
 		experience.setDescription(experienceDTO.getDescription());
 		experience.setSkills(SkillMapper.toEntityList(experienceDTO.getSkills()));
 
@@ -101,7 +112,7 @@ public class ExperienceMapper {
 			return null;
 
 		Experience experience = new Experience(summary.getId(), summary.getName(), summary.getDateBeginning(),
-				summary.getDateEnding(), summary.isFormation());
+				summary.getDateEnding(), summary.isFormation(), null);
 		experience.setMission(summary.getMission());
 		experience.setEstablishement(new Establishment(summary.getEstablishmentId()));
 		experience.setCity(new City(summary.getCityId()));

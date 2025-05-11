@@ -39,7 +39,7 @@ public class Language {
 	public Language(int id, String name) {
 		this();
 		this.id = id;
-		this.name = name;
+		this.setName(name);
 	}
 
 	public String getName() {

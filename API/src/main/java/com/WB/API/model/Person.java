@@ -89,10 +89,10 @@ public class Person {
 
 	public Person(String name, String firstName, String eMail, String phone) {
 		this();
-		this.name = name;
-		this.firstName = firstName;
-		this.mail = eMail;
-		this.phone = phone;
+		this.setName(name);
+		this.setFirstName(firstName);
+		this.setMail(eMail);
+		this.setPhone(phone);
 	}
 
 	public Person(int id, String name, String firstName, String eMail, String phone) {
@@ -103,10 +103,10 @@ public class Person {
 	public Person(int id, String name, String firstName, String eMail, String phone, String title, String subTitle,
 			LocalDate birthDate, String personalValues) {
 		this(id, name, firstName, eMail, phone);
-		this.title = title;
-		this.subtitle = subTitle;
-		this.birthdate = birthDate;
-		this.personalValues = personalValues;
+		this.setTitle(title);
+		this.setSubtitle(subTitle);
+		this.setBirthdate(birthDate);
+		this.setPersonalValues(personalValues);
 	}
 
 	public String getName() {

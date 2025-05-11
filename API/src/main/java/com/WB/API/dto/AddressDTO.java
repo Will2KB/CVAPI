@@ -20,10 +20,10 @@ public class AddressDTO {
 
 	public AddressDTO(int id, Integer streetNumber, String street, String complement) {
 		this();
-		this.id = id;
-		this.streetNumber = streetNumber;
-		this.street = street;
-		this.complement = complement;
+		this.setId(id);
+		this.setStreetNumber(streetNumber);
+		this.setStreet(street);
+		this.setComplement(complement);
 	}
 
 	public int getId() {

@@ -34,7 +34,7 @@ public class Nationality {
 	public Nationality(int id, String name) {
 		this();
 		this.id = id;
-		this.name = name;
+		this.setName(name);
 	}
 
 	public List<Person> getPersons() {

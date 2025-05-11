@@ -18,9 +18,9 @@ public class SkillDTO {
 
 	public SkillDTO(int id, String name, boolean isEnable) {
 		this();
-		this.id = id;
-		this.name = name;
-		this.enable = isEnable;
+		this.setId(id);
+		this.setName(name);
+		this.setEnable(isEnable);
 	}
 
 	public int getId() {

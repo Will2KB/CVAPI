@@ -21,18 +21,19 @@ public class ExperienceDTO {
 
 	public ExperienceDTO() {
 		this.loadSummary();
-		this.establishment = new EstablishmentDTO();
-		this.city = new CityDTO();
+		// this.establishment = new EstablishmentDTO();
+		// this.city = new CityDTO();
 		this.skills = new ArrayList<>();
 	}
 
-	public ExperienceDTO(int id, String name, LocalDate begin, LocalDate end, boolean isFormation) {
+	public ExperienceDTO(int id, String name, LocalDate begin, LocalDate end, boolean isFormation, String mission) {
 		this();
 		this.summary.setId(id);
 		this.summary.setName(name);
 		this.summary.setDateBeginning(begin);
 		this.summary.setDateEnding(end);
 		this.summary.setFormation(isFormation);
+		this.setMission(mission);
 	}
 
 	private void loadSummary() {

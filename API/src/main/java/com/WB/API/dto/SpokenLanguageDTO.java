@@ -14,11 +14,12 @@ public class SpokenLanguageDTO {
 
 	}
 
-	public SpokenLanguageDTO(int personId, int languageId, String level) {
+	public SpokenLanguageDTO(int personId, int languageId, String name, String level) {
 		this();
-		this.personId = personId;
-		this.languageId = languageId;
-		this.level = level;
+		this.setPersonId(personId);
+		this.setLanguageId(languageId);
+		this.setName(name);
+		this.setLevel(level);
 	}
 
 	public int getPersonId() {

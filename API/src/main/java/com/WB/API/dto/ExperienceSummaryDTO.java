@@ -37,11 +37,11 @@ public class ExperienceSummaryDTO {
 	public ExperienceSummaryDTO(int id, String name, LocalDate dateBeginning, LocalDate dateEnding,
 			boolean isFormation) {
 		this();
-		this.id = id;
-		this.name = name;
-		this.dateBeginning = dateBeginning;
-		this.dateEnding = dateEnding;
-		this.isFormation = isFormation;
+		this.setId(id);
+		this.setName(name);
+		this.setDateBeginning(dateBeginning);
+		this.setDateEnding(dateEnding);
+		this.setFormation(isFormation);
 	}
 
 	public int getId() {

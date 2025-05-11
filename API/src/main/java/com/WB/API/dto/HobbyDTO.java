@@ -22,8 +22,8 @@ public class HobbyDTO {
 
 	public HobbyDTO(int id, String name) {
 		this();
-		this.id = id;
-		this.name = name;
+		this.setId(id);
+		this.setName(name);
 	}
 
 	public int getId() {

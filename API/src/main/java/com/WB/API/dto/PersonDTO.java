@@ -52,9 +52,9 @@ public class PersonDTO {
 	public PersonDTO(int id, String name, String firstName, String eMail, String phone, String title, String subTitle,
 			LocalDate birthDate, String personValues) {
 		this(id, name, firstName, eMail, phone, title);
-		this.subtitle = subTitle;
-		this.birthDate = birthDate;
-		this.personalValues = personValues;
+		this.setSubtitle(subTitle);
+		this.setBirthDate(birthDate);
+		this.setPersonalValues(personValues);
 	}
 
 	private void loadSummary() {

@@ -146,7 +146,7 @@ class ExperienceControllerTest {
 	@DisplayName("Sauvegarde d'une expérience avec un nom vide")
 	public void testSaveExperienceWithEmptyName_StatusFail() throws Exception {
 		ExperienceDTO invalidExperience = new ExperienceDTO(12, " ", LocalDate.of(2012, 12, 15),
-				LocalDate.of(2016, 2, 5), false);
+				LocalDate.of(2016, 2, 5), false, "Mission");
 		when(experienceService.saveExperience(Mockito.any(ExperienceDTO.class)))
 				.thenReturn(invalidExperience.getSummary());
 
@@ -157,7 +157,8 @@ class ExperienceControllerTest {
 	@Test
 	@DisplayName("Sauvegarde d'une expérience avec une date de début null")
 	public void testSaveExperienceWithDateBeginningNull_StatusFail() throws Exception {
-		ExperienceDTO invalidExperience = new ExperienceDTO(12, "Exp. 2", null, LocalDate.of(2016, 2, 5), false);
+		ExperienceDTO invalidExperience = new ExperienceDTO(12, "Exp. 2", null, LocalDate.of(2016, 2, 5), false,
+				"Mission");
 		when(experienceService.saveExperience(Mockito.any(ExperienceDTO.class)))
 				.thenReturn(invalidExperience.getSummary());
 

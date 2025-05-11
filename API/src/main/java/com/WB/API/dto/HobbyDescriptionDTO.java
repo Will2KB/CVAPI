@@ -15,8 +15,8 @@ public class HobbyDescriptionDTO {
 
 	public HobbyDescriptionDTO(int id, String description) {
 		this();
-		this.id = id;
-		this.description = description;
+		this.setId(id);
+		this.setDescription(description);
 	}
 
 	public int getId() {

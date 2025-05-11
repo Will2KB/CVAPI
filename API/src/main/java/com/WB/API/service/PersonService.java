@@ -43,6 +43,16 @@ public class PersonService {
 		return findPersonDTO;
 	}
 
+	public PersonDTO getPersonByEmail(String email) {
+		Person findPerson = personRepository.findFirstPersonByMail(email);
+		PersonDTO findPersonDTO = PersonMapper.toDTO(findPerson);
+
+		if (findPersonDTO != null) {
+			findPersonDTO.setAge(this.getAge(findPerson));
+		}
+		return findPersonDTO;
+	}
+
 	public PersonSummaryDTO savePerson(PersonDTO person) {
 		Person toSave = PersonMapper.toEntity(person);
 		return PersonMapper.toSummaryDTO(personRepository.save(toSave));

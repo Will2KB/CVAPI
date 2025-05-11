@@ -26,11 +26,11 @@ public class Country {
 	public Country(int id, String name) {
 		this();
 		this.id = id;
-		this.name = name;
+		this.setName(name);
 	}
 
 	public Country(String name) {
-		this.name = name;
+		this.setName(name);
 	}
 
 	public int getId() {

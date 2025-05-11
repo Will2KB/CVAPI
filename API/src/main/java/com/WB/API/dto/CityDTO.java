@@ -17,9 +17,9 @@ public class CityDTO {
 
 	public CityDTO(int id, String name, Integer zipCode) {
 		this();
-		this.id = id;
-		this.name = name;
-		this.zipCode = zipCode;
+		this.setId(id);
+		this.setName(name);
+		this.setZipCode(zipCode);
 	}
 
 	public int getId() {

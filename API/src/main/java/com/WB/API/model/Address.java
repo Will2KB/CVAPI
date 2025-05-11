@@ -42,9 +42,9 @@ public class Address {
 
 	public Address(int id, Integer streetNumber, String street, String complement) {
 		this(id);
-		this.streetNumber = streetNumber;
-		this.street = street;
-		this.complement = complement;
+		this.setStreetNumber(streetNumber);
+		this.setStreet(street);
+		this.setComplement(complement);
 	}
 
 	public int getId() {

@@ -32,13 +32,14 @@ public class SpokenLanguage {
 	public SpokenLanguage(int personId, int languageId) {
 		this();
 		this.id = new SpokenLanguageId(personId, languageId);
-		this.language = new Language(languageId);
-		this.person = new Person(personId);
+		this.setLanguage(new Language(languageId));
+		this.setPerson(new Person(personId));
 	}
 
-	public SpokenLanguage(int personId, int languageId, String level) {
+	public SpokenLanguage(int personId, int languageId, String name, String level) {
 		this(personId, languageId);
-		this.level = level;
+		this.setLanguage(new Language(languageId, name));
+		this.setLevel(level);
 	}
 
 	public Person getPerson() {

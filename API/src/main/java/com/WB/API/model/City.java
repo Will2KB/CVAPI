@@ -41,14 +41,14 @@ public class City {
 
 	public City(int id, String name, Integer zipCode) {
 		this(id);
-		this.name = name;
-		this.zipCode = zipCode;
+		this.setName(name);
+		this.setZipCode(zipCode);
 	}
 
 	public City(String name, Integer zipCode) {
 		this();
-		this.name = name;
-		this.zipCode = zipCode;
+		this.setName(name);
+		this.setZipCode(zipCode);
 	}
 
 	public String getName() {
@@ -63,8 +63,8 @@ public class City {
 		return zipCode;
 	}
 
-	public void setZip_code(Integer zip_code) {
-		this.zipCode = zip_code;
+	public void setZipCode(Integer zipCode) {
+		this.zipCode = zipCode;
 	}
 
 	public Country getCountry() {

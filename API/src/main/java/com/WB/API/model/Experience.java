@@ -62,17 +62,18 @@ public class Experience {
 	private List<Skill> skills;
 
 	public Experience() {
-		this.isFormation = false;
+		this.setFormation(false);
 		this.skills = new ArrayList<>();
 	}
 
-	public Experience(int id, String name, LocalDate begin, LocalDate end, boolean isFormation) {
+	public Experience(int id, String name, LocalDate begin, LocalDate end, boolean isFormation, String mission) {
 		this();
 		this.id = id;
-		this.name = name;
-		this.dateBegining = begin;
-		this.dateEnding = end;
-		this.isFormation = isFormation;
+		this.setName(name);
+		this.setDateBegining(begin);
+		this.setDateEnding(end);
+		this.setFormation(isFormation);
+		this.setMission(mission);
 	}
 
 	public String getName() {
