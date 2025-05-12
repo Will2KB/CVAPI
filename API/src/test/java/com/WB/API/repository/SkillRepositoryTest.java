@@ -15,6 +15,11 @@ import org.springframework.test.context.ActiveProfiles;
 import com.WB.API.assertions.SkillAssertions;
 import com.WB.API.model.Skill;
 
+/*
+ * Tests du repository des compétences
+ * Lors de ces test, nous souhaitons vérifier le fonctionnement du repository 
+ * Ces tests seront effectué sur une base de test H2
+ */
 @ActiveProfiles("test")
 @DataJpaTest
 @DisplayName("Test du repository des compétences")
@@ -25,6 +30,9 @@ class SkillRepositoryTest {
 
 	private List<Skill> Skills;
 
+	/**
+	 * Chargement des données de tests spécifique au repository
+	 */
 	@BeforeEach
 	void loadData() {
 
@@ -52,15 +60,33 @@ class SkillRepositoryTest {
 	@Test
 	@DisplayName("Chargement d'une compétence à partir de son ID")
 	void findSkillById_ReturnCorrectSkill() {
+		// Arrange
 		Skill searchSkill = Skills.get(2);
+
+		// Act
 		Optional<Skill> optSkill = SkillRepository.findById(searchSkill.getId());
 
+		// Assert
 		Assertions.assertTrue(optSkill.isPresent(),
 				"La compétence n'a pas été trouvée pour l'ID " + searchSkill.getId());
 		Skill skill = optSkill.get();
 
 		SkillAssertions.assertNotNullEntity(skill);
 		SkillAssertions.assertEqualsProperties(searchSkill, skill);
+
+	}
+
+	@Test
+	@DisplayName("Chargement d'une compétence à partir d'un ID innexistant")
+	void findSkillById_ReturnNullWhenNotFound() {
+		// Arrange
+		Integer id = 999;
+
+		// Act
+		Optional<Skill> optSkill = SkillRepository.findById(id);
+
+		// Assert
+		Assertions.assertFalse(optSkill.isPresent(), "La compétence a été trouvée pour l'ID " + id);
 
 	}
 }

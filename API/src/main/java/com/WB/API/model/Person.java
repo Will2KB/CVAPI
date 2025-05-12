@@ -95,6 +95,15 @@ public class Person {
 		this.setPhone(phone);
 	}
 
+	public Person(String name, String firstName, String eMail, String phone, String title, String subTitle,
+			LocalDate birthDate, String personalValues) {
+		this(name, firstName, eMail, phone);
+		this.setTitle(title);
+		this.setSubtitle(subTitle);
+		this.setBirthdate(birthDate);
+		this.setPersonalValues(personalValues);
+	}
+
 	public Person(int id, String name, String firstName, String eMail, String phone) {
 		this(name, firstName, eMail, phone);
 		this.id = id;

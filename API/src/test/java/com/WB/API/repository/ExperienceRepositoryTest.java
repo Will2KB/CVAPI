@@ -13,8 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import com.WB.API.assertions.ExperienceAssertions;
 import com.WB.API.model.Experience;
 
+/*
+ * Tests du repository des expériences
+ * Lors de ces test, nous souhaitons vérifier le fonctionnement du repository 
+ * Ces tests seront effectué sur une base de test H2
+ */
 @ActiveProfiles("test")
 @DataJpaTest
 @DisplayName("Test du repository des expériences")
@@ -25,6 +31,9 @@ class ExperienceRepositoryTest {
 
 	private List<Experience> experiences;
 
+	/**
+	 * Chargement des données de tests spécifique au repository
+	 */
 	@BeforeEach
 	private void loadData() {
 		experiences = new ArrayList<>();
@@ -54,6 +63,7 @@ class ExperienceRepositoryTest {
 	@Test
 	@DisplayName("Sauvegarde d'une nouvelle experience")
 	void saveExperience_RetrieveIt() {
+		// Arrange
 		Experience newExperience = new Experience();
 		newExperience.setName("Univ. 2");
 		newExperience.setDateBegining(LocalDate.of(2011, 12, 15));
@@ -61,61 +71,65 @@ class ExperienceRepositoryTest {
 		newExperience.setDescription("Biologie");
 		newExperience.setFormation(true);
 		newExperience.setMission("Envoie des résultats aux clients");
+
+		// Act
 		Experience savedExperience = experienceRepository.save(newExperience);
 
-		Assertions.assertNotNull(savedExperience);
-		Assertions.assertNotNull(savedExperience.getId());
+		// Assert
+		ExperienceAssertions.assertNotNullEntity(savedExperience);
 		Assertions.assertTrue(savedExperience.getId() > 0);
 
 		// Vérification que l'expérience est bien en base
 		Optional<Experience> optExperience = experienceRepository.findById(savedExperience.getId());
 		Assertions.assertTrue(optExperience.isPresent());
 		Experience findExperience = optExperience.get();
+		ExperienceAssertions.assertEqualsProperties(findExperience, newExperience, true);
 		Assertions.assertEquals(newExperience.getName(), findExperience.getName());
-		Assertions.assertEquals(newExperience.getDescription(), findExperience.getDescription());
-		Assertions.assertEquals(newExperience.getDateBeginning(), findExperience.getDateBeginning());
-		Assertions.assertEquals(newExperience.getDateEnding(), findExperience.getDateEnding());
-		Assertions.assertEquals(newExperience.getMission(), findExperience.getMission());
-		Assertions.assertEquals(newExperience.isFormation(), findExperience.isFormation());
 	}
 
 	@Test
 	@DisplayName("Chargement d'une expérience à partir de son ID")
 	void findExperienceById_ReturnCorrectExperience() {
+		// Arrange
 		Experience searchExperience = experiences.get(0);
+
+		// Act
 		Optional<Experience> optExperience = experienceRepository.findById(searchExperience.getId());
 
+		// Assert
 		Assertions.assertTrue(optExperience.isPresent(),
 				"L'expérience n'a pas été trouvée pour l'ID " + searchExperience.getId());
 		Experience experience = optExperience.get();
+		ExperienceAssertions.assertEqualsProperties(searchExperience, experience, true);
+	}
 
-		Assertions.assertNotNull(experience);
-		Assertions.assertEquals(searchExperience.getId(), experience.getId());
-		Assertions.assertEquals(searchExperience.getName(), experience.getName());
-		Assertions.assertEquals(searchExperience.getDescription(), experience.getDescription());
-		Assertions.assertEquals(searchExperience.getDateBeginning(), experience.getDateBeginning());
-		Assertions.assertEquals(searchExperience.getDateEnding(), experience.getDateEnding());
-		Assertions.assertEquals(searchExperience.getMission(), experience.getMission());
-		Assertions.assertEquals(searchExperience.isFormation(), experience.isFormation());
+	@Test
+	@DisplayName("Chargement d'une expérience à partir d'un ID inexistant")
+	void findExperienceById_ReturnNullWhenNotFound() {
+		// Arrange
+		Integer id = 999;
+
+		// Act
+		Optional<Experience> optExperience = experienceRepository.findById(id);
+
+		// Assert
+		Assertions.assertFalse(optExperience.isPresent(), "L'expérience a été trouvée pour l'ID " + id);
 	}
 
 	@Test
 	@DisplayName("Chargement de toutes les expériences")
 	void findAllExperiences_ReturnCorrectList() {
+		// Arrange @BeforeEach
+
+		// Act
 		List<Experience> findExperiences = experienceRepository.findAll();
 
+		// Assert
 		for (Experience expectedExperience : experiences) {
 			Experience actualExperience = findExperiences.stream()
 					.filter(c -> c.getName().equals(expectedExperience.getName())).findFirst().orElse(null);
 
-			Assertions.assertNotNull(actualExperience);
-			Assertions.assertEquals(expectedExperience.getId(), actualExperience.getId());
-			Assertions.assertEquals(expectedExperience.getName(), actualExperience.getName());
-			Assertions.assertEquals(expectedExperience.getDescription(), actualExperience.getDescription());
-			Assertions.assertEquals(expectedExperience.getDateBeginning(), actualExperience.getDateBeginning());
-			Assertions.assertEquals(expectedExperience.getDateEnding(), actualExperience.getDateEnding());
-			Assertions.assertEquals(expectedExperience.getMission(), actualExperience.getMission());
-			Assertions.assertEquals(expectedExperience.isFormation(), actualExperience.isFormation());
+			ExperienceAssertions.assertEqualsProperties(expectedExperience, actualExperience, true);
 		}
 	}
 }

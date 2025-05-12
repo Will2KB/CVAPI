@@ -15,22 +15,46 @@ import com.WB.API.service.PersonService;
 
 import jakarta.validation.Valid;
 
+/*
+ * Controlleur mettant à disposition les différents chemin nécessaire pour manipuler une personne
+ */
 @RestController
 public class PersonController {
 
 	@Autowired
 	private PersonService personService;
 
+	/*
+	 * Récupérer toutes les personnes
+	 *
+	 * @Return Retourne une liste d'objet de transfert
+	 */
 	@GetMapping("/persons")
 	public List<PersonSummaryDTO> getPersons() {
 		return personService.getPersons();
 	}
 
+	/*
+	 * Récupèrer une personne à partir d'un ID
+	 * 
+	 * @Param id: id à rechercher
+	 * 
+	 * @Return Retourne un objet de transfert correspondant au résultat de la
+	 * recherche
+	 */
 	@GetMapping("/persons/id/{id}")
 	public PersonDTO getPerson(@PathVariable int id) {
 		return personService.getPersonById(id);
 	}
 
+	/*
+	 * Sauvegarde d'une personne
+	 * 
+	 * @Param person: Objet de transfert correspondant à la personne à enregsitrer
+	 * 
+	 * @Return Retroune un résumé d'objet de transfert contenant l'identifiant de
+	 * l'objet enregsitré
+	 */
 	@PostMapping("/persons")
 	public PersonSummaryDTO savePerson(@Valid @RequestBody PersonDTO person) {
 		return personService.savePerson(person);

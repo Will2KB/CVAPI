@@ -35,9 +35,11 @@ class CityControllerTest {
 	@Test
 	@DisplayName("Requête API pour charger toutes les villes")
 	void testGetCities_ReturnAllCities() throws Exception {
-		TestDatas<City, CityDTO> datas = CityAssertions.getSkillTestDatas(4);
+		// Arrange
+		TestDatas<City, CityDTO> datas = CityAssertions.getCityTestDatas(4);
 		Mockito.when(cityService.getCities()).thenReturn(datas.dtos);
 
+		// Act + Assert
 		mockMvc.perform(get("/cities")).andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.length()").value(datas.dtos.size()))
@@ -55,9 +57,11 @@ class CityControllerTest {
 	@Test
 	@DisplayName("Requête API pour charger une ville à partir de son ID")
 	void testGetCityById_ReturnCorrectCity() throws Exception {
+		// Arrange
 		CityDTO searchCity = CityAssertions.getCityDTO();
 		Mockito.when(cityService.getCityByID(searchCity.getId())).thenReturn(searchCity);
 
+		// Act + Assert
 		mockMvc.perform(get("/cities/id/" + searchCity.getId())).andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.id").value(searchCity.getId()))
@@ -68,9 +72,11 @@ class CityControllerTest {
 	@Test
 	@DisplayName("Requête API pour charger une ville à partir de son nom")
 	void testGetCityByName_ReturnCorrectCity() throws Exception {
+		// Arrange
 		CityDTO searchCity = CityAssertions.getCityDTO();
 		Mockito.when(cityService.getCityByName(searchCity.getName())).thenReturn(searchCity);
 
+		// Act + Assert
 		mockMvc.perform(get("/cities/name/" + searchCity.getName())).andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.id").value(searchCity.getId()))

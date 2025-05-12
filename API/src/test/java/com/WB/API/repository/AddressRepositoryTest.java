@@ -14,6 +14,11 @@ import org.springframework.test.context.ActiveProfiles;
 
 import com.WB.API.model.Address;
 
+/*
+ * Tests du repository des adresses
+ * Lors de ces test, nous souhaitons vérifier le fonctionnement du repository 
+ * Ces tests seront effectué sur une base de test H2
+ */
 @ActiveProfiles("test")
 @DataJpaTest
 @DisplayName("Test du repository des adresses")
@@ -24,6 +29,9 @@ class AddressRepositoryTest {
 
 	private List<Address> addresses;
 
+	/**
+	 * Chargement des données de tests spécifique au repository
+	 */
 	@BeforeEach
 	void loadData() {
 
@@ -60,9 +68,13 @@ class AddressRepositoryTest {
 	@Test
 	@DisplayName("Chargement d'une adresse à partir de son ID")
 	void findAddressById_ReturnCorrectAddress() {
+		// Arrange
 		Address searchAddress = addresses.get(2);
+
+		// Act
 		Optional<Address> optAddress = addressRepository.findById(searchAddress.getId());
 
+		// Assert
 		Assertions.assertTrue(optAddress.isPresent(),
 				"L'adresse n'a pas été trouvée pour l'ID " + searchAddress.getId());
 		Address address = optAddress.get();
@@ -72,5 +84,18 @@ class AddressRepositoryTest {
 		Assertions.assertEquals(searchAddress.getStreetNumber(), address.getStreetNumber());
 		Assertions.assertEquals(searchAddress.getStreet(), address.getStreet());
 		Assertions.assertEquals(searchAddress.getComplement(), address.getComplement());
+	}
+
+	@Test
+	@DisplayName("Chargement d'une adresse à partir d'un ID inexistant")
+	void findAddressById_ReturnNullWhenNotFound() {
+		// Arrange
+		Integer id = 999;
+
+		// Act
+		Optional<Address> optAddress = addressRepository.findById(id);
+
+		// Assert
+		Assertions.assertFalse(optAddress.isPresent(), "L'adresse a été trouvée pour l'ID " + id);
 	}
 }

@@ -45,10 +45,12 @@ class ExperienceControllerTest {
 	@Test
 	@DisplayName("Requête API pour charger toutes les Experiencenes")
 	void testGetExperiences_ReturnAllExperiences() throws Exception {
+		// Arrange
 		TestSummaryDatas<Experience, ExperienceDTO, ExperienceSummaryDTO> datas = ExperienceAssertions
-				.getSkillTestDatas(5);
+				.getExperienceTestDatas(5);
 		Mockito.when(experienceService.getExperiences()).thenReturn(datas.dtoSummarries);
 
+		// Act + Assert
 		mockMvc.perform(get("/experiences")).andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.length()").value(datas.dtoSummarries.size()))
@@ -97,17 +99,21 @@ class ExperienceControllerTest {
 	@Test
 	@DisplayName("Requête API pour charger une liste d'expériences vides")
 	public void testGetExperiences_ReturnEmpty() throws Exception {
+		// Arrange
 		when(experienceService.getExperiences()).thenReturn(Collections.emptyList());
 
+		// Act + Assert
 		mockMvc.perform(get("/experiences")).andExpect(status().isOk()).andExpect(jsonPath("$.size()").value(0));
 	}
 
 	@Test
 	@DisplayName("Requête API pour charger une Experiencene à partir de son ID")
 	void testGetExperienceById_ReturnCorrectExperience() throws Exception {
+		// Arrange
 		ExperienceDTO searchExperience = ExperienceAssertions.getExperienceDTO();
 		Mockito.when(experienceService.getExperienceById(searchExperience.getId())).thenReturn(searchExperience);
 
+		// Act + Assert
 		mockMvc.perform(get("/experiences/id/" + searchExperience.getId())).andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.id").value(searchExperience.getId()))
@@ -121,18 +127,21 @@ class ExperienceControllerTest {
 	@Test
 	@DisplayName("Requête API pour charger une Experiencene à partir d'un ID inexistant")
 	public void testGetExperienceById_NotFound() throws Exception {
+		// Arrange
 		when(experienceService.getExperienceById(99)).thenReturn(null);
 
+		// Act + Assert
 		mockMvc.perform(get("/experiences/id/99")).andExpect(status().isNotFound());
 	}
 
 	@Test
 	@DisplayName("Sauvegarde d'une expérience bien définie")
 	public void testSaveExperience_resturnSavedExperience() throws Exception {
-
+		// Arrange
 		ExperienceDTO newExperience = ExperienceAssertions.getExperienceDTO();
 		when(experienceService.saveExperience(Mockito.any(ExperienceDTO.class))).thenReturn(newExperience.getSummary());
 
+		// Act + Assert
 		mockMvc.perform(post("/experiences").contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(newExperience))).andExpect(status().isOk())
 				.andExpect(jsonPath("$.id").value(newExperience.getId()))
@@ -145,11 +154,13 @@ class ExperienceControllerTest {
 	@Test
 	@DisplayName("Sauvegarde d'une expérience avec un nom vide")
 	public void testSaveExperienceWithEmptyName_StatusFail() throws Exception {
+		// Arrange
 		ExperienceDTO invalidExperience = new ExperienceDTO(12, " ", LocalDate.of(2012, 12, 15),
 				LocalDate.of(2016, 2, 5), false, "Mission");
 		when(experienceService.saveExperience(Mockito.any(ExperienceDTO.class)))
 				.thenReturn(invalidExperience.getSummary());
 
+		// Act + Assert
 		mockMvc.perform(post("/experiences").contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(invalidExperience))).andExpect(status().isBadRequest());
 	}
@@ -157,11 +168,13 @@ class ExperienceControllerTest {
 	@Test
 	@DisplayName("Sauvegarde d'une expérience avec une date de début null")
 	public void testSaveExperienceWithDateBeginningNull_StatusFail() throws Exception {
+		// Arrange
 		ExperienceDTO invalidExperience = new ExperienceDTO(12, "Exp. 2", null, LocalDate.of(2016, 2, 5), false,
 				"Mission");
 		when(experienceService.saveExperience(Mockito.any(ExperienceDTO.class)))
 				.thenReturn(invalidExperience.getSummary());
 
+		// Act + Assert
 		mockMvc.perform(post("/experiences").contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(invalidExperience))).andExpect(status().isBadRequest());
 	}

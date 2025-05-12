@@ -12,8 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import com.WB.API.assertions.LanguageAssertions;
 import com.WB.API.model.Language;
 
+/*
+ * Tests du repository des langues
+ * Lors de ces test, nous souhaitons vérifier le fonctionnement du repository 
+ * Ces tests seront effectué sur une base de test H2
+ */
 @DataJpaTest
 @ActiveProfiles("test")
 @DisplayName("Test du repository des langues")
@@ -24,6 +30,9 @@ class LanguageRepositoryTest {
 
 	private List<Language> languages;
 
+	/**
+	 * Chargement des données de tests spécifique au repository
+	 */
 	@BeforeEach
 	private void loadData() {
 		languages = new ArrayList<>();
@@ -47,16 +56,29 @@ class LanguageRepositoryTest {
 	@Test
 	@DisplayName("Chargement d'une langue à partir de son ID")
 	void findLanguageById_ReturnCorrectLanguage() {
+		// Arrange
 		Language searchLanguage = languages.get(2);
+
+		// Act
 		Optional<Language> optLanguage = LanguageRepository.findById(searchLanguage.getId());
 
+		// Assert
 		Assertions.assertTrue(optLanguage.isPresent(),
 				"La langue n'a pas été trouvée pour l'ID " + searchLanguage.getId());
-		Language Language = optLanguage.get();
-
-		Assertions.assertNotNull(Language);
-		Assertions.assertEquals(searchLanguage.getId(), Language.getId());
-		Assertions.assertEquals(searchLanguage.getName(), Language.getName());
+		Language foundLanguage = optLanguage.get();
+		LanguageAssertions.assertEqualsProperties(searchLanguage, foundLanguage);
 	}
 
+	@Test
+	@DisplayName("Chargement d'une langue à partir d'un ID inexistant")
+	void findLanguageById_ReturnNullWhenNotFound() {
+		// Arrange
+		Integer id = 999;
+
+		// Act
+		Optional<Language> optLanguage = LanguageRepository.findById(id);
+
+		// Assert
+		Assertions.assertFalse(optLanguage.isPresent(), "La langue a été trouvée pour l'ID " + id);
+	}
 }

@@ -35,9 +35,11 @@ class NationalityControllerTest {
 	@Test
 	@DisplayName("Requête API pour charger toutes les nationalités")
 	void testGetNationalities_ReturnAllNationalities() throws Exception {
-		TestDatas<Nationality, NationalityDTO> datas = NationalityAssertions.getSkillTestDatas(3);
+		// Arrange
+		TestDatas<Nationality, NationalityDTO> datas = NationalityAssertions.getNationalityTestDatas(3);
 		Mockito.when(nationalityService.getNationalities()).thenReturn(datas.dtos);
 
+		// Act + Assert
 		mockMvc.perform(get("/nationalities")).andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.length()").value(datas.dtos.size()))
@@ -53,9 +55,11 @@ class NationalityControllerTest {
 	@Test
 	@DisplayName("Requête API pour charger une nationalité à partir de son ID")
 	void testGetNationalityById_ReturnCorrectNationality() throws Exception {
+		// Arrange
 		NationalityDTO searchNationality = NationalityAssertions.getNationalityDTO();
 		Mockito.when(nationalityService.getNationalityById(searchNationality.getId())).thenReturn(searchNationality);
 
+		// Act + Assert
 		mockMvc.perform(get("/nationalities/id/" + searchNationality.getId())).andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.id").value(searchNationality.getId()))

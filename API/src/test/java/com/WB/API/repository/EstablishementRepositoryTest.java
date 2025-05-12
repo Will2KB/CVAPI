@@ -14,6 +14,11 @@ import org.springframework.test.context.ActiveProfiles;
 
 import com.WB.API.model.Establishment;
 
+/*
+ * Tests du repository des établissements
+ * Lors de ces test, nous souhaitons vérifier le fonctionnement du repository 
+ * Ces tests seront effectué sur une base de test H2
+ */
 @ActiveProfiles("test")
 @DataJpaTest
 @DisplayName("Test du repository des établissements")
@@ -24,6 +29,9 @@ class EstablishementRepositoryTest {
 
 	private List<Establishment> establishements;
 
+	/**
+	 * Chargement des données de tests spécifique au repository
+	 */
 	@BeforeEach
 	private void loadData() {
 		establishements = new ArrayList<>();
@@ -43,9 +51,13 @@ class EstablishementRepositoryTest {
 	@Test
 	@DisplayName("Chargement d'un établissement à partir de son ID")
 	void findEstablishementById_ReturnCorrectEstablishement() {
+		// Arrange
 		Establishment searchEstablishement = establishements.get(1);
+
+		// Act
 		Optional<Establishment> optEstablishement = establishementRepository.findById(searchEstablishement.getId());
 
+		// Assert
 		Assertions.assertTrue(optEstablishement.isPresent(),
 				"L'établissement n'a pas été trouvée pour l'ID " + searchEstablishement.getId());
 		Establishment establishement = optEstablishement.get();
@@ -53,5 +65,18 @@ class EstablishementRepositoryTest {
 		Assertions.assertNotNull(establishement);
 		Assertions.assertEquals(searchEstablishement.getId(), establishement.getId());
 		Assertions.assertEquals(searchEstablishement.getName(), establishement.getName());
+	}
+
+	@Test
+	@DisplayName("Chargement d'un établissement à partir d'un ID inexistant")
+	void findEstablishementById_ReturnNullWhenNotFound() {
+		// Arrange
+		Integer id = 999;
+
+		// Act
+		Optional<Establishment> optEstablishement = establishementRepository.findById(id);
+
+		// Assert
+		Assertions.assertFalse(optEstablishement.isPresent(), "L'établissement a été trouvée pour l'ID " + id);
 	}
 }

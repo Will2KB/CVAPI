@@ -3,65 +3,155 @@ package com.WB.API.service;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.WB.API.dto.PersonDTO;
 import com.WB.API.dto.PersonSummaryDTO;
+import com.WB.API.exceptions.RessourceNotFoundException;
 import com.WB.API.mapper.PersonMapper;
 import com.WB.API.model.Person;
 import com.WB.API.repository.PersonRepository;
 
+/*
+ * Service permettant de manipuler l'objet personne
+ */
 @Service
 public class PersonService {
 
 	@Autowired
 	private PersonRepository personRepository;
 
-	public List<PersonSummaryDTO> getPersons() {
-		return PersonMapper.toDTOListSummary(personRepository.findAll());
+	/*
+	 * Obtenir l'âge d'une personne en fonction de sa date de naissance enregistré
+	 * dans l'entité
+	 * 
+	 * @Param person: entité à partir de laquelle calculer l'age
+	 * 
+	 * @Return Retourne un entier correspondant à l'âge de la personne en année
+	 */
+	public int getAge(Person person) {
+		// Si la date de naissance n'est pas renseigné
+		if (person.getBirthdate() == null)
+			return 0;// On retourne 0
+
+		// Sinon on retourne le résultat du calcul
+		return Period.between(person.getBirthdate(), LocalDate.now()).getYears();
 	}
 
+	/*
+	 * Récupère une personne à partir d'un ID donné
+	 * 
+	 * @Param ID: id à rechercher
+	 * 
+	 * @Retrun Retourne un objet de transfert ou NULL si aucune personne n'est
+	 * trouvée
+	 */
 	public PersonDTO getPersonById(int id) {
-		Person findPerson = personRepository.findById(id).get();
-		PersonDTO findPersonDTO = PersonMapper.toDTO(findPerson);
+		// Récherche en base de données
+		Optional<Person> optPerson = personRepository.findById(id);
 
-		if (findPersonDTO != null) {
-			findPersonDTO.setAge(this.getAge(findPerson));
+		// Si la recherche renvoie un résultat
+		if (optPerson.isPresent()) {
+			Person findPerson = optPerson.get();
+			// Transfert du résultat sou forme d'objet de transfert
+			PersonDTO findPersonDTO = PersonMapper.toDTO(findPerson);
+
+			// Si un objet a bien été trouvé
+			if (findPersonDTO != null) {
+				// On calcule l'âge de la personne
+				findPersonDTO.setAge(this.getAge(findPerson));
+			}
+
+			return findPersonDTO;
+		} else {
+			// Sinon on lève une exception
+			throw new RessourceNotFoundException("Person not found with id: " + id);
 		}
-		return findPersonDTO;
 	}
 
+	/*
+	 * Récupère une personne à partir d'un nom et un prénom donné
+	 * 
+	 * @Param name: nom à rechercher
+	 * 
+	 * @Param firstName: prénom à rechercher
+	 * 
+	 * @Retrun Retourne le premier élément trouvé en base de donné avec ce nom et ce
+	 * prénom sous forme d'objet de transfert ou NULL si aucune personne n'est
+	 * trouvée
+	 */
 	public PersonDTO getPersonByName(String name, String firstName) {
 		Person findPerson = personRepository.findFirstPersonByNameAndFirstName(name, firstName);
+		// Trasnfert du résultat en objet de transfert
 		PersonDTO findPersonDTO = PersonMapper.toDTO(findPerson);
 
+		// Si un objet a bien été trouvé
 		if (findPersonDTO != null) {
+			// On calcule l'âge de la personne
 			findPersonDTO.setAge(this.getAge(findPerson));
+		} else {
+			// Sinon on lève une exception
+			throw new RessourceNotFoundException(
+					"Person not found with name : " + name + " and firstName : " + firstName);
 		}
+
 		return findPersonDTO;
 	}
 
+	/*
+	 * Récupère une personne à partir d'un email donné
+	 * 
+	 * @Param email: email à rechercher
+	 * 
+	 * @Retrun Retourne le premier élément trouvé en base de donné avec cet email
+	 * sous forme d'objet de transfert ou NULL si aucune personne n'est trouvée
+	 */
 	public PersonDTO getPersonByEmail(String email) {
 		Person findPerson = personRepository.findFirstPersonByMail(email);
+		// Transfert du résultat en objet de transfert
 		PersonDTO findPersonDTO = PersonMapper.toDTO(findPerson);
-
+		// Si un objet a bien été trouvé
 		if (findPersonDTO != null) {
+			// On calcule l'âge de la personne
 			findPersonDTO.setAge(this.getAge(findPerson));
+		} else {
+			// Sinon on lève une exception
+			throw new RessourceNotFoundException("Person not found with email: " + email);
 		}
 		return findPersonDTO;
 	}
 
-	public PersonSummaryDTO savePerson(PersonDTO person) {
-		Person toSave = PersonMapper.toEntity(person);
-		return PersonMapper.toSummaryDTO(personRepository.save(toSave));
+	/*
+	 * Récupérer la liste de toutes les personnes qui existent en base de donnée
+	 * 
+	 * @Return Retourne une liste d'objet de transfert
+	 */
+	public List<PersonSummaryDTO> getPersons() {
+		List<PersonSummaryDTO> summariesPersonDTO = PersonMapper.toDTOListSummary(personRepository.findAll());
+
+		// Si aucune ville n'est trouvée
+		if (summariesPersonDTO == null || summariesPersonDTO.isEmpty()) {
+			// On lève une exception
+			throw new RessourceNotFoundException("List of summaries of persons is empty.");
+		}
+		return summariesPersonDTO;
 	}
 
-	public int getAge(Person person) {
-		if (person.getBirthdate() == null)
-			return 0;
-
-		return Period.between(person.getBirthdate(), LocalDate.now()).getYears();
+	/*
+	 * Enregistre une personne en base de donnée à partir d'un objet de transfert
+	 * 
+	 * @Param person: l'objet de transfert reçu par l'API devant être enregistré en
+	 * base de données
+	 * 
+	 * @Retrun Retourne le résumé de l'objet de transfert enregistré avec l'ID
+	 * enregistré en base de donnée
+	 */
+	public PersonSummaryDTO savePerson(PersonDTO person) {
+		// Transfert de l'objet de transfert en entité de base de données
+		Person toSave = PersonMapper.toEntity(person);
+		return PersonMapper.toSummaryDTO(personRepository.save(toSave));
 	}
 }

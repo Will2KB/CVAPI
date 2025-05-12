@@ -14,6 +14,11 @@ import org.springframework.test.context.ActiveProfiles;
 
 import com.WB.API.model.SkillType;
 
+/*
+ * Tests du repository des types de compétence
+ * Lors de ces test, nous souhaitons vérifier le fonctionnement du repository 
+ * Ces tests seront effectué sur une base de test H2
+ */
 @ActiveProfiles("test")
 @DataJpaTest
 @DisplayName("Test du repository des types de compétence")
@@ -24,6 +29,9 @@ class SkillTypeRepositoryTest {
 
 	private List<SkillType> skillTypes;
 
+	/**
+	 * Chargement des données de tests spécifique au repository
+	 */
 	@BeforeEach
 	void loadData() {
 
@@ -48,15 +56,31 @@ class SkillTypeRepositoryTest {
 	@Test
 	@DisplayName("Chargement d'une type de compétence à partir de son ID")
 	void findSkillTypeById_ReturnCorrectSkillType() {
+		// Arrange
 		SkillType searchSkillType = skillTypes.get(2);
+
+		// Act
 		Optional<SkillType> optSkillType = skillTypeRepository.findById(searchSkillType.getId());
 
+		// Assert
 		Assertions.assertTrue(optSkillType.isPresent(),
 				"Le type de compétence n'a pas été trouvée pour l'ID " + searchSkillType.getId());
 		SkillType skillType = optSkillType.get();
-
 		Assertions.assertNotNull(skillType);
 		Assertions.assertEquals(searchSkillType.getId(), skillType.getId());
 		Assertions.assertEquals(searchSkillType.getName(), skillType.getName());
+	}
+
+	@Test
+	@DisplayName("Chargement d'une type de compétence à partir d'un ID inexistant")
+	void findSkillTypeById_ReturnNullWhenNotFound() {
+		// Arrange
+		Integer id = 999;
+
+		// Act
+		Optional<SkillType> optSkillType = skillTypeRepository.findById(id);
+
+		// Assert
+		Assertions.assertFalse(optSkillType.isPresent(), "Le type de compétence a été trouvée pour l'ID " + id);
 	}
 }

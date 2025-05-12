@@ -35,9 +35,11 @@ class LanguageControllerTest {
 	@Test
 	@DisplayName("Requête API pour charger toutes les langues")
 	void testGetLanguages_ReturnAllLanguages() throws Exception {
-		TestDatas<Language, LanguageDTO> datas = LanguageAssertions.getSkillTestDatas(3);
+		// Arrange
+		TestDatas<Language, LanguageDTO> datas = LanguageAssertions.getLanguageTestDatas(3);
 		Mockito.when(languageService.getLanguages()).thenReturn(datas.dtos);
 
+		// Act + Assert
 		mockMvc.perform(get("/languages")).andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.length()").value(datas.dtos.size()))

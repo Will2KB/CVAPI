@@ -35,9 +35,11 @@ class CountryControllerTest {
 	@Test
 	@DisplayName("Requête API pour charger tous les pays")
 	void testGetCountries_ReturnAllTestDatas() throws Exception {
-		TestDatas<Country, CountryDTO> datas = CountryAssertions.getSkillTestDatas(3);
+		// Arrange
+		TestDatas<Country, CountryDTO> datas = CountryAssertions.getCountryTestDatas(3);
 		Mockito.when(countryService.getCountries()).thenReturn(datas.dtos);
 
+		// Act + Assert
 		mockMvc.perform(get("/countries")).andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.length()").value(datas.dtos.size()))
@@ -53,9 +55,11 @@ class CountryControllerTest {
 	@Test
 	@DisplayName("Requête API pour charger un pays à partir de son ID")
 	void testGetCountryById_ReturnCorrectCountry() throws Exception {
+		// Arrange
 		CountryDTO searchCountry = CountryAssertions.getCountryDTO();
 		Mockito.when(countryService.getContryById(searchCountry.getId())).thenReturn(searchCountry);
 
+		// Act + Assert
 		mockMvc.perform(get("/countries/id/" + searchCountry.getId())).andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.id").value(searchCountry.getId()))
