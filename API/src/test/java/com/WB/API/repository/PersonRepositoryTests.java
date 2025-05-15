@@ -26,7 +26,7 @@ import com.WB.API.model.Person;
 @DataJpaTest
 @ActiveProfiles("test")
 @DisplayName("Test du repository des personnes")
-class PersonRepositoryTest {
+class PersonRepositoryTests {
 
 	@Autowired
 	private PersonRepository personRepository;

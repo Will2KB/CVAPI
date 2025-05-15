@@ -12,7 +12,7 @@ import com.WB.API.mapper.CountryMapper;
 import com.WB.API.model.Country;
 import com.WB.API.repository.CountryRepository;
 
-/*
+/**
  * Service permettant de manipuler l'objet pays
  */
 @Service
@@ -21,12 +21,12 @@ public class CountryService {
 	@Autowired
 	private CountryRepository countryRepository;
 
-	/*
+	/**
 	 * Récupère un pays à partir d'un ID donné
 	 * 
-	 * @Param ID: id à rechercher
+	 * @param ID: id à rechercher
 	 * 
-	 * @Retrun Retourne un objet de transfert ou NULL si aucun pays n'est trouvé
+	 * @return Retourne un objet de transfert ou NULL si aucun pays n'est trouvé
 	 */
 	public CountryDTO getContryById(Integer ID) {
 		// Récherche en base de données
@@ -41,15 +41,15 @@ public class CountryService {
 		}
 	}
 
-	/*
+	/**
 	 * Récupérer la liste de tous les pays qui existent en base de donnée
 	 * 
-	 * @Return Retourne une liste d'objet de transfert
+	 * @return Retourne une liste d'objet de transfert
 	 */
 	public List<CountryDTO> getCountries() {
 		List<CountryDTO> countriesDTO = CountryMapper.toDTOList(countryRepository.findAll());
 
-		// Si aucune ville n'est trouvée
+		// Si aucun pays n'est trouvé
 		if (countriesDTO == null || countriesDTO.isEmpty()) {
 			// On lève une exception
 			throw new RessourceNotFoundException("List of countries is empty.");

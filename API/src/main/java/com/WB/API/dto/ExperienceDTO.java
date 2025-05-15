@@ -21,8 +21,6 @@ public class ExperienceDTO {
 
 	public ExperienceDTO() {
 		this.loadSummary();
-		// this.establishment = new EstablishmentDTO();
-		// this.city = new CityDTO();
 		this.skills = new ArrayList<>();
 	}
 

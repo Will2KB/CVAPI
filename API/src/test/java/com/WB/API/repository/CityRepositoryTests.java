@@ -23,7 +23,7 @@ import com.WB.API.model.City;
 @ActiveProfiles("test")
 @DataJpaTest
 @DisplayName("Test du repository des villes")
-class CityRepositoryTest {
+class CityRepositoryTests {
 
 	@Autowired
 	private CityRepository cityRepository;

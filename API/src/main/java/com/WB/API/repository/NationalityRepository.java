@@ -7,16 +7,16 @@ import org.springframework.stereotype.Repository;
 
 import com.WB.API.model.Nationality;
 
-/*
+/**
  * Repository permettant de manipuler une nationalité dans la base de données
  */
 @Repository
 public interface NationalityRepository extends CrudRepository<Nationality, Integer> {
 
-	/*
-	 * Permet de récupérer la liste de toutes les nationalités
+	/**
+	 * Récupére la liste de toutes les natioanlités
 	 * 
-	 * @Return Retourn une liste d'entité nationalité
+	 * @Return Retourne une liste d'entité nationalité
 	 */
 	public List<Nationality> findAll();
 }

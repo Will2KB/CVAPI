@@ -22,7 +22,7 @@ import com.WB.API.model.Address;
 @ActiveProfiles("test")
 @DataJpaTest
 @DisplayName("Test du repository des adresses")
-class AddressRepositoryTest {
+class AddressRepositoryTests {
 
 	@Autowired
 	private AddressRepository addressRepository;

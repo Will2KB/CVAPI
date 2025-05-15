@@ -7,18 +7,18 @@ import com.WB.API.dto.PersonDTO;
 import com.WB.API.dto.PersonSummaryDTO;
 import com.WB.API.model.Person;
 
-/*
+/**
  * Classe permettant de mapper une entité en objet de trasnfert et inverssement
  * pour les Person
  */
 public class PersonMapper {
 
-	/*
+	/**
 	 * Transfert une entité en objet de transfert résumé
 	 * 
-	 * @Param person: Entité à mapper
+	 * @param person: Entité à mapper
 	 * 
-	 * @Return Retourne l'objet de transfert résumé après le mappage
+	 * @return Retourne l'objet de transfert résumé après le mappage
 	 */
 	public static PersonSummaryDTO toSummaryDTO(Person person) {
 		// Si l'entité d'entrée est null => on retroune null
@@ -39,12 +39,12 @@ public class PersonMapper {
 		return personSummary;
 	}
 
-	/*
+	/**
 	 * Transfert une liste d'entité en liste d'objet de trasnfert résumé
 	 * 
-	 * @Param persons: Liste d'entité à mapper
+	 * @param persons: Liste d'entité à mapper
 	 * 
-	 * @Return Retourne une liste d'objet de transfert résumé après le mappage
+	 * @return Retourne une liste d'objet de transfert résumé après le mappage
 	 */
 	public static List<PersonSummaryDTO> toDTOListSummary(List<Person> persons) {
 		// Si l'entité d'entrée est null => on retroune null
@@ -62,12 +62,12 @@ public class PersonMapper {
 		return summaries;
 	}
 
-	/*
+	/**
 	 * Transfert une entité en objet de transfert
 	 * 
-	 * @Param person: Entité à mapper
+	 * @param person: Entité à mapper
 	 * 
-	 * @Return Retourne l'objet de transfert après le mappage
+	 * @return Retourne l'objet de transfert après le mappage
 	 */
 	public static PersonDTO toDTO(Person person) {
 		// Si l'entité d'entrée est null => on retroune null
@@ -92,12 +92,12 @@ public class PersonMapper {
 		return personDTO;
 	}
 
-	/*
+	/**
 	 * Transfert un objet de transfert en entité
 	 * 
-	 * @Param personDTO: Objet de transfert à mapper
+	 * @param personDTO: Objet de transfert à mapper
 	 * 
-	 * @Return Retourne l'entité après le mappage
+	 * @return Retourne l'entité après le mappage
 	 */
 	public static Person toEntity(PersonDTO personDTO) {
 		// Si l'objet de transfert d'entrée est null => on retroune null

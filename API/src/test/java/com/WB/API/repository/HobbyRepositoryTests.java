@@ -23,7 +23,7 @@ import com.WB.API.model.Hobby;
 @DataJpaTest
 @ActiveProfiles("test")
 @DisplayName("Test du repository des passions")
-class HobbyRepositoryTest {
+class HobbyRepositoryTests {
 
 	@Autowired
 	private HobbyRepository hobbyRepository;

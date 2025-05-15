@@ -1,9 +1,12 @@
 package com.WB.API.controller;
 
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content; // Correct import pour vérifier le contenu
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.Collections;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,13 +21,14 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.WB.API.assertions.CityAssertions;
 import com.WB.API.assertions.TestDatas;
 import com.WB.API.dto.CityDTO;
+import com.WB.API.exceptions.RessourceNotFoundException;
 import com.WB.API.model.City;
 import com.WB.API.service.CityService;
 
 @ActiveProfiles("test")
 @DisplayName("Test du controleur des villes")
 @WebMvcTest(controllers = CityController.class)
-class CityControllerTest {
+class CityControllerTests {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -55,6 +59,16 @@ class CityControllerTest {
 	}
 
 	@Test
+	@DisplayName("Requête API pour charger une liste de villes vide")
+	public void testGetCities_ReturnEmpty() throws Exception {
+		// Arrange
+		when(cityService.getCities()).thenReturn(Collections.emptyList());
+
+		// Act + Assert
+		mockMvc.perform(get("/cities")).andExpect(status().isOk()).andExpect(jsonPath("$.size()").value(0));
+	}
+
+	@Test
 	@DisplayName("Requête API pour charger une ville à partir de son ID")
 	void testGetCityById_ReturnCorrectCity() throws Exception {
 		// Arrange
@@ -70,6 +84,16 @@ class CityControllerTest {
 	}
 
 	@Test
+	@DisplayName("Requête API pour charger une ville à partir d'un ID inexistant")
+	public void testGetCityById_NotFound() throws Exception {
+		// Arrange
+		when(cityService.getCityByID(99)).thenThrow(new RessourceNotFoundException("City not found"));
+
+		// Act + Assert
+		mockMvc.perform(get("/cities/id/99")).andExpect(status().isNotFound());
+	}
+
+	@Test
 	@DisplayName("Requête API pour charger une ville à partir de son nom")
 	void testGetCityByName_ReturnCorrectCity() throws Exception {
 		// Arrange
@@ -82,6 +106,16 @@ class CityControllerTest {
 				.andExpect(jsonPath("$.id").value(searchCity.getId()))
 				.andExpect(jsonPath("$.name").value(searchCity.getName()));
 
+	}
+
+	@Test
+	@DisplayName("Requête API pour charger une ville à partir d'un nom inexistant")
+	public void testGetCityByName_NotFound() throws Exception {
+		// Arrange
+		when(cityService.getCityByName("NotFound")).thenThrow(new RessourceNotFoundException("City not found"));
+
+		// Act + Assert
+		mockMvc.perform(get("/cities/name/NotFound")).andExpect(status().isNotFound());
 	}
 
 }

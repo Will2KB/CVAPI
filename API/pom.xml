@@ -27,9 +27,9 @@
 		<url/>
 	</scm>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>18</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>18</maven.compiler.target>
         <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
 	</properties>
 	<dependencies>
@@ -40,6 +40,10 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.mysql</groupId>
@@ -86,6 +90,9 @@
 			    <artifactId>maven-compiler-plugin</artifactId>
 			    <version>3.11.0</version> <!-- ou plus récente -->
 			    <configuration>
+					<source>18</source>
+			        <target>18</target>
+			        <release>18</release>
 			        <annotationProcessorPaths>
 			            <path>
 			                <groupId>org.projectlombok</groupId>

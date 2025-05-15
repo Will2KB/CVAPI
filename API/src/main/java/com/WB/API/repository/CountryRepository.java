@@ -7,16 +7,17 @@ import org.springframework.stereotype.Repository;
 
 import com.WB.API.model.Country;
 
-/*
+/**
  * Repository permettant de manipuler un pays dans la base de données
  */
 @Repository
 public interface CountryRepository extends CrudRepository<Country, Integer> {
 
-	/*
-	 * Permet de récupérer la liste de tous les pays
+	/**
+	 * Récupére la liste de tous les pays
 	 * 
-	 * @Return Retourn une liste d'entité pays
+	 * @Return Retourne une liste d'entité pays
 	 */
 	public List<Country> findAll();
+
 }

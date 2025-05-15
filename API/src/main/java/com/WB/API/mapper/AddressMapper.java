@@ -3,18 +3,18 @@ package com.WB.API.mapper;
 import com.WB.API.dto.AddressDTO;
 import com.WB.API.model.Address;
 
-/*
+/**
  * Classe permettant de mapper une entité en objet de trasnfert et inverssement
  * pour les Address
  */
 public class AddressMapper {
 
-	/*
+	/**
 	 * Transfert une entité en objet de transfert
 	 * 
-	 * @Param address: Entité à mapper
+	 * @param address: Entité à mapper
 	 * 
-	 * @Return Retourne l'objet de transfert après le mappage
+	 * @return Retourne l'objet de transfert après le mappage
 	 */
 	public static AddressDTO toDTO(Address address) {
 		// Si l'entité d'entrée est null => on retroune null
@@ -34,12 +34,12 @@ public class AddressMapper {
 		return addressDTO;
 	}
 
-	/*
+	/**
 	 * Transfert un objet de transfert en entité
 	 * 
-	 * @Param addressDTO: Objet de transfert à mapper
+	 * @param addressDTO: Objet de transfert à mapper
 	 * 
-	 * @Return Retourne l'entité après le mappage
+	 * @return Retourne l'entité après le mappage
 	 */
 	public static Address toEntity(AddressDTO addressDTO) {
 		// Si l'objet de transfert d'entrée est null => on retroune null

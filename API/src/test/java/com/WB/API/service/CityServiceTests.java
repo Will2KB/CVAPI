@@ -28,7 +28,7 @@ import com.WB.API.repository.CityRepository;
 @ActiveProfiles("test")
 @DisplayName("Test du service des villes")
 @ExtendWith(MockitoExtension.class)
-class CityServiceTest {
+class CityServiceTests {
 
 	@Mock
 	private CityRepository CityRepository;

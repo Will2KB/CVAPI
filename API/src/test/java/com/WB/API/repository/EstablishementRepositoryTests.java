@@ -22,7 +22,7 @@ import com.WB.API.model.Establishment;
 @ActiveProfiles("test")
 @DataJpaTest
 @DisplayName("Test du repository des établissements")
-class EstablishementRepositoryTest {
+class EstablishementRepositoryTests {
 
 	@Autowired
 	EstablishementRepository establishementRepository;

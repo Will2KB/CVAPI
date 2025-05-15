@@ -12,12 +12,12 @@ import com.WB.API.model.Skill;
  */
 public class SkillMapper {
 
-	/*
+	/**
 	 * Transfert une entité en objet de transfert
 	 * 
-	 * @Param skill: Entité à mapper
+	 * @param skill: Entité à mapper
 	 * 
-	 * @Return Retourne l'objet de transfert après le mappage
+	 * @return Retourne l'objet de transfert après le mappage
 	 */
 	public static SkillDTO toDTO(Skill skill) {
 		// Si l'entité d'entrée est null => on retroune null
@@ -40,12 +40,12 @@ public class SkillMapper {
 		return skillDTO;
 	}
 
-	/*
+	/**
 	 * Transfert une liste d'entité en liste d'objet de trasnfert
 	 * 
-	 * @Param skills: Liste d'entité à mapper
+	 * @param skills: Liste d'entité à mapper
 	 * 
-	 * @Return Retourne une liste d'objet de transfert après le mappage
+	 * @return Retourne une liste d'objet de transfert après le mappage
 	 */
 	public static List<SkillDTO> toDTOList(List<Skill> skills) {
 		// Si la liste est null => on retroune null
@@ -63,12 +63,12 @@ public class SkillMapper {
 		return skillsDTO;
 	}
 
-	/*
+	/**
 	 * Transfert un objet de transfert en entité
 	 * 
-	 * @Param skillDTO: Objet de transfert à mapper
+	 * @param skillDTO: Objet de transfert à mapper
 	 * 
-	 * @Return Retourne l'entité après le mappage
+	 * @return Retourne l'entité après le mappage
 	 */
 	public static Skill toEntity(SkillDTO skillDTO) {
 		// Si l'objet de transfert d'entrée est null => on retroune null
@@ -83,12 +83,12 @@ public class SkillMapper {
 		return skill;
 	}
 
-	/*
+	/**
 	 * Transfert une liste d'objet de transfert en liste d'entité
 	 * 
-	 * @Param skillsDTO: Liste d'objet de transfert à mapper
+	 * @param skillsDTO: Liste d'objet de transfert à mapper
 	 * 
-	 * @Return Retourne une liste d'entité de transfert après le mappage
+	 * @return Retourne une liste d'entité de transfert après le mappage
 	 */
 	public static List<Skill> toEntityList(List<SkillDTO> skillsDTO) {
 		// Si la liste d'entrée est null => on retroune null

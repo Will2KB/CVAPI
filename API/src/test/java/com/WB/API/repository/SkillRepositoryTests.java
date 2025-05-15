@@ -23,7 +23,7 @@ import com.WB.API.model.Skill;
 @ActiveProfiles("test")
 @DataJpaTest
 @DisplayName("Test du repository des compétences")
-class SkillRepositoryTest {
+class SkillRepositoryTests {
 
 	@Autowired
 	private SkillRepository SkillRepository;

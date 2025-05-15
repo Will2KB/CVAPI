@@ -24,7 +24,7 @@ import com.WB.API.model.Experience;
 @ActiveProfiles("test")
 @DataJpaTest
 @DisplayName("Test du repository des expériences")
-class ExperienceRepositoryTest {
+class ExperienceRepositoryTests {
 
 	@Autowired
 	ExperienceRepository experienceRepository;

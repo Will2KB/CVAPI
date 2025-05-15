@@ -23,7 +23,7 @@ import com.WB.API.model.Language;
 @DataJpaTest
 @ActiveProfiles("test")
 @DisplayName("Test du repository des langues")
-class LanguageRepositoryTest {
+class LanguageRepositoryTests {
 
 	@Autowired
 	private LanguageRepository LanguageRepository;

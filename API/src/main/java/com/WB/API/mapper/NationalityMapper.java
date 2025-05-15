@@ -6,18 +6,18 @@ import java.util.List;
 import com.WB.API.dto.NationalityDTO;
 import com.WB.API.model.Nationality;
 
-/*
+/**
  * Classe permettant de mapper une entité en objet de trasnfert et inverssement
  * pour les Nationality
  */
 public class NationalityMapper {
 
-	/*
+	/**
 	 * Transfert une entité en objet de transfert
 	 * 
-	 * @Param nationality: Entité à mapper
+	 * @param nationality: Entité à mapper
 	 * 
-	 * @Return Retourne l'objet de transfert après le mappage
+	 * @return Retourne l'objet de transfert après le mappage
 	 */
 	public static NationalityDTO toDTO(Nationality nationality) {
 		// Si l'entité d'entrée est null => on retroune null
@@ -34,12 +34,12 @@ public class NationalityMapper {
 		return nationalityDTO;
 	}
 
-	/*
+	/**
 	 * Transfert une liste d'entité en liste d'objet de trasnfert
 	 * 
-	 * @Param nationalities: Liste d'entité à mapper
+	 * @param nationalities: Liste d'entité à mapper
 	 * 
-	 * @Return Retourne une liste d'objet de transfert après le mappage
+	 * @return Retourne une liste d'objet de transfert après le mappage
 	 */
 	public static List<NationalityDTO> toDTOList(List<Nationality> nationalities) {
 		// Si la liste d'entrée est null => on retroune null
@@ -57,12 +57,12 @@ public class NationalityMapper {
 		return nationalitiesDTO;
 	}
 
-	/*
+	/**
 	 * Transfert un objet de transfert en entité
 	 * 
-	 * @Param nationalityDTO: Objet de transfert à mapper
+	 * @param nationalityDTO: Objet de transfert à mapper
 	 * 
-	 * @Return Retourne l'entité après le mappage
+	 * @return Retourne l'entité après le mappage
 	 */
 	public static Nationality toEntity(NationalityDTO nationalityDTO) {
 		// Si l'objet de transfert d'entrée est null => on retroune null
@@ -75,12 +75,12 @@ public class NationalityMapper {
 		return nationality;
 	}
 
-	/*
+	/**
 	 * Transfert une liste d'objet de transfert en liste d'entité
 	 * 
-	 * @Param nationalitiesDTO: Liste d'objet de transfert à mapper
+	 * @param nationalitiesDTO: Liste d'objet de transfert à mapper
 	 * 
-	 * @Return Retourne une liste d'entité de transfert après le mappage
+	 * @return Retourne une liste d'entité de transfert après le mappage
 	 */
 	public static List<Nationality> toEntityList(List<NationalityDTO> nationalitiesDTO) {
 		// Si l'objet de transfert d'entrée est null => on retroune null

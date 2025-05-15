@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.WB.API.dto.SkillTypeDTO;
 import com.WB.API.service.SkillTypeService;
 
-/*
- * Controlleur mettant à disposition les différents chemin nécessaire pour manipuler un type de compétence
+/**
+ * Controlleur mettant à disposition les différents chemin nécessaire pour
+ * manipuler un type de compétence
  */
 @RestController
 public class SkillTypeController {
@@ -19,23 +20,23 @@ public class SkillTypeController {
 	@Autowired
 	private SkillTypeService skillTypeService;
 
-	/*
-	 * Récupérer tous les type des compétences
+	/**
+	 * Récupére tous les type des compétences
 	 *
-	 * @Return Retourne une liste d'objet de transfert
+	 * @return Retourne une liste d'objet de transfert
 	 */
 	@GetMapping("/skillTypes")
 	public List<SkillTypeDTO> getSkillTypes() {
 		return skillTypeService.getSkillTypes();
 	}
 
-	/*
-	 * Récupèrer un type de compétence à partir d'un ID
+	/**
+	 * Récupère un type de compétence à partir d'un ID
 	 * 
-	 * @Param id: id à rechercher
+	 * @param id: id à rechercher
 	 * 
-	 * @Return Retourne un objet de transfert correspondant au résultat de la
-	 * recherche
+	 * @return Retourne un objet de transfert correspondant au résultat de la
+	 *         recherche
 	 */
 	@GetMapping("/skillTypes/id/{id}")
 	public SkillTypeDTO getSkillType(@PathVariable int id) {

@@ -4,18 +4,18 @@ import com.WB.API.dto.EstablishmentDTO;
 import com.WB.API.model.Address;
 import com.WB.API.model.Establishment;
 
-/*
+/**
  * Classe permettant de mapper une entité en objet de trasnfert et inverssement
  * pour les Establishment
  */
 public class EstablishmentMapper {
 
-	/*
+	/**
 	 * Transfert une entité en objet de transfert
 	 * 
-	 * @Param establishement: Entité à mapper
+	 * @param establishement: Entité à mapper
 	 * 
-	 * @Return Retourne l'objet de transfert après le mappage
+	 * @return Retourne l'objet de transfert après le mappage
 	 */
 	public static EstablishmentDTO toDTO(Establishment establishment) {
 		// Si l'entité d'entrée est null => on retroune null
@@ -44,12 +44,12 @@ public class EstablishmentMapper {
 		return establishmentDTO;
 	}
 
-	/*
+	/**
 	 * Transfert un objet de transfert en entité
 	 * 
-	 * @Param establishmentDTO: Objet de transfert à mapper
+	 * @param establishmentDTO: Objet de transfert à mapper
 	 * 
-	 * @Return Retourne l'entité après le mappage
+	 * @return Retourne l'entité après le mappage
 	 */
 	public static Establishment toEntity(EstablishmentDTO establishmentDTO) {
 		// Si l'objet de transfert d'entrée est null => on retroune null

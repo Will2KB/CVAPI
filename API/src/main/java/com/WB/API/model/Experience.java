@@ -136,16 +136,27 @@ public class Experience {
 		return id;
 	}
 
+	/**
+	 * Recupère la ville dans laquelle s'est déoulé l'expérience
+	 * 
+	 * @return Retourne l'objet ville si elle est renseigné, sinon la méthode
+	 *         retourne NULL
+	 */
 	public City getCity() {
-		if (city == null)
-			if (establishement == null)
+		// Si le paramètre City est null
+		if (city == null) {
+			// On vérifie l'adresse de l'établissement concerné
+			if (establishement == null || establishement.getAddress() == null) {
+				// Si aucun établissement ou aucune adresse alors on renvoie NULL
 				return null;
-			else if (establishement.getAddress() == null)
-				return null;
-			else
+			} else {
+				// Sinon on renvoie la ville de l'établissement
 				return establishement.getAddress().getCity();
-		else
+			}
+		} else {
+			// Sinon on renvoie directement la ville renseignée
 			return city;
+		}
 	}
 
 	public void setCity(City city) {

@@ -7,16 +7,16 @@ import org.springframework.stereotype.Repository;
 
 import com.WB.API.model.Skill;
 
-/*
+/**
  * Repository permettant de manipuler une compétence dans la base de données
  */
 @Repository
 public interface SkillRepository extends CrudRepository<Skill, Integer> {
 
-	/*
-	 * Permet de récupérer la liste de toutes les compétences
+	/**
+	 * Récupére la liste de toutes les compétences
 	 * 
-	 * @Return Retourn une liste d'entité compétence
+	 * @Return Retourne une liste d'entité compétence
 	 */
 	public List<Skill> findAll();
 }

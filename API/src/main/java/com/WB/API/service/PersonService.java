@@ -15,7 +15,7 @@ import com.WB.API.mapper.PersonMapper;
 import com.WB.API.model.Person;
 import com.WB.API.repository.PersonRepository;
 
-/*
+/**
  * Service permettant de manipuler l'objet personne
  */
 @Service
@@ -24,13 +24,13 @@ public class PersonService {
 	@Autowired
 	private PersonRepository personRepository;
 
-	/*
-	 * Obtenir l'âge d'une personne en fonction de sa date de naissance enregistré
+	/**
+	 * Calcule l'âge d'une personne en fonction de sa date de naissance enregistré
 	 * dans l'entité
 	 * 
-	 * @Param person: entité à partir de laquelle calculer l'age
+	 * @param person: entité à partir de laquelle calculer l'age
 	 * 
-	 * @Return Retourne un entier correspondant à l'âge de la personne en année
+	 * @return Retourne un entier correspondant à l'âge de la personne en année
 	 */
 	public int getAge(Person person) {
 		// Si la date de naissance n'est pas renseigné
@@ -41,13 +41,13 @@ public class PersonService {
 		return Period.between(person.getBirthdate(), LocalDate.now()).getYears();
 	}
 
-	/*
+	/**
 	 * Récupère une personne à partir d'un ID donné
 	 * 
-	 * @Param ID: id à rechercher
+	 * @param ID: id à rechercher
 	 * 
-	 * @Retrun Retourne un objet de transfert ou NULL si aucune personne n'est
-	 * trouvée
+	 * @return Retourne un objet de transfert ou NULL si aucune personne n'est
+	 *         trouvée
 	 */
 	public PersonDTO getPersonById(int id) {
 		// Récherche en base de données
@@ -72,16 +72,16 @@ public class PersonService {
 		}
 	}
 
-	/*
+	/**
 	 * Récupère une personne à partir d'un nom et un prénom donné
 	 * 
-	 * @Param name: nom à rechercher
+	 * @param name:      nom à rechercher
 	 * 
-	 * @Param firstName: prénom à rechercher
+	 * @param firstName: prénom à rechercher
 	 * 
-	 * @Retrun Retourne le premier élément trouvé en base de donné avec ce nom et ce
-	 * prénom sous forme d'objet de transfert ou NULL si aucune personne n'est
-	 * trouvée
+	 * @return Retourne le premier élément trouvé en base de donné avec ce nom et ce
+	 *         prénom sous forme d'objet de transfert ou NULL si aucune personne
+	 *         n'est trouvée
 	 */
 	public PersonDTO getPersonByName(String name, String firstName) {
 		Person findPerson = personRepository.findFirstPersonByNameAndFirstName(name, firstName);
@@ -101,13 +101,14 @@ public class PersonService {
 		return findPersonDTO;
 	}
 
-	/*
+	/**
 	 * Récupère une personne à partir d'un email donné
 	 * 
-	 * @Param email: email à rechercher
+	 * @param email: email à rechercher
 	 * 
-	 * @Retrun Retourne le premier élément trouvé en base de donné avec cet email
-	 * sous forme d'objet de transfert ou NULL si aucune personne n'est trouvée
+	 * @return Retourne le premier élément trouvé en base de donné avec cet email
+	 *         sous forme d'objet de transfert ou NULL si aucune personne n'est
+	 *         trouvée
 	 */
 	public PersonDTO getPersonByEmail(String email) {
 		Person findPerson = personRepository.findFirstPersonByMail(email);
@@ -124,15 +125,15 @@ public class PersonService {
 		return findPersonDTO;
 	}
 
-	/*
-	 * Récupérer la liste de toutes les personnes qui existent en base de donnée
+	/**
+	 * Récupére la liste de toutes les personnes qui existent en base de donnée
 	 * 
-	 * @Return Retourne une liste d'objet de transfert
+	 * @return Retourne une liste d'objet de transfert
 	 */
 	public List<PersonSummaryDTO> getPersons() {
 		List<PersonSummaryDTO> summariesPersonDTO = PersonMapper.toDTOListSummary(personRepository.findAll());
 
-		// Si aucune ville n'est trouvée
+		// Si aucune personne n'est trouvée
 		if (summariesPersonDTO == null || summariesPersonDTO.isEmpty()) {
 			// On lève une exception
 			throw new RessourceNotFoundException("List of summaries of persons is empty.");
@@ -140,14 +141,14 @@ public class PersonService {
 		return summariesPersonDTO;
 	}
 
-	/*
+	/**
 	 * Enregistre une personne en base de donnée à partir d'un objet de transfert
 	 * 
-	 * @Param person: l'objet de transfert reçu par l'API devant être enregistré en
-	 * base de données
+	 * @param person: l'objet de transfert reçu par l'API devant être enregistré en
+	 *                base de données
 	 * 
-	 * @Retrun Retourne le résumé de l'objet de transfert enregistré avec l'ID
-	 * enregistré en base de donnée
+	 * @return Retourne le résumé de l'objet de transfert enregistré avec l'ID
+	 *         enregistré en base de donnée
 	 */
 	public PersonSummaryDTO savePerson(PersonDTO person) {
 		// Transfert de l'objet de transfert en entité de base de données

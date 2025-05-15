@@ -1,9 +1,12 @@
 package com.WB.API.controller;
 
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content; // Correct import pour vérifier le contenu
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.Collections;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,13 +21,14 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.WB.API.assertions.CountryAssertions;
 import com.WB.API.assertions.TestDatas;
 import com.WB.API.dto.CountryDTO;
+import com.WB.API.exceptions.RessourceNotFoundException;
 import com.WB.API.model.Country;
 import com.WB.API.service.CountryService;
 
 @ActiveProfiles("test")
 @DisplayName("Test du controleur des pays")
 @WebMvcTest(controllers = CountryController.class)
-class CountryControllerTest {
+class CountryControllerTests {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -53,6 +57,16 @@ class CountryControllerTest {
 	}
 
 	@Test
+	@DisplayName("Requête API pour charger une liste de pays vide")
+	public void testGetCountries_ReturnEmpty() throws Exception {
+		// Arrange
+		when(countryService.getCountries()).thenReturn(Collections.emptyList());
+
+		// Act + Assert
+		mockMvc.perform(get("/countries")).andExpect(status().isOk()).andExpect(jsonPath("$.size()").value(0));
+	}
+
+	@Test
 	@DisplayName("Requête API pour charger un pays à partir de son ID")
 	void testGetCountryById_ReturnCorrectCountry() throws Exception {
 		// Arrange
@@ -67,4 +81,13 @@ class CountryControllerTest {
 
 	}
 
+	@Test
+	@DisplayName("Requête API pour charger un pays à partir d'un ID inexistant")
+	public void testGetCountryById_NotFound() throws Exception {
+		// Arrange
+		when(countryService.getContryById(99)).thenThrow(new RessourceNotFoundException("Country not found"));
+
+		// Act + Assert
+		mockMvc.perform(get("/countries/id/99")).andExpect(status().isNotFound());
+	}
 }

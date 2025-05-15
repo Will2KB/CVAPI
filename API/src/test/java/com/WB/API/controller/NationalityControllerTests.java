@@ -1,9 +1,12 @@
 package com.WB.API.controller;
 
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content; // Correct import pour vérifier le contenu
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.Collections;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,13 +21,14 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.WB.API.assertions.NationalityAssertions;
 import com.WB.API.assertions.TestDatas;
 import com.WB.API.dto.NationalityDTO;
+import com.WB.API.exceptions.RessourceNotFoundException;
 import com.WB.API.model.Nationality;
 import com.WB.API.service.NationalityService;
 
 @ActiveProfiles("test")
 @DisplayName("Test du controleur des nationalités")
 @WebMvcTest(controllers = NationalityController.class)
-class NationalityControllerTest {
+class NationalityControllerTests {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -53,6 +57,16 @@ class NationalityControllerTest {
 	}
 
 	@Test
+	@DisplayName("Requête API pour charger une liste de nationalités vide")
+	public void testGetNationalities_ReturnEmpty() throws Exception {
+		// Arrange
+		when(nationalityService.getNationalities()).thenReturn(Collections.emptyList());
+
+		// Act + Assert
+		mockMvc.perform(get("/nationalities")).andExpect(status().isOk()).andExpect(jsonPath("$.size()").value(0));
+	}
+
+	@Test
 	@DisplayName("Requête API pour charger une nationalité à partir de son ID")
 	void testGetNationalityById_ReturnCorrectNationality() throws Exception {
 		// Arrange
@@ -65,6 +79,17 @@ class NationalityControllerTest {
 				.andExpect(jsonPath("$.id").value(searchNationality.getId()))
 				.andExpect(jsonPath("$.name").value(searchNationality.getName()));
 
+	}
+
+	@Test
+	@DisplayName("Requête API pour charger une nationalité à partir d'un ID inexistant")
+	public void testGetNationalityById_NotFound() throws Exception {
+		// Arrange
+		when(nationalityService.getNationalityById(99))
+				.thenThrow(new RessourceNotFoundException("Nationality not found"));
+
+		// Act + Assert
+		mockMvc.perform(get("/nationalities/id/99")).andExpect(status().isNotFound());
 	}
 
 }

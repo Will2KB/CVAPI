@@ -12,7 +12,7 @@ import com.WB.API.mapper.NationalityMapper;
 import com.WB.API.model.Nationality;
 import com.WB.API.repository.NationalityRepository;
 
-/*
+/**
  * Service permettant de manipuler l'objet nationalité
  */
 @Service
@@ -21,13 +21,13 @@ public class NationalityService {
 	@Autowired
 	private NationalityRepository nationalityRepository;
 
-	/*
+	/**
 	 * Récupère une nationalité à partir d'un ID donné
 	 * 
-	 * @Param ID: id à rechercher
+	 * @param ID: id à rechercher
 	 * 
-	 * @Retrun Retourne un objet de transfert ou NULL si aucune nationalité n'est
-	 * trouvée
+	 * @return Retourne un objet de transfert ou NULL si aucune nationalité n'est
+	 *         trouvée
 	 */
 	public NationalityDTO getNationalityById(int id) {
 		// Récherche en base de données
@@ -42,15 +42,15 @@ public class NationalityService {
 		}
 	}
 
-	/*
-	 * Récupérer la liste de toutes les nationalités qui existent en base de donnée
+	/**
+	 * Récupére la liste de toutes les nationalités qui existent en base de donnée
 	 * 
-	 * @Return Retourne une liste d'objet de transfert
+	 * @return Retourne une liste d'objet de transfert
 	 */
 	public List<NationalityDTO> getNationalities() {
 		List<NationalityDTO> nationalitiesDTO = NationalityMapper.toDTOList(nationalityRepository.findAll());
 
-		// Si aucune ville n'est trouvée
+		// Si aucune nationalité n'est trouvée
 		if (nationalitiesDTO == null || nationalitiesDTO.isEmpty()) {
 			// On lève une exception
 			throw new RessourceNotFoundException("List of nationalities is empty.");

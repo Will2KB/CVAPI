@@ -7,18 +7,18 @@ import com.WB.API.dto.CityDTO;
 import com.WB.API.model.City;
 import com.WB.API.model.Country;
 
-/*
+/**
  * Classe permettant de mapper une entité en objet de trasnfert et inverssement
  * pour les City
  */
 public class CityMapper {
 
-	/*
+	/**
 	 * Transfert une entité en objet de transfert
 	 * 
-	 * @Param city: Entité à mapper
+	 * @param city: Entité à mapper
 	 * 
-	 * @Return Retourne l'objet de transfert après le mappage
+	 * @return Retourne l'objet de transfert après le mappage
 	 */
 	public static CityDTO toDTO(City city) {
 		// Si l'entité d'entrée est null => on retroune null
@@ -40,12 +40,12 @@ public class CityMapper {
 		return dto;
 	}
 
-	/*
+	/**
 	 * Transfert une liste d'entité en liste d'objet de trasnfert
 	 * 
-	 * @Param cities: Liste d'entité à mapper
+	 * @param cities: Liste d'entité à mapper
 	 * 
-	 * @Return Retourne une liste d'objet de transfert après le mappage
+	 * @return Retourne une liste d'objet de transfert après le mappage
 	 */
 	public static List<CityDTO> toDTOList(List<City> cities) {
 		// Si la liste d'entrée est null => on retroune null
@@ -63,12 +63,12 @@ public class CityMapper {
 		return citiesDTO;
 	}
 
-	/*
+	/**
 	 * Transfert un objet de transfert en entité
 	 * 
-	 * @Param cityDTO: Objet de transfert à mapper
+	 * @param cityDTO: Objet de transfert à mapper
 	 * 
-	 * @Return Retourne l'entité après le mappage
+	 * @return Retourne l'entité après le mappage
 	 */
 	public static City toEntity(CityDTO cityDTO) {
 		// Si l'objet de transfert d'entrée est null => on retroune null

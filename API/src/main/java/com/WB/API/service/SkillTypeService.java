@@ -12,7 +12,7 @@ import com.WB.API.mapper.SkillTypeMapper;
 import com.WB.API.model.SkillType;
 import com.WB.API.repository.SkillTypeRepository;
 
-/*
+/**
  * Service permettant de manipuler l'objet type de compétence
  */
 @Service
@@ -21,12 +21,12 @@ public class SkillTypeService {
 	@Autowired
 	private SkillTypeRepository skillTypeRepository;
 
-	/*
-	 * Récupérer un type de compétence à partir d'un id donné
+	/**
+	 * Récupére un type de compétence à partir d'un id donné
 	 * 
-	 * @Param ID: id à rechercher
+	 * @param ID: id à rechercher
 	 * 
-	 * @Retrun Retourne un objet de transfert ou NULL si aucun objet n'a été trouvé
+	 * @return Retourne un objet de transfert ou NULL si aucun objet n'a été trouvé
 	 */
 	public SkillTypeDTO getSkillTypeByID(Integer ID) {
 		// Récherche en base de données
@@ -42,17 +42,17 @@ public class SkillTypeService {
 		}
 	}
 
-	/*
-	 * Récupérer la liste de tous les types de compétence qui existent en base de
+	/**
+	 * Récupére la liste de tous les types de compétence qui existent en base de
 	 * donnée
 	 * 
-	 * @Return Retourne une liste d'objet de transfert
+	 * @return Retourne une liste d'objet de transfert
 	 */
 	public List<SkillTypeDTO> getSkillTypes() {
 
 		List<SkillTypeDTO> skillTypeDTO = SkillTypeMapper.toDTOList(skillTypeRepository.findAll());
 
-		// Si aucune ville n'est trouvée
+		// Si aucun type de compétence n'est trouvée
 		if (skillTypeDTO == null || skillTypeDTO.isEmpty()) {
 			// On lève une exception
 			throw new RessourceNotFoundException("List of skill types is empty.");

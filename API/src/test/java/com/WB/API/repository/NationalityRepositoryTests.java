@@ -23,7 +23,7 @@ import com.WB.API.model.Nationality;
 @DataJpaTest
 @ActiveProfiles("test")
 @DisplayName("Test du repository des nationalités")
-class NationalityRepositoryTest {
+class NationalityRepositoryTests {
 
 	@Autowired
 	private NationalityRepository nationalityRepository;

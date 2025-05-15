@@ -6,18 +6,18 @@ import java.util.List;
 import com.WB.API.dto.HobbyDescriptionDTO;
 import com.WB.API.model.HobbyDescription;
 
-/*
+/**
  * Classe permettant de mapper une entité en objet de trasnfert et inverssement
  * pour les HobbyDescription
  */
 public class HobbyDescriptionMapper {
 
-	/*
+	/**
 	 * Transfert une entité en objet de transfert
 	 * 
-	 * @Param hobbyDescription: Entité à mapper
+	 * @param hobbyDescription: Entité à mapper
 	 * 
-	 * @Return Retourne l'objet de transfert après le mappage
+	 * @return Retourne l'objet de transfert après le mappage
 	 */
 	public static HobbyDescriptionDTO toDTO(HobbyDescription hobbyDescription) {
 		// Si l'entité d'entrée est null => on retroune null
@@ -34,12 +34,12 @@ public class HobbyDescriptionMapper {
 		return hobbyDescriptionDTO;
 	}
 
-	/*
+	/**
 	 * Transfert une liste d'entité en liste d'objet de trasnfert
 	 * 
-	 * @Param hobbyDescriptions: Liste d'entité à mapper
+	 * @param hobbyDescriptions: Liste d'entité à mapper
 	 * 
-	 * @Return Retourne une liste d'objet de transfert après le mappage
+	 * @return Retourne une liste d'objet de transfert après le mappage
 	 */
 	public static List<HobbyDescriptionDTO> toDTOList(List<HobbyDescription> hobbyDescriptions) {
 		// Si la liste d'entrée est null => on retroune null
@@ -57,12 +57,12 @@ public class HobbyDescriptionMapper {
 		return hobbyDescriptionsDTO;
 	}
 
-	/*
+	/**
 	 * Transfert un objet de transfert en entité
 	 * 
-	 * @Param hobbyDescriptionDTO: Objet de transfert à mapper
+	 * @param hobbyDescriptionDTO: Objet de transfert à mapper
 	 * 
-	 * @Return Retourne l'entité après le mappage
+	 * @return Retourne l'entité après le mappage
 	 */
 	public static HobbyDescription toEntity(HobbyDescriptionDTO hobbyDescriptionDTO) {
 		// Si l'objket de trasnfert d'entrée est null => on retroune null
@@ -76,12 +76,12 @@ public class HobbyDescriptionMapper {
 		return hobbyDescription;
 	}
 
-	/*
+	/**
 	 * Transfert une liste d'objet de transfert en liste d'entité
 	 * 
-	 * @Param hobbyDescriptionsDTO: Liste d'objet de transfert à mapper
+	 * @param hobbyDescriptionsDTO: Liste d'objet de transfert à mapper
 	 * 
-	 * @Return Retourne une liste d'entité de transfert après le mappage
+	 * @return Retourne une liste d'entité de transfert après le mappage
 	 */
 	public static List<HobbyDescription> toEntityList(List<HobbyDescriptionDTO> hobbyDescriptionsDTO) {
 		// Si l'entité d'entrée est null => on retroune null

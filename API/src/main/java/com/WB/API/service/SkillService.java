@@ -12,7 +12,7 @@ import com.WB.API.mapper.SkillMapper;
 import com.WB.API.model.Skill;
 import com.WB.API.repository.SkillRepository;
 
-/*
+/**
  * Service permettant de manipuler l'objet compétence
  */
 @Service
@@ -21,12 +21,12 @@ public class SkillService {
 	@Autowired
 	private SkillRepository skillRepository;
 
-	/*
-	 * Récupérer une compétence à partir d'un id donné
+	/**
+	 * Récupére une compétence à partir d'un id donné
 	 * 
-	 * @Param ID: id à rechercher
+	 * @param ID: id à rechercher
 	 * 
-	 * @Retrun Retourne un objet de transfert ou NULL si aucun objet n'a été trouvé
+	 * @return Retourne un objet de transfert ou NULL si aucun objet n'a été trouvé
 	 */
 	public SkillDTO getSkillByID(Integer ID) {
 		// Récherche en base de données
@@ -41,15 +41,15 @@ public class SkillService {
 		}
 	}
 
-	/*
-	 * Récupérer la liste de tous les compétences qui existent en base de donnée
+	/**
+	 * Récupére la liste de tous les compétences qui existent en base de donnée
 	 * 
-	 * @Return Retourne une liste d'objet de transfert
+	 * @return Retourne une liste d'objet de transfert
 	 */
 	public List<SkillDTO> getSkills() {
 		List<SkillDTO> skillsDTO = SkillMapper.toDTOList(skillRepository.findAll());
 
-		// Si aucune ville n'est trouvée
+		// Si aucune compétence n'est trouvée
 		if (skillsDTO == null || skillsDTO.isEmpty()) {
 			// On lève une exception
 			throw new RessourceNotFoundException("List of skills is empty.");

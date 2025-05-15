@@ -12,7 +12,7 @@ import com.WB.API.mapper.CityMapper;
 import com.WB.API.model.City;
 import com.WB.API.repository.CityRepository;
 
-/*
+/**
  * Service permettant de manipuler l'objet Ville
  */
 @Service
@@ -21,12 +21,12 @@ public class CityService {
 	@Autowired
 	private CityRepository cityRepository;
 
-	/*
+	/**
 	 * Récupère une ville à partir d'un ID donné
 	 * 
-	 * @Param ID: id à rechercher
+	 * @param ID: id à rechercher
 	 * 
-	 * @Retrun Retourne un objet de transfert ou NULL si aucune ville n'est trouvée
+	 * @return Retourne un objet de transfert ou NULL si aucune ville n'est trouvée
 	 */
 	public CityDTO getCityByID(Integer ID) {
 		// Récherche en base de données
@@ -41,13 +41,13 @@ public class CityService {
 		}
 	}
 
-	/*
+	/**
 	 * Récupère une ville à partir d'un nom donné
 	 * 
-	 * @Param name: nom à rechercher
+	 * @param name: nom à rechercher
 	 * 
-	 * @Retrun Retourne le premier élément trouvé en base de donné avec ce nom sous
-	 * forme d'objet de transfert ou NULL si aucune ville n'est trouvée
+	 * @return Retourne le premier élément trouvé en base de donné avec ce nom sous
+	 *         forme d'objet de transfert ou NULL si aucune ville n'est trouvée
 	 */
 	public CityDTO getCityByName(String name) {
 		CityDTO cityDTO = CityMapper.toDTO(cityRepository.findFirstCityByName(name));
@@ -61,10 +61,10 @@ public class CityService {
 		return cityDTO;
 	}
 
-	/*
-	 * Récupérer la liste de toutes les villes qui existent en base de donnée
+	/**
+	 * Récupére la liste de toutes les villes qui existent en base de donnée
 	 * 
-	 * @Return Retourne une liste d'objet de transfert
+	 * @return Retourne une liste d'objet de transfert
 	 */
 	public List<CityDTO> getCities() {
 

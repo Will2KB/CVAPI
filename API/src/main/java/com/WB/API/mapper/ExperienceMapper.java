@@ -9,18 +9,18 @@ import com.WB.API.model.City;
 import com.WB.API.model.Establishment;
 import com.WB.API.model.Experience;
 
-/*
+/**
  * Classe permettant de mapper une entité en objet de trasnfert et inverssement
  * pour les Experience
  */
 public class ExperienceMapper {
 
-	/*
+	/**
 	 * Transfert une entité en objet de transfert résumé
 	 * 
-	 * @Param experience: Entité à mapper
+	 * @param experience: Entité à mapper
 	 * 
-	 * @Return Retourne l'objet de transfert résumé après le mappage
+	 * @return Retourne l'objet de transfert résumé après le mappage
 	 */
 	public static ExperienceSummaryDTO toSummaryDTO(Experience experience) {
 		// Si l'entité d'entrée est null => on retroune null
@@ -56,12 +56,12 @@ public class ExperienceMapper {
 		return summary;
 	}
 
-	/*
+	/**
 	 * Transfert une liste d'entité en liste d'objet de trasnfert résumé
 	 * 
-	 * @Param expriences: Liste d'entité à mapper
+	 * @param expriences: Liste d'entité à mapper
 	 * 
-	 * @Return Retourne une liste d'objet de transfert résumé après le mappage
+	 * @return Retourne une liste d'objet de transfert résumé après le mappage
 	 */
 	public static List<ExperienceSummaryDTO> toSummaryDTOList(List<Experience> experiences) {
 		// Si la liste d'entrée est null => on retroune null
@@ -79,12 +79,12 @@ public class ExperienceMapper {
 		return summaries;
 	}
 
-	/*
+	/**
 	 * Transfert une entité en objet de transfert
 	 * 
-	 * @Param experience: Entité à mapper
+	 * @param experience: Entité à mapper
 	 * 
-	 * @Return Retourne l'objet de transfert après le mappage
+	 * @return Retourne l'objet de transfert après le mappage
 	 */
 	public static ExperienceDTO toDTO(Experience experience) {
 		// Si l'entité d'entrée est null => on retroune null
@@ -104,12 +104,12 @@ public class ExperienceMapper {
 		return experienceDTO;
 	}
 
-	/*
+	/**
 	 * Transfert une liste d'entité en liste d'objet de trasnfert
 	 * 
-	 * @Param experiences: Liste d'entité à mapper
+	 * @param experiences: Liste d'entité à mapper
 	 * 
-	 * @Return Retourne une liste d'objet de transfert après le mappage
+	 * @return Retourne une liste d'objet de transfert après le mappage
 	 */
 	public static List<ExperienceDTO> toDTOList(List<Experience> experiences) {
 		// Si la liste d'entrée est null => on retroune null
@@ -127,12 +127,12 @@ public class ExperienceMapper {
 		return experiencesDTO;
 	}
 
-	/*
+	/**
 	 * Transfert un objet de transfert en entité
 	 * 
-	 * @Param experienceDTO: Objet de transfert à mapper
+	 * @param experienceDTO: Objet de transfert à mapper
 	 * 
-	 * @Return Retourne l'entité après le mappage
+	 * @return Retourne l'entité après le mappage
 	 */
 	public static Experience toEntity(ExperienceDTO experienceDTO) {
 		// Si l'objet de trasnfert d'entrée est null => on retroune null
@@ -166,12 +166,12 @@ public class ExperienceMapper {
 		return experience;
 	}
 
-	/*
+	/**
 	 * Transfert un objet de transfert résumé en entité
 	 * 
-	 * @Param summary: Objet de transfert résumé à mapper
+	 * @param summary: Objet de transfert résumé à mapper
 	 * 
-	 * @Return Retourne l'entité après le mappage
+	 * @return Retourne l'entité après le mappage
 	 */
 	public static Experience toEntity(ExperienceSummaryDTO summary) {
 		// Si l'objet de trasnfert résumé d'entrée est null => on retroune null
@@ -190,12 +190,12 @@ public class ExperienceMapper {
 		return experience;
 	}
 
-	/*
+	/**
 	 * Transfert une liste d'objet de transfert en liste d'entité
 	 * 
-	 * @Param experiencesDTO: Liste d'objet de transfert à mapper
+	 * @param experiencesDTO: Liste d'objet de transfert à mapper
 	 * 
-	 * @Return Retourne une liste d'entité après le mappage
+	 * @return Retourne une liste d'entité après le mappage
 	 */
 	public static List<Experience> toEntityListFromDTO(List<ExperienceDTO> experiencesDTO) {
 		// Si la liste d'entrée est null => on retroune null
@@ -213,12 +213,12 @@ public class ExperienceMapper {
 		return experiences;
 	}
 
-	/*
+	/**
 	 * Transfert une liste d'objet de transfert résumé en liste d'entité
 	 * 
-	 * @Param summaries: Liste d'objet de transfert résumé à mapper
+	 * @param summaries: Liste d'objet de transfert résumé à mapper
 	 * 
-	 * @Return Retourne une liste d'entité après le mappage
+	 * @return Retourne une liste d'entité après le mappage
 	 */
 	public static List<Experience> toEntityListFromSummary(List<ExperienceSummaryDTO> summaries) {
 		// Si la liste d'entrée est null => on retroune null
