@@ -42,7 +42,7 @@ class MailServiceTests {
 	@DisplayName("Envoie d'un mail")
 	void testSendMail_ShouldSendTwoMailsWithCorrectContent() {
 		// Arrange
-		MailDTO mailDTO = new MailDTO("expediteur@example.com", "Sujet", "Corps du message");
+		MailDTO mailDTO = new MailDTO("expediteur@example.com", "Sujet", "Corps du message", "reCAPTACHAToken");
 
 		ArgumentCaptor<SimpleMailMessage> messageCaptor = ArgumentCaptor.forClass(SimpleMailMessage.class);
 
@@ -70,7 +70,7 @@ class MailServiceTests {
 	@Test
 	void sendSimpleMail_shouldThrowMailException_ifSendingFails() {
 		// Arrange
-		MailDTO mailDTO = new MailDTO("expediteur@example.com", "Sujet", "Corps du message");
+		MailDTO mailDTO = new MailDTO("expediteur@example.com", "Sujet", "Corps du message", "reCAPTACHAToken");
 
 		doThrow(new MailSendException("Erreur SMTP")).when(mailSender).send(any(SimpleMailMessage.class));
 

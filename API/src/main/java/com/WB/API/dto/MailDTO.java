@@ -15,15 +15,18 @@ public class MailDTO {
 	@NotBlank(message = "Le corps du mail ne peut pas être vide")
 	private String body;
 
+	private String reCaptchaToken;
+
 	public MailDTO() {
 
 	}
 
-	public MailDTO(String mailFrom, String subject, String body) {
+	public MailDTO(String mailFrom, String subject, String body, String reCaptchaToken) {
 		this();
 		this.setMailFrom(mailFrom);
 		this.setSubject(subject);
 		this.setBody(body);
+		this.setReCaptchaToken(reCaptchaToken);
 	}
 
 	public String getMailFrom() {
@@ -48,6 +51,14 @@ public class MailDTO {
 
 	public void setBody(String body) {
 		this.body = body;
+	}
+
+	public String getReCaptchaToken() {
+		return reCaptchaToken;
+	}
+
+	public void setReCaptchaToken(String reCaptchaToken) {
+		this.reCaptchaToken = reCaptchaToken;
 	}
 
 }
