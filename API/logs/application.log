@@ -1,0 +1,20 @@
+2025-06-02T15:28:51.484+02:00  INFO 8160 --- [API] [main] c.WB.API.controller.MailControllerTests  : Starting MailControllerTests using Java 18.0.2.1 with PID 8160 (started by Famille in C:\Users\Famille\git\CVAPI\API)
+2025-06-02T15:28:51.487+02:00  INFO 8160 --- [API] [main] c.WB.API.controller.MailControllerTests  : The following 1 profile is active: "test"
+2025-06-02T15:28:54.587+02:00  WARN 8160 --- [API] [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: dd91e50f-fb1e-4c43-906c-23b417fed299
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-06-02T15:28:54.625+02:00  INFO 8160 --- [API] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-06-02T15:28:54.844+02:00  INFO 8160 --- [API] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-06-02T15:28:54.845+02:00  INFO 8160 --- [API] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-06-02T15:28:54.847+02:00  INFO 8160 --- [API] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
+2025-06-02T15:28:54.899+02:00  INFO 8160 --- [API] [main] c.WB.API.controller.MailControllerTests  : Started MailControllerTests in 4.064 seconds (process running for 5.757)
+2025-06-02T15:28:54.945+02:00  INFO 8160 --- [API] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-06-02T15:28:54.945+02:00  INFO 8160 --- [API] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-06-02T15:28:54.946+02:00  INFO 8160 --- [API] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2025-06-02T15:28:55.214+02:00  INFO 8160 --- [API] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-06-02T15:28:55.214+02:00  INFO 8160 --- [API] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-06-02T15:28:55.216+02:00  INFO 8160 --- [API] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
+2025-06-02T15:28:55.244+02:00  WARN 8160 --- [API] [main] com.WB.API.config.RateLimitingFilter     : Rate limit exceeded for IP: 127.0.0.1
