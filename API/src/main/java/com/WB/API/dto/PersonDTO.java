@@ -20,8 +20,7 @@ public class PersonDTO {
 	private int age;
 	private String subtitle;
 	private String personalValues;
-
-	private AddressDTO address;
+	private List<String> keySkills;
 	private List<NationalityDTO> nationalities;
 	private List<HobbyDTO> hobbies;
 	private List<SpokenLanguageDTO> spokenLanguages;
@@ -29,7 +28,6 @@ public class PersonDTO {
 
 	public PersonDTO() {
 		this.loadSummary();
-		this.address = new AddressDTO();
 		this.nationalities = new ArrayList<>();
 		this.spokenLanguages = new ArrayList<>();
 		this.experiences = new ArrayList<>();
@@ -43,18 +41,22 @@ public class PersonDTO {
 		this.summary.setPhone(phone);
 	}
 
-	public PersonDTO(int id, String name, String firstName, String eMail, String phone, String title) {
+	public PersonDTO(int id, String name, String firstName, String eMail, String phone, String title,
+			String linkedInLink, String gitHubLink) {
 		this(name, firstName, eMail, phone);
 		this.summary.setTitle(title);
 		this.summary.setId(id);
+		this.summary.setLinkedInLink(linkedInLink);
+		this.summary.setGitHubLink(gitHubLink);
 	}
 
 	public PersonDTO(int id, String name, String firstName, String eMail, String phone, String title, String subTitle,
-			LocalDate birthDate, String personValues) {
-		this(id, name, firstName, eMail, phone, title);
+			LocalDate birthDate, String personValues, List<String> keySkills, String linkedInLink, String gitHubLink) {
+		this(id, name, firstName, eMail, phone, title, linkedInLink, gitHubLink);
 		this.setSubtitle(subTitle);
 		this.setBirthDate(birthDate);
 		this.setPersonalValues(personValues);
+		this.setKeySkills(keySkills);
 	}
 
 	private void loadSummary() {
@@ -71,20 +73,20 @@ public class PersonDTO {
 		this.summary = summary;
 	}
 
+	public AddressDTO getAddress() {
+		return this.summary.getAddress();
+	}
+
+	public void setAddress(AddressDTO adress) {
+		this.summary.setAddress(adress);
+	}
+
 	public LocalDate getBirthDate() {
 		return birthDate;
 	}
 
 	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
-	}
-
-	public AddressDTO getAddress() {
-		return address;
-	}
-
-	public void setAddress(AddressDTO address) {
-		this.address = address;
 	}
 
 	public int getId() {
@@ -109,6 +111,22 @@ public class PersonDTO {
 
 	public void setFirstName(String firstName) {
 		this.getSummary().setFirstName(firstName);
+	}
+
+	public String getLinkedInLink() {
+		return this.getSummary().getLinkedInLink();
+	}
+
+	public void setLinkedInLink(String link) {
+		this.getSummary().setLinkedInLink(link);
+	}
+
+	public String getGitHubLink() {
+		return this.getSummary().getGitHubLink();
+	}
+
+	public void setGitHubLink(String link) {
+		this.getSummary().setGitHubLink(link);
 	}
 
 	public int getAge() {
@@ -157,6 +175,14 @@ public class PersonDTO {
 
 	public void setPersonalValues(String personalValues) {
 		this.personalValues = personalValues;
+	}
+
+	public List<String> getKeySkills() {
+		return keySkills;
+	}
+
+	public void setKeySkills(List<String> keySkills) {
+		this.keySkills = keySkills;
 	}
 
 	public List<HobbyDTO> getHobbies() {

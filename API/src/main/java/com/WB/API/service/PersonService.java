@@ -15,10 +15,13 @@ import com.WB.API.mapper.PersonMapper;
 import com.WB.API.model.Person;
 import com.WB.API.repository.PersonRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * Service permettant de manipuler l'objet personne
  */
 @Service
+@Slf4j
 public class PersonService {
 
 	@Autowired
@@ -39,6 +42,33 @@ public class PersonService {
 
 		// Sinon on retourne le résultat du calcul
 		return Period.between(person.getBirthdate(), LocalDate.now()).getYears();
+	}
+
+	/**
+	 * Récupère un résumé d'une personne à partir d'un ID donné
+	 * 
+	 * @param ID: id à rechercher
+	 * 
+	 * @return Retourne un objet de transfert résumé ou NULL si aucune personne
+	 *         n'est trouvée
+	 */
+	public PersonSummaryDTO getPersonSummaryById(int id) {
+
+		// Récherche en base de données
+		Optional<Person> optPerson = personRepository.findById(id);
+
+		// Si la recherche renvoie un résultat
+		if (optPerson.isPresent()) {
+			Person findPerson = optPerson.get();
+
+			// Transfert du résultat sou forme d'objet de transfert
+			PersonSummaryDTO findPersonDTO = PersonMapper.toSummaryDTO(findPerson);
+
+			return findPersonDTO;
+		} else {
+			// Sinon on lève une exception
+			throw new RessourceNotFoundException("Person not found with id: " + id);
+		}
 	}
 
 	/**

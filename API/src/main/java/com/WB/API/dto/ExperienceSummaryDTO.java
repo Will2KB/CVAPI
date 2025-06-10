@@ -3,7 +3,9 @@ package com.WB.API.dto;
 import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -23,11 +25,16 @@ public class ExperienceSummaryDTO {
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dateEnding;
 
-	private int establishmentId;
+	private EstablishmentDTO establishment;
 	private int cityId;
 	private String cityName;
 	private String countryName;
 	private String mission;
+	@JsonProperty("hasDscription")
+	private boolean hasDscription;
+	@JsonProperty("hasSkills")
+	private boolean hasSkills;
+	@JsonProperty("isFormation")
 	private boolean isFormation;
 
 	public ExperienceSummaryDTO() {
@@ -76,12 +83,12 @@ public class ExperienceSummaryDTO {
 		this.dateEnding = dateEnding;
 	}
 
-	public int getEstablishmentId() {
-		return establishmentId;
+	public EstablishmentDTO getEstablishment() {
+		return establishment;
 	}
 
-	public void setEstablishmentId(int establishmentId) {
-		this.establishmentId = establishmentId;
+	public void setEstablishment(EstablishmentDTO establishment) {
+		this.establishment = establishment;
 	}
 
 	public int getCityId() {
@@ -116,6 +123,23 @@ public class ExperienceSummaryDTO {
 		this.mission = mission;
 	}
 
+	public boolean hasDscription() {
+		return hasDscription;
+	}
+
+	public void setHasDscription(boolean hasDscription) {
+		this.hasDscription = hasDscription;
+	}
+
+	public boolean hasSkills() {
+		return hasSkills;
+	}
+
+	public void setHasSkills(boolean hasSkills) {
+		this.hasSkills = hasSkills;
+	}
+
+	@JsonIgnore
 	public boolean isFormation() {
 		return isFormation;
 	}

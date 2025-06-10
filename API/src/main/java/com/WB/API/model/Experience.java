@@ -171,4 +171,12 @@ public class Experience {
 		this.skills = skills;
 	}
 
+	public boolean hasDescription() {
+		return this.description != null && this.description != "";
+	}
+
+	public boolean hasSkills() {
+		return this.skills.size() > 0;
+	}
+
 }

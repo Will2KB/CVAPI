@@ -55,7 +55,9 @@ CREATE TABLE `person` (
   `title` VARCHAR(250) DEFAULT NULL,
   `subtitle` VARCHAR(250) DEFAULT NULL,
   `personal_values` CLOB DEFAULT NULL,
-  `address_id` INT DEFAULT NULL
+  `address_id` INT DEFAULT NULL, 
+  `linkedInLink` VARCHAR(2083) DEFAULT NULL,
+  `gitHubLink` VARCHAR(2083) DEFAULT NULL
 )  ;
 
 --

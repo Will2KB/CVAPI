@@ -36,8 +36,8 @@ INSERT INTO `address` (`id`, `nb_street`, `street`, `complement`, `city_id`) VAL
 -- Déchargement des données de la table `person`
 --
 
-INSERT INTO `person` (`id`, `name`, `first_name`, `birthday`, `mail`, `phone`, `img`, `title`, `subtitle`, `personal_values`, `address_id`) VALUES
-(1, 'Baroni', 'William', '1986-07-04', 'baroni.will@gmail.com', '+33609215347', NULL, 'Développeur full-stack', '4 ans d''expérience - Disponible de suite', 'Sens de l''initiative, Esprit d''équipe, Sens des responsabilités', 1);
+INSERT INTO `person` (`id`, `name`, `first_name`, `birthday`, `mail`, `phone`, `img`, `title`, `subtitle`, `personal_values`, `address_id`, `linkedInLink`, `gitHubLink`) VALUES
+(1, 'Baroni', 'William', '1986-07-04', 'baroni.will@gmail.com', '+33609215347', NULL, 'Développeur full-stack', '4 ans d''expérience - Disponible de suite', 'Sens de l''initiative, Esprit d''équipe, Sens des responsabilités', 1, "https://www.linkedin.com/in/baroniwilliam/", "https://github.com/Will2KB");
 
 
 --

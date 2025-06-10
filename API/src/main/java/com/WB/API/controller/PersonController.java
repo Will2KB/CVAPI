@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.WB.API.dto.PersonDTO;
+import com.WB.API.dto.PersonSummaryDTO;
 import com.WB.API.service.PersonService;
 
 /**
@@ -27,6 +28,19 @@ public class PersonController {
 //	public List<PersonSummaryDTO> getPersons() {
 //		return personService.getPersons();
 //	}
+
+	/**
+	 * Récupère une personne à partir d'un ID
+	 * 
+	 * @param id: id à rechercher
+	 * 
+	 * @return Retourne un objet de transfert correspondant au résultat de la
+	 *         recherche
+	 */
+	@GetMapping("/persons/summary/id/{id}")
+	public PersonSummaryDTO getSummaryPerson(@PathVariable int id) {
+		return personService.getPersonSummaryById(id);
+	}
 
 	/**
 	 * Récupère une personne à partir d'un ID

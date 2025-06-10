@@ -35,6 +35,9 @@ public class PersonMapper {
 		personSummary.setMail(person.getMail());
 		personSummary.setPhone(person.getPhone());
 		personSummary.setTitle(person.getTitle());
+		personSummary.setLinkedInLink(person.getLinkedInLink());
+		personSummary.setGitHubLink(person.getGitHubLink());
+		personSummary.setAddress(AddressMapper.toDTO(person.getAddress()));
 
 		return personSummary;
 	}
@@ -81,8 +84,9 @@ public class PersonMapper {
 		personDTO.setSummary(PersonMapper.toSummaryDTO(person));
 		personDTO.setSubtitle(person.getSubtitle());
 		personDTO.setPersonalValues(person.getPersonalValues());
-		personDTO.setAddress(AddressMapper.toDTO(person.getAddress()));
 		personDTO.setBirthDate(person.getBirthdate());
+		personDTO.setKeySkills(person.getKeySkills());
+
 		// Mappage des sous-objets
 		personDTO.setNationalities(NationalityMapper.toDTOList(person.getNationalities()));
 		personDTO.setSpokenLanguages(SpokenLanguageMapper.toDTOList(person.getSpokenLanguages()));
@@ -113,6 +117,8 @@ public class PersonMapper {
 		person.setMail(personDTO.getSummary().getMail());
 		person.setPhone(personDTO.getSummary().getPhone());
 		person.setTitle(personDTO.getSummary().getTitle());
+		person.setLinkedInLink(personDTO.getSummary().getLinkedInLink());
+		person.setGitHubLink(personDTO.getSummary().getGitHubLink());
 		// Mappage des autres paramètres
 		person.setSubtitle(personDTO.getSubtitle());
 		person.setPersonalValues(personDTO.getPersonalValues());

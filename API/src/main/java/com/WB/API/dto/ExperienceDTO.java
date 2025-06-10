@@ -13,7 +13,6 @@ public class ExperienceDTO {
 
 	@Valid
 	private ExperienceSummaryDTO summary;
-	private EstablishmentDTO establishment;
 	private CityDTO city;
 
 	private String description;
@@ -94,17 +93,6 @@ public class ExperienceDTO {
 
 	public void setFormation(boolean isFormation) {
 		this.getSummary().setFormation(isFormation);
-	}
-
-	public EstablishmentDTO getEstablishment() {
-		return establishment;
-	}
-
-	public void setEstablishment(EstablishmentDTO establishment) {
-		this.establishment = establishment;
-		if (establishment != null) {
-			this.getSummary().setEstablishmentId(establishment.getId());
-		}
 	}
 
 	public CityDTO getCity() {

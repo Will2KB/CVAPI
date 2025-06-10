@@ -28,9 +28,9 @@ public class EstablishmentMapper {
 		// Mappage des paramètres
 		establishmentDTO.setId(establishment.getId());
 		establishmentDTO.setName(establishment.getName());
-		establishmentDTO.setAddressId(establishment.getAddress().getId());
 		// Mappage si il y a une adresse
 		if (establishment.getAddress() != null) {
+			establishmentDTO.setAddressId(establishment.getAddress().getId());
 			// Mappage si il y a une ville
 			if (establishment.getAddress().getCity() != null) {
 				establishmentDTO.setCityName(establishment.getAddress().getCity().getName());

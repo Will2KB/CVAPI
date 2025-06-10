@@ -40,7 +40,7 @@ public class ExperienceMapper {
 
 		// Mappage si il y a un établissement
 		if (experience.getEstablishement() != null) {
-			summary.setEstablishmentId(experience.getEstablishement().getId());
+			summary.setEstablishment(EstablishmentMapper.toDTO(experience.getEstablishement()));
 		}
 
 		// Mappage si il y a une ville
@@ -52,6 +52,10 @@ public class ExperienceMapper {
 				summary.setCountryName(experience.getCity().getCountry().getName());
 			}
 		}
+
+		// Mappage des informations supplémentaires
+		summary.setHasSkills(experience.hasSkills());
+		summary.setHasDscription(experience.hasDescription());
 
 		return summary;
 	}
@@ -97,7 +101,6 @@ public class ExperienceMapper {
 		// Mappage des paramètres
 		experienceDTO.setSummary(ExperienceMapper.toSummaryDTO(experience));
 		experienceDTO.setCity(CityMapper.toDTO(experience.getCity()));
-		experienceDTO.setEstablishment(EstablishmentMapper.toDTO(experience.getEstablishement()));
 		experienceDTO.setDescription(experience.getDescription());
 		experienceDTO.setSkills(SkillMapper.toDTOList(experience.getSkills()));
 
@@ -149,8 +152,8 @@ public class ExperienceMapper {
 		experience.setDescription(experienceDTO.getDescription());
 		experience.setSkills(SkillMapper.toEntityList(experienceDTO.getSkills()));
 		// Mappage si il y a une établissement
-		if (experienceDTO.getEstablishment() != null) {
-			experience.setEstablishement(new Establishment(experienceDTO.getEstablishment().getId()));
+		if (experienceDTO.getSummary().getEstablishment() != null) {
+			experience.setEstablishement(new Establishment(experienceDTO.getSummary().getEstablishment().getId()));
 		} else {
 			// Sinon set to NULL
 			experience.setEstablishement(null);
@@ -184,7 +187,11 @@ public class ExperienceMapper {
 
 		// Mappage des autres paramètres
 		experience.setMission(summary.getMission());
-		experience.setEstablishement(new Establishment(summary.getEstablishmentId()));
+		if (summary.getEstablishment() != null) {
+			experience.setEstablishement(new Establishment(summary.getEstablishment().getId()));
+		} else {
+			experience.setEstablishement(null);
+		}
 		experience.setCity(new City(summary.getCityId()));
 
 		return experience;

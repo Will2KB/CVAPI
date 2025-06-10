@@ -41,32 +41,32 @@ class PersonRepositoryTests {
 
 		persons = new ArrayList<>();
 		Person person1 = new Person("Madrigal", "Coco", "MadrigalCoco@gmail.com", "0609548768", "Title1", "Subtitle1",
-				LocalDate.of(1986, 07, 04), "Values1");
+				LocalDate.of(1986, 07, 04), "Values1", "LinkedIn1", "Github1");
 		personRepository.save(person1);
 		persons.add(person1);
 
 		Person person2 = new Person("Dupont", "Corine", "Dupont@gmail.com", "0609632768", "Title2", "Subtitle2",
-				LocalDate.of(1995, 12, 15), "Values2");
+				LocalDate.of(1995, 12, 15), "Values2", "LinkedIn2", "Github2");
 		personRepository.save(person2);
 		persons.add(person2);
 
 		Person person3 = new Person("Papa", "Thibault", "PapaThibault@gmail.com", "0606548768", "Title3", "Subtitle3",
-				LocalDate.of(1975, 02, 07), "Values3");
+				LocalDate.of(1975, 02, 07), "Values3", "LinkedIn3", "Github3");
 		personRepository.save(person3);
 		persons.add(person3);
 
 		Person person4 = new Person("Herrault", "Rodolphe", "roro@gmail.com", "0609598768", "Title4", "Subtitle4",
-				LocalDate.of(1984, 10, 12), "Values4");
+				LocalDate.of(1984, 10, 12), "Values4", "LinkedIn4", "Github4");
 		personRepository.save(person4);
 		persons.add(person4);
 
 		Person person5 = new Person("Paramount", "Thibault", "ParamountThibault@gmail.com", "0606546498", "Title5",
-				"Subtitle5", LocalDate.of(1989, 9, 9), "Values5");
+				"Subtitle5", LocalDate.of(1989, 9, 9), "Values5", "LinkedIn5", "Github5");
 		personRepository.save(person5);
 		persons.add(person5);
 
 		Person person6 = new Person("Herrault", "Alicia", "alicia@gmail.com", "0695478768", "Title6", "Subtitle6",
-				LocalDate.of(1992, 03, 16), "Values6");
+				LocalDate.of(1992, 03, 16), "Values6", "LinkedIn6", "Github6");
 		personRepository.save(person6);
 		persons.add(person6);
 	}
@@ -76,7 +76,7 @@ class PersonRepositoryTests {
 	void savePerson_RetrieveIt() {
 		// Arrange
 		Person newPerson = new Person("New", "Person", "NewPerson@gmail.com", "0665485768", "Title1", "Subtitle1",
-				LocalDate.of(1986, 07, 04), "Values1");
+				LocalDate.of(1986, 07, 04), "Values1", "LinkedIn1", "Github1");
 
 		// Act
 		Person savedPerson = personRepository.save(newPerson);

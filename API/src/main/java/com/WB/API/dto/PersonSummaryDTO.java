@@ -25,7 +25,17 @@ public class PersonSummaryDTO {
 	@Pattern(regexp = "^(\\+([1-9]{1,3})\\d{4,14}|0\\d{9})$", message = "Numéro de téléphone invalide : doit être un numéro international (+...) ou français (0...)")
 	private String phone;
 
+	private AddressDTO address;
+
 	private String title;
+
+	private String linkedInLink;
+
+	private String gitHubLink;
+
+	public PersonSummaryDTO() {
+		this.address = new AddressDTO();
+	}
 
 	public int getId() {
 		return id;
@@ -67,12 +77,36 @@ public class PersonSummaryDTO {
 		this.phone = phone;
 	}
 
+	public AddressDTO getAddress() {
+		return address;
+	}
+
+	public void setAddress(AddressDTO address) {
+		this.address = address;
+	}
+
 	public String getTitle() {
 		return title;
 	}
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getLinkedInLink() {
+		return linkedInLink;
+	}
+
+	public void setLinkedInLink(String linkedInLink) {
+		this.linkedInLink = linkedInLink;
+	}
+
+	public String getGitHubLink() {
+		return gitHubLink;
+	}
+
+	public void setGitHubLink(String gitHubLink) {
+		this.gitHubLink = gitHubLink;
 	}
 
 }

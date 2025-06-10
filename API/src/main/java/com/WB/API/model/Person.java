@@ -56,6 +56,12 @@ public class Person {
 	@Column(name = "personal_values")
 	private String personalValues;
 
+	@Column(name = "linkedinlink")
+	private String linkedInLink;
+
+	@Column(name = "githublink")
+	private String gitHubLink;
+
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "address_id")
 	private Address address;
@@ -96,12 +102,14 @@ public class Person {
 	}
 
 	public Person(String name, String firstName, String eMail, String phone, String title, String subTitle,
-			LocalDate birthDate, String personalValues) {
+			LocalDate birthDate, String personalValues, String linkedInLink, String gitHubLink) {
 		this(name, firstName, eMail, phone);
 		this.setTitle(title);
 		this.setSubtitle(subTitle);
 		this.setBirthdate(birthDate);
 		this.setPersonalValues(personalValues);
+		this.setLinkedInLink(linkedInLink);
+		this.setGitHubLink(gitHubLink);
 	}
 
 	public Person(int id, String name, String firstName, String eMail, String phone) {
@@ -110,12 +118,14 @@ public class Person {
 	}
 
 	public Person(int id, String name, String firstName, String eMail, String phone, String title, String subTitle,
-			LocalDate birthDate, String personalValues) {
+			LocalDate birthDate, String personalValues, String linkedInLink, String gitHubLink) {
 		this(id, name, firstName, eMail, phone);
 		this.setTitle(title);
 		this.setSubtitle(subTitle);
 		this.setBirthdate(birthDate);
 		this.setPersonalValues(personalValues);
+		this.setLinkedInLink(linkedInLink);
+		this.setGitHubLink(gitHubLink);
 	}
 
 	public String getName() {
@@ -184,6 +194,22 @@ public class Person {
 
 	public void setPersonalValues(String personalValues) {
 		this.personalValues = personalValues;
+	}
+
+	public String getLinkedInLink() {
+		return linkedInLink;
+	}
+
+	public void setLinkedInLink(String linkedInLink) {
+		this.linkedInLink = linkedInLink;
+	}
+
+	public String getGitHubLink() {
+		return gitHubLink;
+	}
+
+	public void setGitHubLink(String gitHubLink) {
+		this.gitHubLink = gitHubLink;
 	}
 
 	public Address getAddress() {
@@ -256,5 +282,29 @@ public class Person {
 	public void removeSpokenLanguage(SpokenLanguage spokenLanguage) {
 		spokenLanguages.remove(spokenLanguage);
 		spokenLanguage.setPerson(null);
+	}
+
+	/**
+	 * Créé une chaîne de caractères des compétences clés d'une personne séparé par
+	 * une virgule
+	 * 
+	 * @param experiences
+	 * @return la chaîne de caractères listant les compétences clés
+	 */
+	public List<String> getKeySkills() {
+
+		List<String> keySkills = new ArrayList<>();
+
+		for (Experience experience : this.experiences) {
+			for (Skill skill : experience.getSkills()) {
+				// Si la compétence est active et qu'elle est de type "key"
+				if (skill.isEnable() && skill.getType().getId() == 3) {
+					keySkills.add(skill.getName());
+				}
+			}
+		}
+
+		return keySkills;
+
 	}
 }

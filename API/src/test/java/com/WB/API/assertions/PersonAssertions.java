@@ -18,7 +18,7 @@ public class PersonAssertions {
 	 */
 	public static Person getPerson() {
 		return new Person(25, "Name", "FirstName", "b.s@gmail.com", "0609548735", "title", "subTitle",
-				LocalDate.of(1986, 07, 04), "Values");
+				LocalDate.of(1986, 07, 04), "Values", "LinkedIn", "Github");
 	}
 
 	/*
@@ -26,7 +26,8 @@ public class PersonAssertions {
 	 */
 	public static PersonDTO getPersonDTO() {
 		return new PersonDTO(25, "Name", "FirstName", "b.s@gmail.com", "0609548735", "title", "subTitle",
-				LocalDate.of(1986, 07, 04), "Values");
+				LocalDate.of(1986, 07, 04), "Values", List.of("KeySkillsA", "KeySkillsB", "KeySkillsC"), "LinkedIn",
+				"Github");
 	}
 
 	/*
@@ -46,9 +47,10 @@ public class PersonAssertions {
 			int month = ThreadLocalRandom.current().nextInt(1, 13);
 			int day = ThreadLocalRandom.current().nextInt(1, 29);
 			entities.add(new Person(i, "Name" + i, "FirstName" + i, "email" + i + "@gmail.com", "0609" + i, "title" + i,
-					"subTitle" + i, LocalDate.of(year, month, day), "Values" + i));
+					"subTitle" + i, LocalDate.of(year, month, day), "Values" + i, "LinkedIn" + i, "GitHub" + i));
 			PersonDTO newDTO = new PersonDTO(i, "Name" + i, "FirstName" + i, "email" + i + "@gmail.com", "0609" + i,
-					"title" + i, "subTitle" + i, LocalDate.of(year, month, day), "Values" + i);
+					"title" + i, "subTitle" + i, LocalDate.of(year, month, day), "Values" + i,
+					List.of("KeySkillsA" + i, "KeySkillsB" + i, "KeySkillsC" + i), "LinkedIn" + i, "GitHub" + i);
 			dtos.add(newDTO);
 			dtoSummaries.add(newDTO.getSummary());
 		}
@@ -70,6 +72,9 @@ public class PersonAssertions {
 		Assertions.assertNotNull(dto.getTitle(), "Le titre du DTO ne doit pas être null");
 		Assertions.assertNotNull(dto.getSubtitle(), "Le sous titre du DTO ne doit pas être null");
 		Assertions.assertNotNull(dto.getPersonalValues(), "Les valeurs personnelles du DTO ne doit pas être null");
+		Assertions.assertNotNull(dto.getKeySkills(), "Les compétences du DTO ne doit pas être null");
+		Assertions.assertNotNull(dto.getLinkedInLink(), "Le lien LinkedIn du DTO ne doit pas être null");
+		Assertions.assertNotNull(dto.getGitHubLink(), "Le lien GitHub du DTO ne doit pas être null");
 	}
 
 	/*
@@ -83,6 +88,8 @@ public class PersonAssertions {
 		Assertions.assertNotNull(dto.getMail(), "Le mail du résumé du DTO ne doit pas être null");
 		Assertions.assertNotNull(dto.getPhone(), "Le téléphone du résumé du DTO ne doit pas être null");
 		Assertions.assertNotNull(dto.getTitle(), "Le titre du résumé du DTO ne doit pas être null");
+		Assertions.assertNotNull(dto.getLinkedInLink(), "Le lien LinkedIn du résumé du DTO ne doit pas être null");
+		Assertions.assertNotNull(dto.getGitHubLink(), "Le lien GitHub du résumé du DTO ne doit pas être null");
 	}
 
 	/*
@@ -100,6 +107,8 @@ public class PersonAssertions {
 		Assertions.assertNotNull(entity.getSubtitle(), "Le sous titre de l'entité ne doit pas être null");
 		Assertions.assertNotNull(entity.getPersonalValues(),
 				"Les valeurs personnelles de l'entité ne doit pas être null");
+		Assertions.assertNotNull(entity.getLinkedInLink(), "Le lien LinkedIn de l'entité ne doit pas être null");
+		Assertions.assertNotNull(entity.getGitHubLink(), "Le lien GitHub de l'entité ne doit pas être null");
 	}
 
 	/*
@@ -128,6 +137,10 @@ public class PersonAssertions {
 				"Les valeurs personnelles ne sont pas cohérentes entre les deux entités");
 		Assertions.assertEquals(person1.getBirthdate(), person2.getBirthdate(),
 				"La date d'anniversaire n'est pas cohérente entre les deux entités");
+		Assertions.assertEquals(person1.getLinkedInLink(), person2.getLinkedInLink(),
+				"Les liens LinkedIn ne sont pas cohérents entre les deux entités");
+		Assertions.assertEquals(person1.getGitHubLink(), person2.getGitHubLink(),
+				"Les liens GitHub ne sont pas cohérents entre les deux entités");
 	}
 
 	/*
@@ -154,6 +167,10 @@ public class PersonAssertions {
 				"Les valeurs personnelles ne sont pas cohérentes entre l'entité et le DTO");
 		Assertions.assertEquals(person1.getBirthdate(), person2.getBirthDate(),
 				"La date d'anniversaire n'est pas cohérente entre l'entité et le DTO");
+		Assertions.assertEquals(person1.getLinkedInLink(), person2.getLinkedInLink(),
+				"Les liens LinkedIn ne sont pas cohérents entre l'entité et le DTO");
+		Assertions.assertEquals(person1.getGitHubLink(), person2.getGitHubLink(),
+				"Les liens GitHub ne sont pas cohérents entre l'entité et le DTO");
 	}
 
 	/*
@@ -177,6 +194,10 @@ public class PersonAssertions {
 				"Le téléphone n'est pas cohérent entre l'entité et le résumé du DTO");
 		Assertions.assertEquals(person1.getTitle(), summary.getTitle(),
 				"Le titre n'est pas cohérent entre l'entité et le résumé du DTO");
+		Assertions.assertEquals(person1.getLinkedInLink(), summary.getLinkedInLink(),
+				"Le lien LinkedIn n'est pas cohérent entre l'entité et le résumé du DTO");
+		Assertions.assertEquals(person1.getGitHubLink(), summary.getGitHubLink(),
+				"Le lien GitHub n'est pas cohérent entre l'entité et le résumé du DTO");
 	}
 
 	/*
@@ -203,6 +224,10 @@ public class PersonAssertions {
 				"Les valeurs personnelles ne sont pas cohérentes entre les deux DTO");
 		Assertions.assertEquals(person1.getBirthDate(), person2.getBirthDate(),
 				"La date d'anniversaire n'est pas cohérente entre les deux DTO");
+		Assertions.assertEquals(person1.getLinkedInLink(), person2.getLinkedInLink(),
+				"Les liens LinkedIn ne sont pas cohérents entre les deux DTO");
+		Assertions.assertEquals(person1.getGitHubLink(), person2.getGitHubLink(),
+				"Les liens GitHub ne sont pas cohérents entre les deux DTO");
 	}
 
 	/*
@@ -226,6 +251,10 @@ public class PersonAssertions {
 				"Le téléphone n'est pas cohérent entre le résumé et le DTO");
 		Assertions.assertEquals(personSummary.getTitle(), person2.getTitle(),
 				"Le titre n'est pas cohérent entre le résumé et le DTO");
+		Assertions.assertEquals(personSummary.getLinkedInLink(), person2.getLinkedInLink(),
+				"Le lien LinkedIn n'est pas cohérent entre le résumé et le DTO");
+		Assertions.assertEquals(personSummary.getGitHubLink(), person2.getGitHubLink(),
+				"Le lien GitHub n'est pas cohérent entre le résumé et le DTO");
 	}
 
 	/*
@@ -249,6 +278,10 @@ public class PersonAssertions {
 				"Le téléphone n'est pas cohérent entre les deux résumés du DTO");
 		Assertions.assertEquals(person1.getTitle(), person2.getTitle(),
 				"Le titre n'est pas cohérent entre les deux résumés du DTO");
+		Assertions.assertEquals(person1.getLinkedInLink(), person2.getLinkedInLink(),
+				"Le lien LinkedIn n'est pas cohérent entre les deux résumés du DTO");
+		Assertions.assertEquals(person1.getGitHubLink(), person2.getGitHubLink(),
+				"Le lien GitHub n'est pas cohérent entre les deux résumés du DTO");
 	}
 
 	/*

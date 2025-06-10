@@ -45,7 +45,8 @@ class PersonServiceTests {
 		PersonDTO mockedPerson = PersonAssertions.getPersonDTO();
 		Person input = new Person(mockedPerson.getId(), mockedPerson.getName(), mockedPerson.getFirstName(),
 				mockedPerson.getMail(), mockedPerson.getPhone(), mockedPerson.getTitle(), mockedPerson.getSubtitle(),
-				mockedPerson.getBirthDate(), mockedPerson.getPersonalValues());
+				mockedPerson.getBirthDate(), mockedPerson.getPersonalValues(), mockedPerson.getLinkedInLink(),
+				mockedPerson.getGitHubLink());
 		Mockito.when(personRepository.save(Mockito.any(Person.class))).thenReturn(input);
 
 		// Act
@@ -63,7 +64,8 @@ class PersonServiceTests {
 		PersonDTO mockedPerson = PersonAssertions.getPersonDTO();
 		Person output = new Person(mockedPerson.getId(), mockedPerson.getName(), mockedPerson.getFirstName(),
 				mockedPerson.getMail(), mockedPerson.getPhone(), mockedPerson.getTitle(), mockedPerson.getSubtitle(),
-				mockedPerson.getBirthDate(), mockedPerson.getPersonalValues());
+				mockedPerson.getBirthDate(), mockedPerson.getPersonalValues(), mockedPerson.getLinkedInLink(),
+				mockedPerson.getGitHubLink());
 		Mockito.when(personRepository.findById(mockedPerson.getId())).thenReturn(Optional.of(output));
 
 		// Act
@@ -96,7 +98,8 @@ class PersonServiceTests {
 		PersonDTO mockedPerson = PersonAssertions.getPersonDTO();
 		Person output = new Person(mockedPerson.getId(), mockedPerson.getName(), mockedPerson.getFirstName(),
 				mockedPerson.getMail(), mockedPerson.getPhone(), mockedPerson.getTitle(), mockedPerson.getSubtitle(),
-				mockedPerson.getBirthDate(), mockedPerson.getPersonalValues());
+				mockedPerson.getBirthDate(), mockedPerson.getPersonalValues(), mockedPerson.getLinkedInLink(),
+				mockedPerson.getGitHubLink());
 		Mockito.when(
 				personRepository.findFirstPersonByNameAndFirstName(mockedPerson.getName(), mockedPerson.getFirstName()))
 				.thenReturn(output);
@@ -134,7 +137,8 @@ class PersonServiceTests {
 		PersonDTO mockedPerson = PersonAssertions.getPersonDTO();
 		Person output = new Person(mockedPerson.getId(), mockedPerson.getName(), mockedPerson.getFirstName(),
 				mockedPerson.getMail(), mockedPerson.getPhone(), mockedPerson.getTitle(), mockedPerson.getSubtitle(),
-				mockedPerson.getBirthDate(), mockedPerson.getPersonalValues());
+				mockedPerson.getBirthDate(), mockedPerson.getPersonalValues(), mockedPerson.getLinkedInLink(),
+				mockedPerson.getGitHubLink());
 		Mockito.when(personRepository.findFirstPersonByMail(mockedPerson.getMail())).thenReturn(output);
 
 		// Act
