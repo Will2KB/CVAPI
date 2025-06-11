@@ -30,8 +30,8 @@ public class ExperienceSummaryDTO {
 	private String cityName;
 	private String countryName;
 	private String mission;
-	@JsonProperty("hasDscription")
-	private boolean hasDscription;
+	@JsonProperty("hasDescription")
+	private boolean hasDescription;
 	@JsonProperty("hasSkills")
 	private boolean hasSkills;
 	@JsonProperty("isFormation")
@@ -123,12 +123,12 @@ public class ExperienceSummaryDTO {
 		this.mission = mission;
 	}
 
-	public boolean hasDscription() {
-		return hasDscription;
+	public boolean hasDescription() {
+		return hasDescription;
 	}
 
-	public void setHasDscription(boolean hasDscription) {
-		this.hasDscription = hasDscription;
+	public void setHasDescription(boolean hasDscription) {
+		this.hasDescription = hasDscription;
 	}
 
 	public boolean hasSkills() {

@@ -42,7 +42,7 @@ class ExperienceRepositoryTests {
 		experience1.setName("Université");
 		experience1.setDateBegining(LocalDate.of(2008, 9, 15));
 		experience1.setDateEnding(LocalDate.of(2011, 9, 1));
-		experience1.setDescription("Etude en informatique");
+		experience1.setDescriptions(new ArrayList<>(List.of("Etude en informatique")));
 		experience1.setFormation(true);
 		experience1.setMission("Découverte du développement");
 		experienceRepository.save(experience1);
@@ -52,7 +52,7 @@ class ExperienceRepositoryTests {
 		experience2.setName("Première exp.");
 		experience2.setDateBegining(LocalDate.of(2011, 12, 15));
 		experience2.setDateEnding(LocalDate.of(2016, 2, 1));
-		experience2.setDescription("Bio-informatique");
+		experience2.setDescriptions(new ArrayList<>(List.of("Bio-informatique")));
 		experience2.setFormation(false);
 		experience2.setMission("Envoie des résultats aux clients");
 		experienceRepository.save(experience2);
@@ -68,7 +68,7 @@ class ExperienceRepositoryTests {
 		newExperience.setName("Univ. 2");
 		newExperience.setDateBegining(LocalDate.of(2011, 12, 15));
 		newExperience.setDateEnding(LocalDate.of(2016, 2, 1));
-		newExperience.setDescription("Biologie");
+		newExperience.setDescriptions(new ArrayList<>(List.of("Biologie")));
 		newExperience.setFormation(true);
 		newExperience.setMission("Envoie des résultats aux clients");
 

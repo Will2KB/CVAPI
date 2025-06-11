@@ -15,7 +15,7 @@ public class ExperienceDTO {
 	private ExperienceSummaryDTO summary;
 	private CityDTO city;
 
-	private String description;
+	private List<String> descriptions;
 	private List<SkillDTO> skills;
 
 	public ExperienceDTO() {
@@ -106,12 +106,12 @@ public class ExperienceDTO {
 		}
 	}
 
-	public String getDescription() {
-		return description;
+	public List<String> getDescriptions() {
+		return descriptions;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDescriptions(List<String> descriptions) {
+		this.descriptions = descriptions;
 	}
 
 	public List<SkillDTO> getSkills() {

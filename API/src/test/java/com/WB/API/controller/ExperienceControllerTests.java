@@ -61,7 +61,7 @@ class ExperienceControllerTests {
 				.andExpect(
 						jsonPath("$[0].dateBeginning").value(datas.dtoSummarries.get(0).getDateBeginning().toString()))
 				.andExpect(jsonPath("$[0].dateEnding").value(datas.dtoSummarries.get(0).getDateEnding().toString()))
-				.andExpect(jsonPath("$[0].formation").value(datas.dtoSummarries.get(0).isFormation()))
+				.andExpect(jsonPath("$[0].isFormation").value(datas.dtoSummarries.get(0).isFormation()))
 				.andExpect(jsonPath("$[1].id").value(datas.dtoSummarries.get(1).getId()))
 				.andExpect(jsonPath("$[1].name").value(datas.dtoSummarries.get(1).getName()))
 				.andExpect(jsonPath("$[1].id").value(datas.dtoSummarries.get(1).getId()))
@@ -69,7 +69,7 @@ class ExperienceControllerTests {
 				.andExpect(
 						jsonPath("$[1].dateBeginning").value(datas.dtoSummarries.get(1).getDateBeginning().toString()))
 				.andExpect(jsonPath("$[1].dateEnding").value(datas.dtoSummarries.get(1).getDateEnding().toString()))
-				.andExpect(jsonPath("$[1].formation").value(datas.dtoSummarries.get(1).isFormation()))
+				.andExpect(jsonPath("$[1].isFormation").value(datas.dtoSummarries.get(1).isFormation()))
 				.andExpect(jsonPath("$[2].id").value(datas.dtoSummarries.get(2).getId()))
 				.andExpect(jsonPath("$[2].name").value(datas.dtoSummarries.get(2).getName()))
 				.andExpect(jsonPath("$[2].id").value(datas.dtoSummarries.get(2).getId()))
@@ -77,7 +77,7 @@ class ExperienceControllerTests {
 				.andExpect(
 						jsonPath("$[2].dateBeginning").value(datas.dtoSummarries.get(2).getDateBeginning().toString()))
 				.andExpect(jsonPath("$[2].dateEnding").value(datas.dtoSummarries.get(2).getDateEnding().toString()))
-				.andExpect(jsonPath("$[2].formation").value(datas.dtoSummarries.get(2).isFormation()))
+				.andExpect(jsonPath("$[2].isFormation").value(datas.dtoSummarries.get(2).isFormation()))
 				.andExpect(jsonPath("$[3].id").value(datas.dtoSummarries.get(3).getId()))
 				.andExpect(jsonPath("$[3].name").value(datas.dtoSummarries.get(3).getName()))
 				.andExpect(jsonPath("$[3].id").value(datas.dtoSummarries.get(3).getId()))
@@ -85,7 +85,7 @@ class ExperienceControllerTests {
 				.andExpect(
 						jsonPath("$[3].dateBeginning").value(datas.dtoSummarries.get(3).getDateBeginning().toString()))
 				.andExpect(jsonPath("$[3].dateEnding").value(datas.dtoSummarries.get(3).getDateEnding().toString()))
-				.andExpect(jsonPath("$[3].formation").value(datas.dtoSummarries.get(3).isFormation()))
+				.andExpect(jsonPath("$[3].isFormation").value(datas.dtoSummarries.get(3).isFormation()))
 				.andExpect(jsonPath("$[4].id").value(datas.dtoSummarries.get(4).getId()))
 				.andExpect(jsonPath("$[4].name").value(datas.dtoSummarries.get(4).getName()))
 				.andExpect(jsonPath("$[4].id").value(datas.dtoSummarries.get(4).getId()))
@@ -93,7 +93,7 @@ class ExperienceControllerTests {
 				.andExpect(
 						jsonPath("$[4].dateBeginning").value(datas.dtoSummarries.get(4).getDateBeginning().toString()))
 				.andExpect(jsonPath("$[4].dateEnding").value(datas.dtoSummarries.get(4).getDateEnding().toString()))
-				.andExpect(jsonPath("$[4].formation").value(datas.dtoSummarries.get(4).isFormation()));
+				.andExpect(jsonPath("$[4].isFormation").value(datas.dtoSummarries.get(4).isFormation()));
 
 	}
 
@@ -121,7 +121,7 @@ class ExperienceControllerTests {
 				.andExpect(jsonPath("$.name").value(searchExperience.getName()))
 				.andExpect(jsonPath("$.dateBeginning").value(searchExperience.getDateBeginning().toString()))
 				.andExpect(jsonPath("$.dateEnding").value(searchExperience.getDateEnding().toString()))
-				.andExpect(jsonPath("$.formation").value(searchExperience.isFormation()));
+				.andExpect(jsonPath("$.summary.isFormation").value(searchExperience.isFormation()));
 
 	}
 
@@ -149,7 +149,7 @@ class ExperienceControllerTests {
 //				.andExpect(jsonPath("$.name").value(newExperience.getName()))
 //				.andExpect(jsonPath("$.dateBeginning").value(newExperience.getDateBeginning().toString()))
 //				.andExpect(jsonPath("$.dateEnding").value(newExperience.getDateEnding().toString()))
-//				.andExpect(jsonPath("$.formation").value(newExperience.isFormation()));
+//				.andExpect(jsonPath("$.isFormation").value(newExperience.isFormation()));
 //	}
 
 //	@Test

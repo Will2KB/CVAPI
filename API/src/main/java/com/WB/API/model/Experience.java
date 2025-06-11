@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -51,8 +53,9 @@ public class Experience {
 	@Column(name = "mission")
 	private String mission;
 
-	@Column(name = "description")
-	private String description;
+	@JdbcTypeCode(SqlTypes.JSON)
+	@Column(name = "descriptions", columnDefinition = "json")
+	private List<String> descriptions;
 
 	@Column(name = "is_formation")
 	private boolean isFormation;
@@ -116,12 +119,12 @@ public class Experience {
 		this.mission = mission;
 	}
 
-	public String getDescription() {
-		return description;
+	public List<String> getDescriptions() {
+		return descriptions;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDescriptions(List<String> descriptions) {
+		this.descriptions = descriptions;
 	}
 
 	public boolean isFormation() {
@@ -172,7 +175,7 @@ public class Experience {
 	}
 
 	public boolean hasDescription() {
-		return this.description != null && this.description != "";
+		return this.descriptions != null && this.descriptions.size() > 0;
 	}
 
 	public boolean hasSkills() {

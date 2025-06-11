@@ -55,7 +55,7 @@ public class ExperienceMapper {
 
 		// Mappage des informations supplémentaires
 		summary.setHasSkills(experience.hasSkills());
-		summary.setHasDscription(experience.hasDescription());
+		summary.setHasDescription(experience.hasDescription());
 
 		return summary;
 	}
@@ -101,7 +101,7 @@ public class ExperienceMapper {
 		// Mappage des paramètres
 		experienceDTO.setSummary(ExperienceMapper.toSummaryDTO(experience));
 		experienceDTO.setCity(CityMapper.toDTO(experience.getCity()));
-		experienceDTO.setDescription(experience.getDescription());
+		experienceDTO.setDescriptions(experience.getDescriptions());
 		experienceDTO.setSkills(SkillMapper.toDTOList(experience.getSkills()));
 
 		return experienceDTO;
@@ -149,7 +149,7 @@ public class ExperienceMapper {
 
 		// Mappage des autres paramètres
 		experience.setMission(experienceDTO.getSummary().getMission());
-		experience.setDescription(experienceDTO.getDescription());
+		experience.setDescriptions(experienceDTO.getDescriptions());
 		experience.setSkills(SkillMapper.toEntityList(experienceDTO.getSkills()));
 		// Mappage si il y a une établissement
 		if (experienceDTO.getSummary().getEstablishment() != null) {
