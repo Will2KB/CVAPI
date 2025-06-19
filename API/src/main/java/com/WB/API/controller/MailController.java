@@ -1,5 +1,7 @@
 package com.WB.API.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,12 +23,14 @@ public class MailController {
 	private RecaptchaService recaptchaService;
 
 	@PostMapping("/mail")
-	public ResponseEntity<String> sendMail(@RequestBody MailDTO mailDTO) {
-		if (!recaptchaService.isCaptchaValid(mailDTO.getReCaptchaToken())) {
-			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Échec de la vérification reCAPTCHA");
+	public ResponseEntity<Map<String, String>> sendMail(@RequestBody MailDTO mailDTO) {
+		if (recaptchaService.isCaptchaValid(mailDTO.getReCaptchaToken())) {
+			mailService.sendSimpleMail(mailDTO);
+			return ResponseEntity.ok(Map.of("message", "Message envoyé avec succès !"));
+		} else {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN)
+					.body(Map.of("error", "Échec de la vérification reCAPTCHA"));
 		}
 
-		mailService.sendSimpleMail(mailDTO);
-		return ResponseEntity.ok("Message envoyé avec succès !");
 	}
 }
